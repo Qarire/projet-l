@@ -8,7 +8,7 @@ class Jeu {
 
     private:
         Terrain map;
-        Personnage player;
+        vector<Personnage> player;
 
     public :
 
@@ -18,7 +18,7 @@ class Jeu {
     ~Jeu();
     /** @brief Destructeur par défaut **/
 
-    Personnage getPersonnage() const;
+    vector<Personnage> getPersonnage() const;
     /** @brief recupere le Personnage **/
 
     Terrain getTerrain() const;
