@@ -1,5 +1,6 @@
 #ifndef _VECTEUR_H
 #define _VECTEUR_H
+
 class Vecteur {
     private :
         float x,y; /** @brief les coordonnees en x et en y de notre vecteur*/
@@ -7,13 +8,15 @@ class Vecteur {
     public :
         Vecteur();
         /** @brief le constructeur par defaut de notre vecteur*/
+        
         Vecteur(float a, float b);
         /** @brief le constructeur par copie de notre vecteur*/
+       
         ~Vecteur();
         /** @brief le destructeur par defaut du vecteur*/
-        float getX const();
+        float getX() const;
         /** @brief permet de recuperer la coordonnee x du vecteur*/
-        float getY const();
+        float getY() const;
         /** @brief permet de recuperer la coordonnee y du vecteur*/
         void setX(float x1);
         /** @brief permet de modifier la coordonnee x du vecteur*/
@@ -34,10 +37,7 @@ class Vecteur {
         Vecteur operator-(float a);
         /** @brief effectue la soustraction entre le vecteur et un reel a
         @param le reel a que l'on retire au vecteur*/
-}
-
-
-
+};
 
 
 #endif

@@ -15,10 +15,10 @@ Vecteur::Vecteur(float a, float b) {
 Vecteur::~Vecteur(){
 
 }
-float Vecteur:getX const{
+float Vecteur::getX() const{
     return x;
 }
-float Vecteur:getY const{
+float Vecteur::getY() const{
     return y;
 }
 void Vecteur::setX(float x1){
