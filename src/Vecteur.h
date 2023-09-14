@@ -11,13 +11,13 @@ class Vecteur {
         /** @brief le constructeur par copie de notre vecteur*/
         ~Vecteur();
         /** @brief le destructeur par defaut du vecteur*/
-        float getX();
+        float getX const();
         /** @brief permet de recuperer la coordonnee x du vecteur*/
-        float getY();
+        float getY const();
         /** @brief permet de recuperer la coordonnee y du vecteur*/
-        void setX(float x);
+        void setX(float x1);
         /** @brief permet de modifier la coordonnee x du vecteur*/
-        void setY(float y);
+        void setY(float y1);
         /** @brief permet de modifier la coordonnee y du vecteur*/
         bool operator==(Vecteur v);
         /** @brief effectue le test d'egalite avec le vecteur v
