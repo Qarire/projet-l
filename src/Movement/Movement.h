@@ -11,6 +11,8 @@ protected:
     Vecteur moveTowards(DIRECTION direction, Vecteur position);
 
 public:
+    Movement();
+    ~Movement();
     virtual Vecteur Move(Vecteur start, Vecteur objective);
 
 };

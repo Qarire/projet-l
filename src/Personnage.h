@@ -3,6 +3,7 @@
 
 
 #include "Vecteur.h"
+#include "Movement/Movement.h"
 
 class Personnage {
 
@@ -17,7 +18,7 @@ public:
 
     Personnage();
     /** @brief Constructeur par défaut; **/
-    Personnage(Vecteur p, int pv);
+    Personnage(Vecteur p, int pv, Movement* movement);
     /** @brief constructeur par copie **/
     ~Personnage();
     /** @brief Destructeur par défaut **/
