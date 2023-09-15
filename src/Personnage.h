@@ -10,6 +10,7 @@ private:
     
     int pv;
     Vecteur pos;
+    Movement* movement;
 
 
 public:
