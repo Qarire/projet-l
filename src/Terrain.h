@@ -6,7 +6,7 @@ class Terrain {
 
 private:
     
-    int dimx, dimy; /** @brief les deux dimension du terrain */
+    unsigned int dimx, dimy; /** @brief les deux dimension du terrain */
 
 public:
 
@@ -25,6 +25,10 @@ public:
     unsigned int getDimy() const;
     /** @brief Recupere la dimension du y du Terrain **/
 
+    void setDimx(unsigned int dimx1);
+    /** @brief Modifie la dimension en x du Terrain **/
+    void setDimy(unsigned int dimy1);
+    /** @brief Modifie la dimension en y du Terrain **/
 
-}
+};
 #endif
