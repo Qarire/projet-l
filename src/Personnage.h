@@ -20,14 +20,25 @@ public:
     /** @brief constructeur par copie **/
     ~Personnage();
     /** @brief Destructeur par défaut **/
-    int getpv();
 
+    int getpv() const;
+    /** @brief Recupere les pv d'un personnage**/
 
-    Vecteur getpos();
+    Vecteur getpos() const;
+    /** @brief  Recupere la position d'un personnage**/
 
+    void setpv(int pv1);
+    /** @brief  definit les pv d'un personnage**/
+
+    void setpos(Vecteur pos1);
+    /** @brief  definit la position d'un personnage**/
 
     void Update(float dt);
     /** **/
 
+
+
+    //+
+    //-
 };
 #endif
