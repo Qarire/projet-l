@@ -14,11 +14,11 @@ private:
 
 public:
 
-    Perso();
+    Personnage();
     /** @brief Constructeur par défaut; **/
-    Perso(Vecteur p, int pv);
+    Personnage(Vecteur p, int pv);
     /** @brief constructeur par copie **/
-    ~Perso(Vecteur p, int pv);
+    ~Personnage();
     /** @brief Destructeur par défaut **/
     int getpv();
 
@@ -26,8 +26,8 @@ public:
     Vecteur getpos();
 
 
-    Perso(float dt);
+    void Update(float dt);
     /** **/
 
-}
+};
 #endif
