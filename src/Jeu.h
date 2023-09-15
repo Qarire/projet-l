@@ -3,6 +3,10 @@
 
 #include "Terrain.h"
 #include "Personnage.h"
+#include <vector>
+
+
+using namespace std;
 
 class Jeu {
 
@@ -14,7 +18,8 @@ class Jeu {
 
     Jeu();
     /** @brief Constructeur par défaut **/
-
+    
+    
     ~Jeu();
     /** @brief Destructeur par défaut **/
 
@@ -24,6 +29,6 @@ class Jeu {
     Terrain getTerrain() const;
     /** @brief recupere le Terrain **/
 
-}
+};
 
 #endif
