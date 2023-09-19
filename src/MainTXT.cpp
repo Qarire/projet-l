@@ -55,14 +55,19 @@ void txtBoucle (Jeu & jeu) {
 	bool stop = false;
 	
 	
-    
+    vector<Personnage> personnageList = jeu.getPersonnage();
        
       
 
 	do
 	{
 		txtAff(win,jeu);
-         #ifdef _WIN32
+        
+		for(int i = 0; i < personnageList.size(); i++) {
+			personnageList[i].Update(0);
+		}
+		
+		#ifdef _WIN32
         Sleep(100);
 		#else
 		usleep(100000);

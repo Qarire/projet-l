@@ -10,5 +10,5 @@ Vecteur MovementSimple::Move(Vecteur start, Vecteur objective) {
     else
         return moveTowards((diffY > 0)? DOWN : UP, start);
 
-    return Vecteur();
+    return start;
 }

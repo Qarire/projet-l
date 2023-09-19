@@ -1,8 +1,5 @@
 #include "Movement.h"
 
-using namespace std;
-
-
 Vecteur Movement::moveTowards(DIRECTION direction, Vecteur position) {
     switch (direction) {
         case UP:

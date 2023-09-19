@@ -4,15 +4,12 @@ using namespace std;
 
 
 Jeu::Jeu() {
-
     map = Terrain(50,50);
-    player.push_back(Personnage(Vecteur(25,25),100));
+    player.push_back(Personnage(Vecteur(25,25),100, new MovementSimple()));
 
 }
 
 Jeu::~Jeu() {
-
-
 }
 
 vector<Personnage> Jeu::getPersonnage() const {
