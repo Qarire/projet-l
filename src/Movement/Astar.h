@@ -11,6 +11,6 @@ public:
     int fscore(int heuristic, int gscore);
 
     Vecteur Move(Vecteur start, Vecteur objective) override;
-}
+};
 
 #endif

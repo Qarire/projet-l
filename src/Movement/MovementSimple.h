@@ -1,14 +1,14 @@
-// #ifndef _MOVEMENTSIMPLE_H
-// #define _MOVEMENTSIMPLE_H
+#ifndef _MOVEMENTSIMPLE_H
+#define _MOVEMENTSIMPLE_H
 
-// #include "Movement.h"
+#include "Movement.h"
 
-// class MovementSimple : public Movement {
-// public:
-//     MovementSimple() : Movement() {}
-//     ~MovementSimple() override {}
-//     Vecteur Move(Vecteur start, Vecteur objective) override;
+class MovementSimple : public Movement {
+public:
+    MovementSimple() : Movement() {}
+    ~MovementSimple() {}
+    Vecteur Move(Vecteur start, Vecteur objective) override;
 
-// };
+};
 
-// #endif
+#endif

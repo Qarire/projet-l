@@ -3,7 +3,7 @@
 
 
 #include "Vecteur.h"
-#include "Movement/Movement.h"
+#include "Movement/MovementSimple.h"
 
 class Personnage {
 
@@ -11,7 +11,7 @@ private:
     
     int pv;
     Vecteur pos;
-    //Movement* movement;
+    Movement* movement;
 
 
 public:
