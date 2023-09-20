@@ -1,7 +1,7 @@
 #pragma once
 
 #include <iostream>
-#include "../Jeu/Jeu.h"
+#include "Jeu.h"
 
 using namespace std;
 

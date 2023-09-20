@@ -1,7 +1,7 @@
 #ifndef _MOVEMENT_H
 #define _MOVEMENT_H
 
-#include "../../lib/Vecteur.h"
+#include "Vecteur.h"
 #include "E_Direction.h"
 
 class Movement {

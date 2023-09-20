@@ -1,7 +1,7 @@
 #include <iostream>
 
-#include "Jeu/Jeu.h"
-#include "Display/Displayer.h"
+#include "Jeu.h"
+#include "Displayer.h"
 
 using namespace std;
 

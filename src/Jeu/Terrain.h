@@ -1,9 +1,12 @@
 #ifndef _TERRAIN_H
 #define _TERRAIN_H
 
+#include <iostream>
+#include <exception>
 #include <vector>
-#include "../lib/Vecteur.h"
-#include "Personnage/Personnage.h"
+
+#include "Vecteur.h"
+#include "Personnage.h"
 
 using namespace std;
 

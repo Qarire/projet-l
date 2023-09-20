@@ -1,5 +1,4 @@
 #include "Vecteur.h"
-#include <iostream>
 
 
 using namespace std;

@@ -2,3 +2,5 @@
 *.o
 *.gch
 *.exe
+build/fileMesh/*.cpp
+build/fileMesh/*.h
