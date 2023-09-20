@@ -1,7 +1,6 @@
 #include "Terrain.h"
 
 
-
 Terrain::Terrain() {
     width=0;
     height=0;
@@ -59,7 +58,7 @@ bool Terrain::removePersonnage(Personnage* personnage) {
 
 bool Terrain::isThereSomethingAt(Vecteur position) const { // TODO use templates to check for the different type of things that can be in there
     for(int i = 0; i < personnageList.size(); i++) {
-        if(personnageList[i]->getpos() == position)
+        if(personnageList[i]->getPosition() == position)
             return true;
     }
 
@@ -70,10 +69,22 @@ Personnage* Terrain::findPersonnageAt(Vecteur position) const {
         throw std::invalid_argument("there is nothing at this position");
 
     for(int i = 0; i < personnageList.size(); i++) {
-        if(personnageList[i]->getpos() == position)
+        if(personnageList[i]->getPosition() == position)
             return personnageList[i];
     }
 }
+
+
+void Terrain::cleanDeads() {
+    for(int i = 0; i < personnageList.size(); i++) {
+        if(personnageList[i]->getIsDead()) {
+            removePersonnage(personnageList[i]);
+            cleanDeads();
+            return;
+        }   
+    }
+}
+
 
 
 void Terrain::Update(float dt) {

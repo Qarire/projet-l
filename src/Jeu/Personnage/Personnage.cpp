@@ -1,16 +1,12 @@
 #include "Personnage.h"
 
 
-Personnage::Personnage(){
-    pv = 100;
-    pos = Vecteur();
-    movement = new Movement();
-}
-
-Personnage::Personnage(Vecteur p1, int pv1, Movement* movement){
-    pv = pv1;
-    pos = Vecteur(p1);
+Personnage::Personnage(Vecteur position, int pv, Movement* movement){
+    this->position = position;
+    this->pv = pv;
     this->movement = movement;
+
+    this->isDead = false;
 }
 
 Personnage::~Personnage(){
@@ -18,24 +14,7 @@ Personnage::~Personnage(){
 }
 
 
-int Personnage::getpv() const{
-    return pv;
-}
-
-Vecteur Personnage::getpos() const{
-    return pos;
-}
-
-void Personnage::setpv(int pv1){
-    pv=pv1;
-}
-
-void Personnage::setpos(Vecteur pos1){
-    pos= pos1;
-}
 
 void Personnage::Update(float dt) {
-    pos = movement->Move(pos, Vecteur(50, 50));
+    position = movement->Move(position, Vecteur(50, 50));
 }
-
-

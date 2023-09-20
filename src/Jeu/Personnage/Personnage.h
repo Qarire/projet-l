@@ -6,39 +6,32 @@
 
 class Personnage {
 
-private:
-    
+protected:
     int pv;
-    Vecteur pos;
+    Vecteur position;
     Movement* movement;
 
+    bool isDead;
 
 public:
-
-    Personnage();
-    /** @brief Constructeur par défaut; **/
-    Personnage(Vecteur p, int pv, Movement* movement);
-    /** @brief constructeur par copie **/
+    Personnage(Vecteur position, int pv, Movement* movement);
+    /** @brief constructeur**/
     ~Personnage();
     /** @brief Destructeur par défaut **/
 
-    int getpv() const;
+    int getPv() const { return pv; }
     /** @brief Recupere les pv d'un personnage**/
-
-    Vecteur getpos() const;
-    /** @brief  Recupere la position d'un personnage**/
-
-    void setpv(int pv1);
+    void setPv(int pv) { this->pv = pv; }
     /** @brief  definit les pv d'un personnage**/
 
-    void setpos(Vecteur pos1);
+    Vecteur getPosition() const { return position; }
+    /** @brief  Recupere la position d'un personnage**/
+    void setPosition(Vecteur position) { this->position = position; }
     /** @brief  definit la position d'un personnage**/
 
+    bool getIsDead() const { return isDead; }
+    void kill() { isDead = true; }
+
+
     void Update(float dt);
-    /** **/
-
-
-
-    //+
-    //-
 };

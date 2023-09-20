@@ -46,6 +46,9 @@ public:
     bool isThereSomethingAt(Vecteur position) const;
     Personnage* findPersonnageAt(Vecteur position) const;
 
-    void Update(float dt);
 
+    void cleanDeads();
+
+
+    void Update(float dt);
 };
