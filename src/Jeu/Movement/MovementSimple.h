@@ -1,5 +1,4 @@
-#ifndef _MOVEMENTSIMPLE_H
-#define _MOVEMENTSIMPLE_H
+#pragma once
 
 #include "Movement.h"
 
@@ -10,5 +9,3 @@ public:
     Vecteur Move(Vecteur start, Vecteur objective) override;
 
 };
-
-#endif

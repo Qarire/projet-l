@@ -1,5 +1,4 @@
-#ifndef _ASTAR_H
-#define _ASTAR_H
+#pragma once
 
 #include "Movement.h"
 
@@ -12,5 +11,3 @@ public:
 
     Vecteur Move(Vecteur start, Vecteur objective) override;
 };
-
-#endif

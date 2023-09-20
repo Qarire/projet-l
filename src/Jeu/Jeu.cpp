@@ -2,6 +2,7 @@
 
 using namespace std;
 
+
 // ! Singleton
 Jeu* Jeu::instance= nullptr;
 

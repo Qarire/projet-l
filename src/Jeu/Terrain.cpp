@@ -1,6 +1,6 @@
 #include "Terrain.h"
 
-using namespace std;
+
 
 Terrain::Terrain() {
     width=0;

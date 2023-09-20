@@ -1,9 +1,8 @@
-#ifndef _PERSONNAGE_H
-#define _PERSONNAGE_H
-
+#pragma once
 
 #include "Vecteur.h"
 #include "MovementSimple.h"
+
 
 class Personnage {
 
@@ -43,4 +42,3 @@ public:
     //+
     //-
 };
-#endif

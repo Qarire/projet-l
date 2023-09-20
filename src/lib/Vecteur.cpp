@@ -1,7 +1,7 @@
 #include "Vecteur.h"
 
-
 using namespace std;
+
 
 Vecteur::Vecteur() {
     x = 0;

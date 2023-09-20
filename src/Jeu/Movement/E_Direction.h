@@ -1,5 +1,4 @@
-#ifndef _E_Direction_H
-#define _E_Direction_H
+#pragma once
 
 enum DIRECTION {
     UP,
@@ -7,5 +6,3 @@ enum DIRECTION {
     DOWN, 
     RIGHT
 };
-
-#endif

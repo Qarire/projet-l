@@ -1,5 +1,5 @@
-#ifndef _VECTEUR_H
-#define _VECTEUR_H
+#pragma once
+
 
 class Vecteur {
     private :
@@ -38,6 +38,3 @@ class Vecteur {
         /** @brief effectue la soustraction entre le vecteur et un reel a
         @param le reel a que l'on retire au vecteur*/
 };
-
-
-#endif

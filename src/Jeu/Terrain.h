@@ -1,5 +1,4 @@
-#ifndef _TERRAIN_H
-#define _TERRAIN_H
+#pragma once
 
 #include <iostream>
 #include <exception>
@@ -9,6 +8,7 @@
 #include "Personnage.h"
 
 using namespace std;
+
 
 class Terrain {
 
@@ -49,4 +49,3 @@ public:
     void Update(float dt);
 
 };
-#endif

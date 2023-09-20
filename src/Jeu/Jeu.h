@@ -1,10 +1,9 @@
-#ifndef _JEU_H
-#define _JEU_H
+#pragma once
 
 #include "Terrain.h"
 
-
 using namespace std;
+
 
 class Jeu {
 private:
@@ -38,5 +37,3 @@ public:
     void Update(float dt);
 
 };
-
-#endif
