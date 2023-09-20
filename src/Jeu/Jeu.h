@@ -8,21 +8,33 @@
 using namespace std;
 
 class Jeu {
+private:
 
-    private:
-        Terrain* terrain;
+    // ! Singleton
+    static Jeu* instance;
 
-    public :
+    Jeu() { terrain = new Terrain(50,50); }
+    // ! Singleton
 
-    Jeu();
-    /** @brief Constructeur par défaut **/
+    Terrain* terrain;
+
+public:
+
+    // ! Singleton
+    static Jeu* getInstance() {
+        if(instance==nullptr){
+            instance = new Jeu();
+        }
+        return instance;
+    }    
+
     
-    
-    ~Jeu();
+    ~Jeu() { delete terrain; }
     /** @brief Destructeur par défaut **/
 
-    Terrain* getTerrain() const;
+    Terrain* getTerrain() const { return terrain; }
     /** @brief recupere le Terrain **/
+
 
     void Update(float dt);
 

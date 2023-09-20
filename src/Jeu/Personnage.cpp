@@ -37,7 +37,7 @@ void Personnage::setpos(Vecteur pos1){
 }
 
 void Personnage::Update(float dt) {
-    pos = movement->Move(pos, Vecteur(0, 50));
+    pos = movement->Move(pos, Vecteur(50, 50));
 }
 
 

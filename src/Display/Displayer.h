@@ -1,18 +1,28 @@
 #pragma once
 
 #include <iostream>
-#include "../Jeu/Terrain.h"
+#include "../Jeu/Jeu.h"
 
 using namespace std;
 
-class Displayer {
+class Displayer { 
 private:
-    Terrain* terrain;
+
+    // ! Singleton
+    static Displayer* instance;
+
+    Displayer() {}
+    // ! Singleton
 
 public:
-    Displayer(Terrain* terrain) {
-        this->terrain = terrain;
-    }
+
+    // ! Singleton
+    static Displayer* getInstance() {
+        if(instance==nullptr){
+            instance = new Displayer();
+        }
+        return instance;
+    }    
     ~Displayer() {}
 
     void Display() const;

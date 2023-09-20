@@ -6,8 +6,8 @@
 using namespace std;
 
 int main() {
-    Jeu* jeu = new Jeu();
-    Displayer* displayer = new Displayer(jeu->getTerrain());
+    Jeu* jeu = Jeu::getInstance();
+    Displayer* displayer = Displayer::getInstance();
 
     do {
         jeu->Update(0);
