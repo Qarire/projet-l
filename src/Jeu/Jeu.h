@@ -2,7 +2,6 @@
 #define _JEU_H
 
 #include "Terrain.h"
-#include "Personnage.h"
 
 
 using namespace std;

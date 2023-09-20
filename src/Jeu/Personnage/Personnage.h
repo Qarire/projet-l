@@ -2,8 +2,8 @@
 #define _PERSONNAGE_H
 
 
-#include "../lib/Vecteur.h"
-#include "Movement/MovementSimple.h"
+#include "../../lib/Vecteur.h"
+#include "../Movement/MovementSimple.h"
 
 class Personnage {
 

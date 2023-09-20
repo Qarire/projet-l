@@ -3,7 +3,7 @@
 
 #include <vector>
 #include "../lib/Vecteur.h"
-#include "Personnage.h"
+#include "Personnage/Personnage.h"
 
 using namespace std;
 
