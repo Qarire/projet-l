@@ -12,8 +12,8 @@ void Displayer::Display() const {
         cout << "| ";
 
         for(int x = 0; x < jeu->getTerrain()->getWidth(); x++) {
-            if(jeu->getTerrain()->isThereSomethingAt(Vecteur(x, y))) {
-                Personnage* personnage = jeu->getTerrain()->findPersonnageAt(Vecteur(x, y));
+            if(jeu->getTerrain()->isThereSomethingAt(Vecteur(y, x))) {
+                Personnage* personnage = jeu->getTerrain()->findPersonnageAt(Vecteur(y, x));
                 cout << "P ";
             }
             else

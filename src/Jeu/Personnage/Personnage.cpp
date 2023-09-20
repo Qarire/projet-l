@@ -15,6 +15,10 @@ Personnage::~Personnage(){
 
 
 
-void Personnage::Update(float dt) {
-    position = movement->Move(position, Vecteur(50, 50));
+void Personnage::Update(float dt, vector<Personnage*> myTeam, vector<Personnage*> enemyTeam) {
+    if(enemyTeam.size() > 0) {
+        if(!enemyTeam[0]->getIsDead()) {
+            position = movement->Move(position, enemyTeam[0]->getPosition());
+        }
+    }
 }

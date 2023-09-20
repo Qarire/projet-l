@@ -1,7 +1,10 @@
 #pragma once
 
+#include <vector>
 #include "Vecteur.h"
 #include "MovementSimple.h"
+
+using namespace std;
 
 
 class Personnage {
@@ -33,5 +36,5 @@ public:
     void kill() { isDead = true; }
 
 
-    void Update(float dt);
+    void Update(float dt, vector<Personnage*> myTeam, vector<Personnage*> enemyTeam);
 };

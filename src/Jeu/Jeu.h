@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Terrain.h"
+#include "PunchingBag.h"
 
 using namespace std;
 

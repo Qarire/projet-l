@@ -52,6 +52,8 @@ public:
     
     TEAM findPersonnageTeam(Personnage*) const ;
     bool inTheSameTeam(Personnage* personnageA, Personnage* personnageB) const;
+    vector<Personnage*> getMyTeam(TEAM) const;
+    vector<Personnage*> getEnemyTeam(TEAM) const;
 
     bool isThereSomethingAt(Vecteur position) const; // will use templates
     Personnage* findPersonnageAt(Vecteur position) const; // will use templates

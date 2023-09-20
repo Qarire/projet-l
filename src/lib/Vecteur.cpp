@@ -4,27 +4,26 @@ using namespace std;
 
 
 Vecteur::Vecteur() {
-    x = 0;
     y = 0;
+    x = 0;
 }
-Vecteur::Vecteur(float a, float b) {
-    x = a;
-    y = b;
+Vecteur::Vecteur(float y, float x) {
+    this->y = y;
+    this->x = x;
 }
-Vecteur::~Vecteur(){
+Vecteur::~Vecteur(){}
 
-}
 float Vecteur::getX() const{
     return x;
 }
 float Vecteur::getY() const{
     return y;
 }
-void Vecteur::setX(float x1){
-    x=x1;
+void Vecteur::setX(float x){
+    this->x=x;
 }
-void Vecteur::setY(float y1){
-    y=y1;
+void Vecteur::setY(float y){
+    this->y=y;
 }
 bool Vecteur::operator==(Vecteur v){
     return (x==v.x && y==v.y);

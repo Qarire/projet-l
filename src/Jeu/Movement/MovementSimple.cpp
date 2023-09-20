@@ -2,7 +2,7 @@
 
 
 Vecteur MovementSimple::Move(Vecteur start, Vecteur objective) {
-    int diffX = objective.getX() - start.getY();
+    int diffX = objective.getX() - start.getX();
     int diffY = objective.getY() - start.getY();
 
     if(diffX >= diffY) 

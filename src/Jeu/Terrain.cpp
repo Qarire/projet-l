@@ -75,6 +75,19 @@ TEAM Terrain::findPersonnageTeam(Personnage* personnage) const {
 bool Terrain::inTheSameTeam(Personnage* personnageA, Personnage* personnageB) const {
     return findPersonnageTeam(personnageA) == findPersonnageTeam(personnageB);
 }
+vector<Personnage*> Terrain::getMyTeam(TEAM team) const {
+    if(team == BLUE)
+        return blueTeam;
+    else
+        return redTeam;
+}
+vector<Personnage*> Terrain::getEnemyTeam(TEAM team) const {
+    if(team == BLUE)
+        return redTeam;
+    else
+        return blueTeam;
+}
+
 
 
 bool Terrain::isThereSomethingAt(Vecteur position) const { // TODO use templates to check for the different type of things that can be in there
@@ -110,6 +123,7 @@ void Terrain::cleanDeads() {
 
 void Terrain::Update(float dt) {
     for(int i = 0; i < personnageList.size(); i++) {
-        personnageList[i]->Update(dt);
+        TEAM team = findPersonnageTeam(personnageList[i]);
+        personnageList[i]->Update(dt, getMyTeam(team), getEnemyTeam(team));
     }
 }
