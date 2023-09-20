@@ -38,7 +38,12 @@ Personnage* Terrain::getPersonnage(unsigned int index) const {
 }
 
 
-bool Terrain::addPersonnage(Personnage* personnage) {
+bool Terrain::addPersonnage(Personnage* personnage, TEAM team) {
+    if(team == BLUE)
+        blueTeam.push_back(personnage);
+    else
+        redTeam.push_back(personnage);
+    
     personnageList.push_back(personnage);
 
     return true;
@@ -53,6 +58,22 @@ bool Terrain::removePersonnage(Personnage* personnage) {
     }
 
     return false;
+}
+
+TEAM Terrain::findPersonnageTeam(Personnage* personnage) const {
+    for(int i = 0; i < blueTeam.size(); i++) {
+        if(blueTeam[i] == personnage)
+            return BLUE;
+    }
+    for(int i = 0; i < redTeam.size(); i++) {
+        if(redTeam[i] == personnage)
+            return BLUE;
+    }
+
+    throw std::invalid_argument("this Personnage is not in any team");
+}
+bool Terrain::inTheSameTeam(Personnage* personnageA, Personnage* personnageB) const {
+    return findPersonnageTeam(personnageA) == findPersonnageTeam(personnageB);
 }
 
 

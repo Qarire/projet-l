@@ -10,12 +10,20 @@
 using namespace std;
 
 
+enum TEAM {
+    BLUE,
+    RED
+};
+
+
 class Terrain {
 
 private:
     
     unsigned int height, width; /** @brief les deux dimension du terrain */
     vector<Personnage*> personnageList;
+    vector<Personnage*> blueTeam;
+    vector<Personnage*> redTeam;
 
 public:
 
@@ -39,12 +47,14 @@ public:
 
     Personnage* getPersonnage(unsigned int) const;
 
-
-    bool addPersonnage(Personnage*);
+    bool addPersonnage(Personnage*, TEAM);
     bool removePersonnage(Personnage*);
+    
+    TEAM findPersonnageTeam(Personnage*) const ;
+    bool inTheSameTeam(Personnage* personnageA, Personnage* personnageB) const;
 
-    bool isThereSomethingAt(Vecteur position) const;
-    Personnage* findPersonnageAt(Vecteur position) const;
+    bool isThereSomethingAt(Vecteur position) const; // will use templates
+    Personnage* findPersonnageAt(Vecteur position) const; // will use templates
 
 
     void cleanDeads();
