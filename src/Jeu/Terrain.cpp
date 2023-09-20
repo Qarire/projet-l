@@ -6,13 +6,13 @@
 using namespace std;
 
 Terrain::Terrain() {
-    dimx=0;
-    dimy=0;
+    width=0;
+    height=0;
 }
 
 Terrain::Terrain(unsigned int x, unsigned int y) {
-    dimx = x;
-    dimy = y;
+    width = x;
+    height = y;
 }
 
 Terrain::~Terrain(){
@@ -70,7 +70,7 @@ bool Terrain::isThereSomethingAt(Vecteur position) const { // TODO use templates
 }
 Personnage* Terrain::findPersonnageAt(Vecteur position) const {
     if(!isThereSomethingAt(position))
-        throw std:invalid_argument("there is nothing at this position");
+        throw std::invalid_argument("there is nothing at this position");
 
     for(int i = 0; i < personnageList.size(); i++) {
         if(personnageList[i]->getpos() == position)

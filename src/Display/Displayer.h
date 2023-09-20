@@ -1,3 +1,5 @@
+#pragma once
+
 #include <iostream>
 #include "../Jeu/Terrain.h"
 
@@ -14,4 +16,4 @@ public:
     ~Displayer() {}
 
     void Display() const;
-}
+};
