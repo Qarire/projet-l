@@ -2,7 +2,7 @@
 
 #include <vector>
 #include "Vecteur.h"
-#include "Attack.h"
+#include "Melee.h"
 #include "MovementSimple.h"
 
 using namespace std;

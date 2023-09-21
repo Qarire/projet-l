@@ -6,6 +6,8 @@
 
 #include "Vecteur.h"
 #include "Personnage.h"
+#include "Melee.h"
+#include "Range.h"
 
 using namespace std;
 
@@ -49,6 +51,7 @@ public:
 
     bool addPersonnage(Personnage*, TEAM);
     bool removePersonnage(Personnage*);
+    bool removePersonnage(Personnage* personnage, TEAM team);
     
     TEAM findPersonnageTeam(Personnage*) const ;
     bool inTheSameTeam(Personnage* personnageA, Personnage* personnageB) const;

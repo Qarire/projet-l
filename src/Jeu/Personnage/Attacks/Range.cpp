@@ -1,39 +1,24 @@
-#include "Range.cpp"
+#include "Range.h"
 
 bool Range::canTouch(Vecteur myPosition, Vecteur targetPosition) {
-    diffX = abs(myPosition.x - targetPosition.x);
-    diffY = abs(myPosition.y - targetPosition.y);
+    int diffX = abs(myPosition.getX() - targetPosition.getX());
+    int diffY = abs(myPosition.getY() - targetPosition.getY());
 
-    if(diffX >= 3 || diff >=3)
+    if(diffX >= 3 || diffY >=3)
         return true;
     return false;
 }
 
-vector<Vecteur> Range::findAllPositionWhereIcanHit(Vecteur targetPosition) {
-    vector<Vecteur> positionList;
-
-    int height = Jeu::getInstance()->getTerrain()->getHeight();
-    int width = Jeu::getInstance()->getTerrain()->getWidth();
-
-    for(int y = 0; y < height; y++) {
-        for(int x = 0; x < width; x++) {
-            if(canTouch(Vecteur(y, x), targetPosition))
-                positionList.push_back(Vecteur(y, x));
-        }
-    }
-
-    return positionList;
-}
 
 int Range::damage(Vecteur myPosition, Vecteur targetPosition) {
-    diffX = abs(myPosition.x - targetPosition.x);
-    diffY = abs(myPosition.y - targetPosition.y);
+    int diffX = abs(myPosition.getX() - targetPosition.getX());
+    int diffY = abs(myPosition.getY() - targetPosition.getY());
 
-    real_dist = diffX + diffY;
+    int real_dist = diffX + diffY;
 
     if (real_dist <= 5) {
         return 5;
-    } else if (real dist > 8) {
+    } else if (real_dist > 8) {
         return 10;  
     }else 
         return 20;  

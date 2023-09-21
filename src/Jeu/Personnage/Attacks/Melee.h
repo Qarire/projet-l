@@ -11,6 +11,5 @@ public:
 
 
     bool canTouch(Vecteur myPosition, Vecteur targetPosition) override;
-    vector<Vecteur> findAllPositionWhereIcanHit(Vecteur targetPosition) override;
     int damage(Vecteur myPosition, Vecteur targetPosition) override;
 };

@@ -51,10 +51,25 @@ bool Terrain::addPersonnage(Personnage* personnage, TEAM team) {
 bool Terrain::removePersonnage(Personnage* personnage) {
     for(int i = 0; i < personnageList.size(); i++) {
         if(personnageList[i] == personnage) {
+            removePersonnage(personnage, findPersonnageTeam(personnage));
+
+            delete personnageList[i];
+
             personnageList.erase(personnageList.begin()+i);
             return true;
         }
+    }
 
+    return false;
+}
+bool Terrain::removePersonnage(Personnage* personnage, TEAM team) {
+    vector<Personnage*> personnageTeam = (team == BLUE)? blueTeam : redTeam;
+
+    for(int i = 0; i < personnageTeam.size(); i++) {
+        if(personnageTeam[i] == personnage) {
+            personnageTeam.erase(personnageTeam.begin()+i);
+            return true;
+        }
     }
 
     return false;
