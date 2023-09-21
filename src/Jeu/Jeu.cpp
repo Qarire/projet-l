@@ -11,7 +11,7 @@ void Jeu::Update(float dt) {
     terrain->cleanDeads();
 
     if(terrain->getPersonnageList().size() == 0) {
-        terrain->addPersonnage(new Personnage(Vecteur(0, 25), 1000, new Range(), new MovementSimple(terrain->getHeight(), terrain->getWidth())), BLUE);
+        terrain->addPersonnage(new Personnage(Vecteur(0, 25), 1000, new Melee(), new MovementSimple(terrain->getHeight(), terrain->getWidth())), BLUE);
     }
     else if(terrain->getPersonnageList().size() == 1) {
         terrain->addPersonnage(new Personnage(Vecteur(49, 25), 1000, new Melee(), new MovementSimple(terrain->getHeight(), terrain->getWidth())), RED);

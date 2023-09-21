@@ -43,6 +43,10 @@ void Personnage::Update(float dt, vector<Personnage*> myTeam, vector<Personnage*
                 );
                 
                 cout << "Myposition : " << position << " enemy position: " << enemyTeam[0]->position << " target position " << positionList[0] << endl;
+                for(int i = 0; i < positionList.size(); i++) {
+                    cout << " - " << positionList[i] << endl;
+                }
+
 
                 position = movement->Move(position, positionList[0]);
             }
