@@ -1,5 +1,8 @@
-#ifndef _VECTEUR_H
-#define _VECTEUR_H
+#pragma once
+
+#include <iostream>
+
+using namespace std;
 
 class Vecteur {
     private :
@@ -39,5 +42,4 @@ class Vecteur {
         @param le reel a que l'on retire au vecteur*/
 };
 
-
-#endif
+ostream& operator<<(ostream& os, const Vecteur& vecteur);
