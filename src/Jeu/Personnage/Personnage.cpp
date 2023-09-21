@@ -4,9 +4,11 @@
 #include <iostream>
 using namespace std;
 
-Personnage::Personnage(Vecteur position, int pv, Movement* movement){
+Personnage::Personnage(Vecteur position, int pv, Attack* attack, Movement* movement){
     this->position = position;
     this->pv = pv;
+
+    this->attack = attack;
     this->movement = movement;
 
     this->isDead = false;
@@ -17,12 +19,25 @@ Personnage::~Personnage(){
 }
 
 
+void Personnage::receiveDamage(int damage) {
+    pv-= damage;
+
+    if(pv <= 0)
+        kill();
+}
+
 
 void Personnage::Update(float dt, vector<Personnage*> myTeam, vector<Personnage*> enemyTeam) {
     if(enemyTeam.size() > 0) {
         if(!enemyTeam[0]->getIsDead()) {
-            cout << "my position: " << position << " enemy position: " << enemyTeam[0]->getPosition() << endl;
-            position = movement->Move(position, enemyTeam[0]->getPosition());
+            if(attack->canTouch(enemyTeam[0]))
+                enemyTeam[0]->receiveDamage(attack->damage());
+            else {
+                vector<Vecteur> positionList = attack->findAllPositionWhereIcanHit(enemyTeam[0]->getPosition());
+                
+                position = movement->Move(position, positionList[0]);
+            }
+
         }
     }
 }

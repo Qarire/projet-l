@@ -1,3 +1,5 @@
+#pragma once
+
 #include "Personnage.h"
 
 class PunchingBag : public Personnage {
