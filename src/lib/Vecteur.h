@@ -1,5 +1,8 @@
 #pragma once
 
+#include <iostream>
+
+using namespace std;
 
 class Vecteur {
     private :
@@ -38,3 +41,5 @@ class Vecteur {
         /** @brief effectue la soustraction entre le vecteur et un reel a
         @param le reel a que l'on retire au vecteur*/
 };
+
+ostream& operator<<(ostream& os, const Vecteur& vecteur);

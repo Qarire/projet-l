@@ -53,3 +53,9 @@ Vecteur Vecteur::operator-(float a){
     res.y = y - a;
     return res;
 }
+
+
+ostream& operator<<(ostream& os, const Vecteur& vecteur) {
+    os << "[ "<< vecteur.getY() << ", " << vecteur.getX() << " ]";
+    return os;
+}

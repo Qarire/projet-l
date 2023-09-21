@@ -67,7 +67,7 @@ TEAM Terrain::findPersonnageTeam(Personnage* personnage) const {
     }
     for(int i = 0; i < redTeam.size(); i++) {
         if(redTeam[i] == personnage)
-            return BLUE;
+            return RED;
     }
 
     throw std::invalid_argument("this Personnage is not in any team");
@@ -99,13 +99,12 @@ bool Terrain::isThereSomethingAt(Vecteur position) const { // TODO use templates
     return false;
 }
 Personnage* Terrain::findPersonnageAt(Vecteur position) const {
-    if(!isThereSomethingAt(position))
-        throw std::invalid_argument("there is nothing at this position");
-
     for(int i = 0; i < personnageList.size(); i++) {
         if(personnageList[i]->getPosition() == position)
             return personnageList[i];
     }
+
+    throw std::invalid_argument("there is nothing at this position");
 }
 
 
