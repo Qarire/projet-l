@@ -7,7 +7,7 @@
 class PersoTank : public Personnage {
 public :
     PersoTank(Vecteur position, int pv, Movement* movement) : Personnage(position, pv, new Melee(), movement) {this->pv = pv*2;}
-    void receiveDamage(int damage) override;
+    void receiveDamage(int damage, bool isAttacked=true) override;
 };
 
 

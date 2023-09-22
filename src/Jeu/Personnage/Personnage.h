@@ -30,7 +30,7 @@ public:
     void setPv(int pv) { this->pv = pv; }
     /** @brief  definit les pv d'un personnage**/
 
-    virtual void receiveDamage(int damage);
+    virtual void receiveDamage(int damage, bool isAttacked=true);
 
     Vecteur getPosition() const { return position; }
     /** @brief  Recupere la position d'un personnage**/
