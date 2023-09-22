@@ -1,7 +1,7 @@
-#ifndef _PERSOARCHER_H
-#define _PERSOARCHER_H
 #include "Range.h"
 #include "Personnage.h"
+#include <iostream>
+using namespace std;
 /** l'archer a la capacité d'attaquer de loin les ennemis*/
 class PersoArcher : public Personnage {
     public :
@@ -9,5 +9,3 @@ class PersoArcher : public Personnage {
 };
 
 
-
-#endif
