@@ -3,7 +3,7 @@
 
 struct Position {
     private :
-        float x,y; /** @brief les coordonnees en x et en y de notre vecteur*/
+        float x,y; /** @brief les coordonnees en x et en y de notre Position*/
     public : 
         Position ();
     

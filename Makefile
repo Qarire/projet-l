@@ -8,11 +8,11 @@ INCLUDE_DIR = -Isrc
 
 all: $(BIN_DIR)/mainTXT
 
-$(BIN_DIR)/mainTXT: $(OBJ_DIR)/MainTXT.o $(OBJ_DIR)/Jeu.o $(OBJ_DIR)/Personnage.o $(OBJ_DIR)/Terrain.o $(OBJ_DIR)/winTXT.o $(OBJ_DIR)/Vecteur.o
-	$(CC) $(OBJ_DIR)/MainTXT.o $(OBJ_DIR)/Jeu.o $(OBJ_DIR)/Personnage.o $(OBJ_DIR)/Terrain.o $(OBJ_DIR)/winTXT.o $(OBJ_DIR)/Vecteur.o -o $(BIN_DIR)/mainTXT $(LDFLAGS)
+$(BIN_DIR)/mainTXT: $(OBJ_DIR)/MainTXT.o $(OBJ_DIR)/Jeu.o $(OBJ_DIR)/Personnage.o $(OBJ_DIR)/Terrain.o $(OBJ_DIR)/winTXT.o $(OBJ_DIR)/Position.o
+	$(CC) $(OBJ_DIR)/MainTXT.o $(OBJ_DIR)/Jeu.o $(OBJ_DIR)/Personnage.o $(OBJ_DIR)/Terrain.o $(OBJ_DIR)/winTXT.o $(OBJ_DIR)/Position.o -o $(BIN_DIR)/mainTXT $(LDFLAGS)
 
-$(OBJ_DIR)/Vecteur.o: $(SRC_DIR)/Vecteur.cpp $(SRC_DIR)/Vecteur.h
-	$(CC) -c $(SRC_DIR)/Vecteur.cpp -o $(OBJ_DIR)/Vecteur.o
+$(OBJ_DIR)/Position.o: $(SRC_DIR)/Position.cpp $(SRC_DIR)/Position.h
+	$(CC) -c $(SRC_DIR)/Position.cpp -o $(OBJ_DIR)/Position.o
 
 $(OBJ_DIR)/winTXT.o: $(SRC_DIR)/winTXT.cpp $(SRC_DIR)/winTXT.h
 	$(CC) -c $(SRC_DIR)/winTXT.cpp -o $(OBJ_DIR)/winTXT.o
@@ -20,7 +20,7 @@ $(OBJ_DIR)/winTXT.o: $(SRC_DIR)/winTXT.cpp $(SRC_DIR)/winTXT.h
 $(OBJ_DIR)/Terrain.o: $(SRC_DIR)/Terrain.cpp $(SRC_DIR)/Terrain.h
 	$(CC) -c $(SRC_DIR)/Terrain.cpp -o $(OBJ_DIR)/Terrain.o
 
-$(OBJ_DIR)/Personnage.o: $(SRC_DIR)/Personnage.cpp $(SRC_DIR)/Personnage.h $(SRC_DIR)/Vecteur.h
+$(OBJ_DIR)/Personnage.o: $(SRC_DIR)/Personnage.cpp $(SRC_DIR)/Personnage.h $(SRC_DIR)/Position.h
 	$(CC) -c $(SRC_DIR)/Personnage.cpp -o $(OBJ_DIR)/Personnage.o
 
 $(OBJ_DIR)/Jeu.o: $(SRC_DIR)/Jeu.cpp $(SRC_DIR)/Jeu.h $(SRC_DIR) $(SRC_DIR)/Terrain.h $(SRC_DIR)/Personnage.h
