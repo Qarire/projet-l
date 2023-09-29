@@ -1,7 +1,7 @@
 #include <iostream>
+#include <utility>
 
-#include "Jeu.h"
-#include "Displayer.h"
+#include "Field.h"
 
 using namespace std;
 
@@ -12,14 +12,16 @@ using namespace std;
 
 
 int main() {
-    Jeu* jeu = Jeu::getInstance();
-    Displayer* displayer = Displayer::getInstance();
-
-    do {
-        jeu->Update(0);
-        displayer->Display();
-    }while(true);
+    Field* field = Field.GetInstance();
+    Game* game = Game.GetInstance();
+    Updater* updater = Updater.GetInstance();
+    Drawer* drawer = Drawer.GetInstance();
 
 
-    delete jeu;
+    field.Init(make_pair(50, 50));
+    game.Init(); updater.Init(); drawer.Init();
+
+    while(true) {
+        updater->Update();
+    }
 }
