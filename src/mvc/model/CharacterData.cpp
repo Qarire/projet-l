@@ -2,8 +2,8 @@
 
 using namespace std;
 
-CharacterData::CharacterData(Team TEAM, Stats stats, float healModifier, float damageModifier, Type type) {
-    this->team = TEAM;
+CharacterData::CharacterData(Team team, Stats stats, float healModifier, float damageModifier, Type type) {
+    this->team = team;
     this->stats = stats;
     this->healModifier = healModifier;
     this->damageModifier = damageModifier;

@@ -16,10 +16,10 @@ class CharacterData {
         Stats stats;
         Type type;
     public :
-    CharacterData(Team TEAM, Stats stats, float healModifier, float damageModifier, Type type);
+    CharacterData(Team team, Stats stats, float healModifier, float damageModifier, Type type);
     Position getPos() const {return this->position; };
     void setPos(Position pos) {this->position = pos; };
-    Stats getStats(){return stats;};
+    Stats getStats() const {return stats;};
     float getHealModifier() const {return this->healModifier; };
     float getDmgModifier () const {return this->damageModifier; };
     virtual void changeHP(int value, bool isDamaged);

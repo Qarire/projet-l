@@ -1,3 +1,6 @@
+#pragma once
+
+
 #include <vector>
 #include <utility>
 
@@ -8,7 +11,7 @@ class Field {
 private:
 //! Singleton
     Field() {}
-    static Field* Instance = nullptr;
+    static Field* Instance;
 //! Singleton
 
 
@@ -25,7 +28,7 @@ private:
                 return i;
         }
 
-        throw std::invalid_argument("This CharacterData does not exists on the Field")
+        throw std::invalid_argument("This CharacterData does not exists on the Field");
     }
 
 
@@ -40,7 +43,7 @@ public:
 //! Singleton
 
     void Init(pair<int, int> size) {
-        this.size = size;
+        this->size = size;
     }
 
 

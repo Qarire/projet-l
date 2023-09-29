@@ -1,8 +1,12 @@
+#pragma once
+
+#include "Game.h"
+
 class Drawer {
 private:
 //! Singleton
     Drawer() {}
-    static Drawer* Instance = nullptr;
+    static Drawer* Instance;
 
 //! Singleton
 
@@ -12,18 +16,18 @@ public:
     //! Singleton
     static Drawer* GetInstance() { 
         if(Instance == nullptr)
-            Instance = new Updater();
+            Instance = new Drawer();
         
         return Instance;
     } 
     //! Singleton
 
     void Init() {
-        game = Game.GetInstance();
+        game = Game::GetInstance();
     }
 
-    void Draw(dt: float) {
-        if(game == nullptr) throw std::bad_alloc("Updater hasn't been initialized");
+    void Draw(float dt) {
+        if(game == nullptr) throw std::invalid_argument("Updater hasn't been initialized");
 
         throw std::runtime_error("not implemented");        
     }

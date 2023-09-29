@@ -16,18 +16,18 @@ using namespace std;
 
 int main() {
 // Initialization
-    Field* field = Field.GetInstance();
-    Game* game = Game.GetInstance();
-    Updater* updater = Updater.GetInstance();
-    Drawer* drawer = Drawer.GetInstance();
+    Field* field = Field::GetInstance();
+    Game* game = Game::GetInstance();
+    Updater* updater = Updater::GetInstance();
+    Drawer* drawer = Drawer::GetInstance();
 
     field->Init(make_pair(50, 50));
-    game->Init(); updater.Init(); drawer.Init();
+    game->Init(); updater->Init(); drawer->Init();
 
 // Game loop
-    while(true) {
-        updater->Update();
-    }
+    // while(true) {
+    //     updater->Update(1);
+    // }
 
 // Endings
     delete field;

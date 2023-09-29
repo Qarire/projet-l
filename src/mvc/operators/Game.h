@@ -1,13 +1,17 @@
+#pragma once
+
 #include <Vector>
 
 #include "Field.h"
 #include "Brain.h"
 
+using namespace std;
+
 class Game {
 private:
 //! Singleton
     Game() {}
-    static Jeu* Instance = nullptr;
+    static Game* Instance;
 
 //! Singleton
 
@@ -24,7 +28,7 @@ private:
                 return i;
         }
 
-        throw std::invalid_argument("This Brain does not exists in the game")
+        throw std::invalid_argument("This Brain does not exists in the game");
     }
 
 public:
@@ -38,7 +42,7 @@ public:
     //! Singleton
 
     ~Game() {
-        for(int i = 0; i < brainList; i++) {
+        for(int i = 0; i < brainList.size(); i++) {
             delete brainList[i];
         }
 
@@ -46,7 +50,7 @@ public:
     }
 
     void Init() {
-        field = Field.GetInstance();
+        field = Field::GetInstance();
     }
 
 
@@ -57,7 +61,7 @@ public:
     }
     void addBrain(Brain* newBrain) {
         brainList.push_back(newBrain);
-        field->addCharacterData(newBrain->getCharacterData())
+        field->addCharacterData(newBrain->getCharacterData());
     }
     void removeBrain(Brain* brain) {
         int index = findBrainIndex(brain);
