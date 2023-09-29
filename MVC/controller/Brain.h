@@ -2,6 +2,7 @@
 
 #include "CharacterData.h"
 #include "Action.h"
+#include  <iostream>
 
 class Brain {
 
@@ -19,7 +20,9 @@ class Brain {
         
         vector<Action> getActionlist() const;
 
-        Action findPriority();
+        Action findPriority(CharacterData charac,vector<Action> listact);
+       
+        pair<int,characterData> FindpairCharacterDistance(CharacterData charac, int heightTerrai, int widthTerrain);
 
         void Update(float dt);
 }

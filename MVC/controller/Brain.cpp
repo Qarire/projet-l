@@ -18,6 +18,30 @@ vector<Action> Brain::getActionlist() const {
 }
 
 
+pair<int,characterData> Brain::FindpairCharacterDistance(CharacterData charac, int heightTerrain, int widthTerrain){
+    int dist;
+    pair<int,characterData> p;
+
+    for(int i=0; i<heightTerrain;i++) {
+        for(int j=0;j<widthTerrain;j++)
+        {
+            if(charac.getPos().getX() == i && charac.getPos().getY() == j) {
+                dist=sqrt(i*i + j*j);
+            }
+        }
+    }
+    p.first = dist;
+    p.second = charac;
+
+    return p;
+}
+
+Action Brain::findPriority(CharacterData charac,vector<Action> listaction) {
+
+    
+}
+
+
 void Brain::Update(float dt) {
     
 }
