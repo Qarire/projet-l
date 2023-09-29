@@ -1,10 +1,14 @@
 #pragma once
 
 #include <vector>
-
+#include "AttackData.h"
 #include "Vecteur.h"
+#include "Action.h"
 
 class Attack {
+private: 
+    AttackData spell;
+
 public:
     Attack() {}
     ~Attack() {}

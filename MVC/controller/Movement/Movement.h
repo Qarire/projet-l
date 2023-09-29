@@ -2,7 +2,7 @@
 
 #include "Vecteur.h"
 #include "E_Direction.h"
-
+#include "Action.h"
 
 class Movement {
 private:
