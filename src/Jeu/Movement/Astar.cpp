@@ -1,19 +1,24 @@
 #include "Astar.h"
 
-#define colone 9; // pour l'instant déclarer à l'arrache mais provient de terrain
-#define ligne 9;
 
 
+/*Case::Case(Vecteur pos1, int toA, int toB, int total, Case* parent, bool traversable, char name) {
+	//Vecteur pos = pos1 ;
+    set_f_score(total);
+    float h_score= toA;
+    float g_score =toB;
+
+    //Case* parent;
+}
+
+Case::~Case() {}*/
 
 int Heuristic(Vecteur start, Vecteur objective){
-    int diffX = objective.Vecteur.getX() - start.Vecteur.getX();
-    int diffY = objective.Vecteur.getY() - start.Vecteur.getY();
+    int diffX = objective.getX() - start.getX();
+    int diffY = objective.getY() - start.getY();
     return diffY + diffY;
 }
 
-int gscore(Case case1 ){
-    return *(case1.parent).g_score +1;
-}
     
 int fscore(Case case1){
     return case1.g_score + case1.h_score;
@@ -24,22 +29,34 @@ int fscore(Case case1){
     }*/ // on considerre pour l'intsant que chaque case est accessible independamment de la position des ennemis
 
 bool destination(Vecteur depart, Vecteur arrive){
-    return (depart.getx() == arrive.getx())&&(depart.gety() == arrive.gety());
+    return (depart.getX() == arrive.getX())&&(depart.getY() == arrive.getY());
 }
 
-vector<*Case> case_autour(vector<vector<Case*>> TAB,Case case){
-    vector<*Case> liste;
-    for(i=-1; i<2; i++){
-        for(j=-1; j <2;j++){
-            TAB[i][j].parent = &case;
-            liste.append(TAB[i][j]);
+vector<Case*> case_autour(vector<vector<Case*>> TAB,Case case1,Vecteur arrive){
+    vector<Case*> liste;
+    for(int i=-1; i<2; i++){
+        for(int j=-1; j <2;j++){
+            TAB[i][j]->parent = &case1;
+            liste.push_back(TAB[i][j]);
+            TAB[i][j]->h_score = Heuristic(TAB[i][j]->pos,arrive)
+            if(abs(i)+abs(j)==2){
+                TAB[i][j]->g_score = TAB[i][j]->parent->g_score +1.41;
+            }
+            else{
+                TAB[i][j]->g_score = TAB[i][j]->parent->g_score +1;
+            }
         }
+    }
+    return liste;
+}
+
+
 int min_f_score( vector<Case*> TAB){
-    float mini = TAB.begin().f_score;
+    float mini = TAB.begin()->f_score;
     int j=0;
     for(int i = 1; i< TAB.size();i++){
-        if ((mini)< TAB[i].f_score){
-            mini= TAB[i].f_score;
+        if ((mini)< TAB[i]->f_score){
+            mini= TAB[i]->f_score;
             j= i;
         }
     }
@@ -47,7 +64,7 @@ int min_f_score( vector<Case*> TAB){
 }
 
 bool appartient_list(Case* case1, vector<Case*> liste){
-    for (i = 0 ; i<liste.size(); i++){
+    for (int i = 0 ; i<liste.size(); i++){
         if (case1== liste[i] ){
             return i;
         }
@@ -56,27 +73,25 @@ bool appartient_list(Case* case1, vector<Case*> liste){
 }
 
 vector<Vecteur> defilement (Case case1){
-    vector<Vecteur> l = [];
-    case* p =&case1;
-    while(p §= nullptr){
-        l.append(case1.Vecteur);
+    vector<Vecteur> l;
+    Case* p =&case1;
+    while(p != nullptr){
+        l.push_back(case1.pos);
         p = case1.parent;
     }
     return l;
 }
 
-vector<Vecteur> astar (vector<Vecteur> TAB, Vecteur depart, Vecteur objectif){
-    //init le tab qui permet d'acceder a la position des obstacles directment 
-    vector<vector<Case*>> TAB;
-    for (int i =0 ; i< colone ; i++){
-        for (int j =0 ; j< colone ; j++){
-            TAB[i][j]=(TAB[i][j].vecteur = Vecteur.setx(i);
-                        TAB[i][j].vecteur = Vecteur.sety(j);
-                        TAB[i][j].parent = nullptr;
-                        TAB[i][j] .f_score = MAX;
-                        TAB[i][j].h_score = MAX;
-                        TAB[i][j].g_score = MAX;
-                        )
+vector<Vecteur> astar_ (vector<Vecteur> TAB, Vecteur depart, Vecteur objectif){
+    for (int i =0 ; i< MAX ; i++){// modif apres en fonction de la tailled efield
+        for (int j =0 ; j< MAX ; j++){
+            TAB[i][j].pos = Vecteur.setX(i);
+            TAB[i][j].pos = Vecteur.setY(j);
+            TAB[i][j].parent = nullptr;
+            TAB[i][j] .f_score = MAX;
+            TAB[i][j].h_score = MAX;
+            TAB[i][j].g_score = MAX;
+                        
         }
     }
     /*for (int i =0; i< obstacle_perso.size(); i++){
@@ -97,11 +112,12 @@ vector<Vecteur> astar (vector<Vecteur> TAB, Vecteur depart, Vecteur objectif){
     OPEN.insert(debut);
     
     while (!OPEN.empty()){
-        Case p = OPEN[min_f_score(OPEN)];
-        OPEN.remove(p)
+        int i_min_f = min_f_score(OPEN);
+        Case p = OPEN[i_min_f];
+        OPEN.erase(i_min_f);
         
-        vector<Case*> succesor = case_autour(TAB,OPEN);
-        for (k=0; k< 8k++){
+        vector<Case*> succesor = case_autour(TAB,OPEN,objectif);
+        for (int k=0; k< 8;k++){
             if (destination(succesor[k].Vecteur,objectif)){
                 return defilement (succesor[k]);
             }
@@ -124,8 +140,8 @@ vector<Vecteur> astar (vector<Vecteur> TAB, Vecteur depart, Vecteur objectif){
     float mini = TAB[0][0].f_score;
     int i_save=0;
     int j_save = 0;
-    for(i=0; i<colone; i++){
-        for(j=0; j <ligne;j++){
+    for(int i=0; i<colone; i++){
+        for(int j=0; j <ligne;j++){
             if ((mini)< TAB[i][j].f_score){
                 mini= TAB[i][j].f_score;
                 i_save= i;
@@ -143,6 +159,6 @@ vector<Vecteur> astar (vector<Vecteur> TAB, Vecteur depart, Vecteur objectif){
 
 
 Vecteur Move(Vecteur start, Vecteur destination){
-
-    return astar(TAB,start,destination).begin();
+    vector<Vecteur> TAB; //init avec les obsatcle recuperr a un moment
+    return astar_(TAB,start,destination).begin();
 }
