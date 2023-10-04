@@ -5,6 +5,15 @@ Brain::Brain(CharacterData* charac, vector<Action*> list){
     actionlist = list;
 }
 
+Brain::~Brain() {
+    delete character;
+
+    for(int i = 0; i < actionlist.size(); i++) {
+        delete actionlist[i];
+    }
+    actionlist.clear();
+}
+
 CharacterData* Brain::getCharacterData() const {
     return character;
 }

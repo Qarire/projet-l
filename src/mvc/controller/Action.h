@@ -2,15 +2,14 @@
 
 class Action {
 
-    public:
+    private:
         float lastFor;
         float chrono;
         bool isRunning;
 
-    private:
-
+    public:
         Action(float lastfor, float chrono, bool run);
-        ~Action();
+        ~Action() {};
         float getLastFor() const;
         float getChrono() const;
 
