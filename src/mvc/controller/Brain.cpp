@@ -34,7 +34,7 @@ pair<int,CharacterData*> Brain::FindpairCharacterDistance(CharacterData* charac,
     for(int i=0; i<heightTerrain;i++) {
         for(int j=0;j<widthTerrain;j++)
         {
-            if(charac->getPos().getX() == i && charac->getPos().getY() == j) {
+            if(charac->getPosition().x == i && charac->getPosition().y == j) {
                 dist=sqrt(i*i + j*j);
             }
         }

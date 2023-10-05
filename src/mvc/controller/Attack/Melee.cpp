@@ -2,8 +2,8 @@
 
 
 bool Melee::canTouch(Position myPosition, Position targetPosition) {
-    int diffX = abs(myPosition.getX() - targetPosition.getX());
-    int diffY = abs(myPosition.getY() - targetPosition.getY());
+    int diffX = abs(myPosition.x - targetPosition.x);
+    int diffY = abs(myPosition.y - targetPosition.y);
 
     if(diffX <= 1 && diffY <= 1)
         return true;

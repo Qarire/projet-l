@@ -13,10 +13,10 @@ Position::Position(float y, float x) {
 }
 Position::~Position(){}
 
-float Position::getX() const{
+float Position::x const{
     return x;
 }
-float Position::getY() const{
+float Position::y const{
     return y;
 }
 void Position::setX(float x){
@@ -30,15 +30,15 @@ bool Position::operator==(Position v){
 }
 Position Position::operator+(Position v){
     Position res;
-    res.x = x + v.getX();
-    res.y = y + v.getY();
+    res.x = x + v.x;
+    res.y = y + v.y;
     return res;
 }
 
 Position Position::operator-(Position v){
     Position res;
-    res.x = x - v.getX();
-    res.y = y - v.getY();
+    res.x = x - v.x;
+    res.y = y - v.y;
     return res;
 }
 Position Position::operator+(float a){
@@ -56,6 +56,6 @@ Position Position::operator-(float a){
 
 
 ostream& operator<<(ostream& os, const Position& Position) {
-    os << "[ "<< Position.getY() << ", " << Position.getX() << " ]";
+    os << "[ "<< Position.y << ", " << Position.x << " ]";
     return os;
 }

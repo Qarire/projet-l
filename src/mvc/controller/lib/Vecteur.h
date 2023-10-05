@@ -17,9 +17,9 @@ class Position {
        
         ~Position();
         /** @brief le destructeur par defaut du Position*/
-        float getX() const;
+        float x const;
         /** @brief permet de recuperer la coordonnee x du Position*/
-        float getY() const;
+        float y const;
         /** @brief permet de recuperer la coordonnee y du Position*/
         void setX(float x1);
         /** @brief permet de modifier la coordonnee x du Position*/

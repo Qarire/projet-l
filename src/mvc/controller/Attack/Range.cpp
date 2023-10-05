@@ -1,8 +1,8 @@
 #include "Range.h"
 
 bool Range::canTouch(Position myPosition, Position targetPosition) {
-    int diffX = abs(myPosition.getX() - targetPosition.getX());
-    int diffY = abs(myPosition.getY() - targetPosition.getY());
+    int diffX = abs(myPosition.x - targetPosition.x);
+    int diffY = abs(myPosition.y - targetPosition.y);
 
     if(diffX >= 3 || diffY >=3)
         return true;
@@ -11,8 +11,8 @@ bool Range::canTouch(Position myPosition, Position targetPosition) {
 
 
 int Range::damage(Position myPosition, Position targetPosition) {
-    int diffX = abs(myPosition.getX() - targetPosition.getX());
-    int diffY = abs(myPosition.getY() - targetPosition.getY());
+    int diffX = abs(myPosition.x - targetPosition.x);
+    int diffY = abs(myPosition.y - targetPosition.y);
 
     int real_dist = diffX + diffY;
 

@@ -4,16 +4,16 @@
 Position Movement::moveTowards(DIRECTION direction, Position position) {
     switch (direction) {
         case UP:
-            position.setY(position.getY() - 1);
+            position.y -= 1;
             break;
         case LEFT:
-            position.setX(position.getX() - 1);
+            position.x -= 1;
             break;
         case DOWN:
-            position.setY(position.getY() + 1);
+            position.y += 1;
             break;
         case RIGHT:
-            position.setX(position.getX() + 1);
+            position.x += 1;
             break;
     }
 

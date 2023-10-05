@@ -19,8 +19,8 @@ class CharacterData {
     public :
     CharacterData(Team team, Stats stats, float healModifier, float damageModifier, Type type, Type favoriteEnemyType);
 
-    Position getPos() const {return this->position; };
-    void setPos(Position pos) {this->position = pos; };
+    Position getPosition() const {return this->position; };
+    void setPosition(Position position) {this->position = position; };
 
     Stats getStats() const {return stats;};
     Team getTeam() const {return team;};

@@ -3,8 +3,8 @@
 #include <cstdlib>
 
 Position MovementSimple::Move(Position start, Position objective) {
-    int diffX = objective.getX() - start.getX();
-    int diffY = objective.getY() - start.getY();
+    int diffX = objective.x - start.x;
+    int diffY = objective.y - start.y;
 
     if(abs(diffX) > abs(diffY)) 
         return moveTowards((diffX > 0)? RIGHT : LEFT, start);
