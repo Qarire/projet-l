@@ -18,11 +18,11 @@ int main() {
 // Initialization
     Field* field = Field::GetInstance();
     Game* game = Game::GetInstance();
-     Updater* updater = Updater::GetInstance();
-     Drawer* drawer = Drawer::GetInstance();
+    Updater* updater = Updater::GetInstance();
+    Drawer* drawer = Drawer::GetInstance();
 
-     field->Init(make_pair(50, 50));
-     game->Init(); updater->Init(); drawer->Init();
+    field->Init(make_pair(50, 50));
+    game->Init(); updater->Init(); drawer->Init();
 
 // Game loop
     // while(true) {
