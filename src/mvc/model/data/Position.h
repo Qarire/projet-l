@@ -1,28 +1,26 @@
 #pragma once
+
 #include <iostream>
+#include <cmath>
+
+using namespace std;
 
 struct Position {
-    private :
-        float x,y; /** @brief les coordonnees en x et en y de notre Position*/
-    public : 
-        Position ();
-    
-        Position(float y, float x);
-        ~Position();
-    
-        float getX() const;
-        float getY() const;
-        void setX(float x);
+public : 
+    float x,y; /** @brief les coordonnees en x et en y de notre Position*/
 
-        void setY(float y);
+// Constructor
+    Position ();
+    Position(float y, float x);
+    ~Position();
 
-        bool operator==(Position p);
+// Static Methods
+    static float distance(Position pos1, Position pos2);
 
-        Position operator+(Position p);
-
-        Position operator+(float a);
-    
-        Position operator-(Position p);
-    
-        Position operator-(float a);
+// Operators
+    bool operator==(Position p);
+    Position operator+(Position p);
+    Position operator+(float a);
+    Position operator-(Position p);
+    Position operator-(float a);
 };

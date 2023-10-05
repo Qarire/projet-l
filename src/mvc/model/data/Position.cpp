@@ -11,18 +11,15 @@ Position::Position(float y, float x) {
     this->x = x;
 }
 Position::~Position(){};
-float Position::getX() const {
-    return x;
+
+
+float Position::distance(Position posA, Position posB) {
+    return sqrt(
+        pow(posB.x - posA.x, 2) + pow(posB.y - posA.y, 2)
+    );
 }
-float Position::getY() const {
-    return y;
-}
-void Position::setX(float x){
-    this->x = x;
-}
-void Position::setY(float y){
-    this->y = y;
-}
+
+
 bool Position::operator==(Position p) {
     return (x==p.x && y==p.y);
 }
@@ -54,6 +51,6 @@ Position Position::operator-(float a) {
 
 }
 ostream& operator<<(ostream& os, const Position& position) {
-        os << "[ "<< position.getY() << ", " << position.getX() << " ]";
+        os << "[ "<< position.y << ", " << position.x << " ]";
         return os;
 }
