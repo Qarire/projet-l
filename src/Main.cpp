@@ -24,14 +24,14 @@ int main() {
      field->Init(make_pair(50, 50));
      game->Init(); updater->Init(); drawer->Init();
 
-// // Game loop
-//     // while(true) {
-//     //     updater->Update(1);
-//     // }
+// Game loop
+    // while(true) {
+    //     updater->Update(1);
+    // }
 
-// // Endings
-//     delete field;
-//     delete game;
-//     delete updater;
-//     delete drawer;
+// Endings
+    delete field;
+    delete game;
+    delete updater;
+    delete drawer;
 }
