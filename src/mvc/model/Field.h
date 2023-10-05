@@ -83,7 +83,7 @@ public:
     }
 
 
-    vector<CharacterData*> findAllCharacterData(Team team) {
+    vector<CharacterData*> findAllCharacterData(Team team) const {
         vector<CharacterData*> resultList;
 
         for(int i = 0; i < CharacterDataList.size(); i++) {
@@ -93,7 +93,7 @@ public:
 
         return resultList;
     }
-    vector<CharacterData*> findAllCharacterData(Type type) {
+    vector<CharacterData*> findAllCharacterData(Type type) const {
         vector<CharacterData*> resultList;
 
         for(int i = 0; i < CharacterDataList.size(); i++) {
@@ -103,7 +103,7 @@ public:
 
         return resultList;
     }
-    vector<CharacterData*> findAllCharacterData(Position position, int range) {
+    vector<CharacterData*> findAllCharacterData(Position position, int range) const {
         vector<CharacterData*> resultList;
 
         for(int i = 0; i < CharacterDataList.size(); i++) {
