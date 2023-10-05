@@ -23,6 +23,7 @@ class CharacterData {
     void setPos(Position pos) {this->position = pos; };
 
     Stats getStats() const {return stats;};
+    Team getTeam() const {return team;};
     float getHealModifier() const {return this->healModifier; };
     float getDmgModifier () const {return this->damageModifier; };
     bool getisDead() const { return isDead; };
