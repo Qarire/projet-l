@@ -25,7 +25,7 @@ class Brain {
 
         // Action findPriority(CharacterData* charac,vector<Action> listact);
        
-        pair<int,CharacterData*> FindpairCharacterDistance(CharacterData* charac, int heightTerrai, int widthTerrain);
+        // pair<int,CharacterData*> FindpairCharacterDistance(CharacterData* charac, int heightTerrai, int widthTerrain);
 
         void Update(float dt);
 };
