@@ -10,8 +10,8 @@ using namespace std;
 
 
 // compilation :
-// windows : cp src/*.cpp, src/lib/*.cpp, src/Display/*.cpp, src/Jeu/*.cpp, src/Jeu/Movement/*.cpp, src/Jeu/Personnage/*.cpp, src/Jeu/personnage/Attacks/*.cpp, src/*.h, src/lib/*.h, src/Display/*.h, src/Jeu/*.h, src/Jeu/Movement/*.h, src/Jeu/Personnage/*.h, src/Jeu/Personnage/Attacks/*.h build/fileMesh/; g++ build/fileMesh/*.cpp -o build/prog.exe && build/prog.exe
-// linux cp src/*.cpp src/lib/*.cpp src/Display/*.cpp src/Jeu/*.cpp src/Jeu/Movement/*.cpp src/Jeu/Personnage/*.cpp src/Jeu/Personnage/Attacks/*.cpp src/*.h src/lib/*.h src/Display/*.h src/Jeu/*.h src/Jeu/Movement/*.h src/Jeu/Personnage/*.h src/Jeu/Personnage/Attacks/*.h build/fileMesh/; g++ build/fileMesh/*.cpp -o build/prog.exe && build/prog.exe
+// windows: cp src/*.cpp, src/mvc/controller/*.cpp, src/mvc/model/*.cpp, src/mvc/operators/*.cpp, src/mvc/controller/Attack/*.cpp, src/mvc/controller/Movement/*.cpp, src/mvc/model/data/*.cpp,src/mvc/controller/*.h, src/mvc/model/*.h, src/mvc/operators/*.h, src/mvc/controller/Attack/*.h, src/mvc/controller/Movement/*.h, src/mvc/model/data/*.h build/fileMesh/ && g++ build/fileMesh/*.cpp -o build/prog.exe && build/prog.exe
+// linux: cp src/*.cpp src/mvc/controller/*.cpp src/mvc/model/*.cpp src/mvc/operators/*.cpp src/mvc/controller/Attack/*.cpp src/mvc/controller/Movement/*.cpp src/mvc/model/data/*.cpp src/mvc/controller/*.h src/mvc/model/*.h src/mvc/operators/*.h src/mvc/controller/Attack/*.h src/mvc/controller/Movement/*.h src/mvc/model/data/*.h build/fileMesh/ && g++ build/fileMesh/*.cpp -o build/prog.exe && build/prog.exe
 
 
 int main() {
