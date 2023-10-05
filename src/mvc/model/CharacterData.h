@@ -15,14 +15,20 @@ class CharacterData {
         Team team;
         Stats stats;
         Type type;
+        Type favoriteEnemyType;
     public :
-    CharacterData(Team team, Stats stats, float healModifier, float damageModifier, Type type);
+    CharacterData(Team team, Stats stats, float healModifier, float damageModifier, Type type, Type favoriteEnemyType);
+
     Position getPos() const {return this->position; };
     void setPos(Position pos) {this->position = pos; };
+
     Stats getStats() const {return stats;};
     float getHealModifier() const {return this->healModifier; };
     float getDmgModifier () const {return this->damageModifier; };
-    virtual void changeHP(int value, bool isDamaged);
     bool getisDead() const { return isDead; };
+    Type getType() const {return type;};
+    Type getFavoriteEnemyType() const {return favoriteEnemyType;};
+
+    void changeHP(int value, bool isDamaged);
     void kill() { isDead = true; };
 };

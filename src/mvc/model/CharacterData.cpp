@@ -2,12 +2,13 @@
 
 using namespace std;
 
-CharacterData::CharacterData(Team team, Stats stats, float healModifier, float damageModifier, Type type) {
+CharacterData::CharacterData(Team team, Stats stats, float healModifier, float damageModifier, Type type, Type favoriteEnemyType) {
     this->team = team;
     this->stats = stats;
     this->healModifier = healModifier;
     this->damageModifier = damageModifier;
     this->type = type;
+    this->favoriteEnemyType = favoriteEnemyType;
 }
 
 void CharacterData::changeHP(int value, bool isDamaged) {
