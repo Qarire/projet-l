@@ -1,32 +1,63 @@
 #include "Astar.h"
+const int MAX =100000;
+const int COLONNE =100000;
+const int LIGNE =100000;
 
 
 
-/*Case::Case(Vecteur pos1, int toA, int toB, int total, Case* parent, bool traversable, char name) {
-	//Vecteur pos = pos1 ;
-    set_f_score(total);
-    float h_score= toA;
-    float g_score =toB;
 
-    //Case* parent;
+float Case::get_f_score(){
+    return this->f_score;
+}
+float Case::get_g_score(){
+    return this->g_score;
+}
+float Case::get_h_score(){
+    return this->h_score;
+}
+Vecteur Case::get_pos(){
+    return this->pos;
+}
+Case* Case::get_parent(){
+    return this->parent;
+}
+bool Case::get_accessible(){
+    return this->accessible;
 }
 
-Case::~Case() {}*/
+void Case::set_f_score( float x){
+    this->f_score = x;
+}
+void Case::set_g_score( float x){
+    this->g_score = x;
+}
+void Case::set_h_score(float x){
+    this->h_score = x;
+}
+void Case::set_parent( Case* case1){
+    this->parent = case1;
+}
+void Case::set_pos(Vecteur v){
+    this->pos = v;
+}
+void Case::set_accessible(bool b){
+    this->accessible = b;
+}
+
 
 int Heuristic(Vecteur start, Vecteur objective){
     int diffX = objective.getX() - start.getX();
     int diffY = objective.getY() - start.getY();
     return diffY + diffY;
 }
-
     
 int fscore(Case case1){
-    return case1.g_score + case1.h_score;
+    return case1.get_g_score() + case1.get_h_score();
 }
 
 /*bool case_valide(Vecteur case1){
         return (case1.getx()>=0)&&(case1.gety()>=0)&&(case1.getx()<colone)&&(case1.gety()<ligne);
-    }*/ // on considerre pour l'intsant que chaque case est accessible independamment de la position des ennemis
+    }*/ // on considere pour l'intsant que chaque case est accessible independamment de la position des ennemis
 
 bool destination(Vecteur depart, Vecteur arrive){
     return (depart.getX() == arrive.getX())&&(depart.getY() == arrive.getY());
@@ -36,14 +67,16 @@ vector<Case*> case_autour(vector<vector<Case*>> TAB,Case case1,Vecteur arrive){
     vector<Case*> liste;
     for(int i=-1; i<2; i++){
         for(int j=-1; j <2;j++){
-            TAB[i][j]->parent = &case1;
-            liste.push_back(TAB[i][j]);
-            TAB[i][j]->h_score = Heuristic(TAB[i][j]->pos,arrive)
-            if(abs(i)+abs(j)==2){
-                TAB[i][j]->g_score = TAB[i][j]->parent->g_score +1.41;
-            }
-            else{
-                TAB[i][j]->g_score = TAB[i][j]->parent->g_score +1;
+            if(TAB[i][j]->get_accessible()== true){
+                TAB[i][j]->set_parent(&case1) ;
+                liste.push_back(TAB[i][j]);
+                TAB[i][j]->set_h_score(Heuristic(TAB[i][j]->get_pos(),arrive));
+                if((abs(i)+abs(j))==2){
+                    TAB[i][j]->set_g_score(TAB[i][j]->get_parent()->get_g_score() +1.41);
+                }
+                else{
+                    TAB[i][j]->set_g_score(TAB[i][j]->get_parent()->get_g_score() +1);
+                }
             }
         }
     }
@@ -51,12 +84,12 @@ vector<Case*> case_autour(vector<vector<Case*>> TAB,Case case1,Vecteur arrive){
 }
 
 
-int min_f_score( vector<Case*> TAB){
-    float mini = TAB.begin()->f_score;
+int min_f_score( vector<Case*> tab){
+    float mini = tab[0]->get_f_score();
     int j=0;
-    for(int i = 1; i< TAB.size();i++){
-        if ((mini)< TAB[i]->f_score){
-            mini= TAB[i]->f_score;
+    for(int i = 1; i< tab.size();i++){
+        if ((mini)< tab[i]->get_f_score()){
+            mini= tab[i]->get_f_score();
             j= i;
         }
     }
@@ -72,78 +105,84 @@ bool appartient_list(Case* case1, vector<Case*> liste){
     return -1;
 }
 
-vector<Vecteur> defilement (Case case1){
-    vector<Vecteur> l;
-    Case* p =&case1;
+vector<Vecteur> defilement (Case* case1){
+    vector<Vecteur> liste;
+    Case* p =case1;
     while(p != nullptr){
-        l.push_back(case1.pos);
-        p = case1.parent;
+        liste.push_back(case1->get_pos());
+        p = case1->get_parent();
+        printf("hqrhr");
+
+
     }
-    return l;
+    return liste;
 }
 
-vector<Vecteur> astar_ (vector<Vecteur> TAB, Vecteur depart, Vecteur objectif){
-    for (int i =0 ; i< MAX ; i++){// modif apres en fonction de la tailled efield
-        for (int j =0 ; j< MAX ; j++){
-            TAB[i][j].pos = Vecteur.setX(i);
-            TAB[i][j].pos = Vecteur.setY(j);
-            TAB[i][j].parent = nullptr;
-            TAB[i][j] .f_score = MAX;
-            TAB[i][j].h_score = MAX;
-            TAB[i][j].g_score = MAX;
+vector<Vecteur> astar_ (vector<Vecteur> tabl_obstacle, Vecteur depart, Vecteur objectif){
+    vector<vector<Case*>> TAB;
+    for (int i =0 ; i< COLONNE ; i++){// modif apres en fonction de la tailled efield
+        for (int j =0 ; j< LIGNE ; j++){
+            TAB[i][j]->get_pos().setX(i) ;
+            TAB[i][j]->get_pos().setX(j);
+            TAB[i][j]->set_parent(nullptr);
+            TAB[i][j] ->set_f_score(MAX);
+            TAB[i][j]->set_h_score(MAX) ;
+            TAB[i][j]->set_g_score(MAX) ;
+            TAB[i][j]->set_accessible(true) ;
                         
         }
     }
-    /*for (int i =0; i< obstacle_perso.size(); i++){
-        TAB[obstacle_perso[i].Vecteur.getx()][obstacle_perso[i].Vecteur.gety()]=1;
-    }*/
+    for (int i =0; i< tabl_obstacle.size(); i++){
+        TAB[tabl_obstacle[i].getX()][tabl_obstacle[i].getY()] ->set_accessible(true) ;
+    }
 
     vector<Case*> OPEN;
-    vector<Case*> CLOSE;
+    vector<Case*> CLOSED;
 
     Case debut;
-    debut.vecteur = depart;
-    debut.parent = nullptr;
-    debut .f_score = 0;
-    debut.h_score = Heuristic(depart,objectif);
-    debut.g_score = 0;
+    debut.set_pos(depart);
+    debut.set_parent(nullptr);
+    debut .set_f_score(0);
+    debut.set_h_score(Heuristic(depart,objectif)) ;
+    debut.set_g_score(0);
+    debut.set_accessible(true);
 
-
-    OPEN.insert(debut);
+    OPEN.push_back(&debut);
     
     while (!OPEN.empty()){
         int i_min_f = min_f_score(OPEN);
-        Case p = OPEN[i_min_f];
-        OPEN.erase(i_min_f);
+        Case* p = OPEN[i_min_f];
+        OPEN.erase(OPEN.begin()+i_min_f);
         
-        vector<Case*> succesor = case_autour(TAB,OPEN,objectif);
+        vector<Case*> succesor = case_autour(TAB,*p,objectif);
         for (int k=0; k< 8;k++){
-            if (destination(succesor[k].Vecteur,objectif)){
+            if (destination(succesor[k]->get_pos(),objectif)){
                 return defilement (succesor[k]);
             }
       
             int pos_closed = appartient_list(succesor[k],CLOSED);
-            if(pos_open >=0 && succesor[k].f_score < OPEN[pos_open].f_score){
+            int pos_open = appartient_list(succesor[k],OPEN);
+            if(pos_open >=0 && succesor[k]->get_f_score() < OPEN[pos_open]->get_f_score()){
                 OPEN[pos_open] = succesor[k];
             }
 
-            if(pos_closed >=0 && succesor[k].f_score < CLOSED[pos_open].f_score){
-                OPEN.append(CLOSED[pos_closed]);
+            if(pos_closed >=0 && succesor[k]->get_f_score() < CLOSED[pos_open]->get_f_score()){
+                OPEN.push_back(CLOSED[pos_closed]);
                 CLOSED[pos_closed] = succesor[k];
 
             }
             
 
         }
-        CLOSED.append(p);
+        CLOSED.push_back(p);
     }
-    float mini = TAB[0][0].f_score;
+    float mini = TAB[0][0]->get_f_score();
     int i_save=0;
     int j_save = 0;
-    for(int i=0; i<colone; i++){
-        for(int j=0; j <ligne;j++){
-            if ((mini)< TAB[i][j].f_score){
-                mini= TAB[i][j].f_score;
+    for(int i=0; i<COLONNE; i++){
+        for(int j=0; j <LIGNE;j++){
+            if ((mini)< TAB[i][j]->get_f_score()){
+                mini= TAB[i][j]->get_f_score();
                 i_save= i;
                 j_save= j;
             }
@@ -159,6 +198,13 @@ vector<Vecteur> astar_ (vector<Vecteur> TAB, Vecteur depart, Vecteur objectif){
 
 
 Vecteur Move(Vecteur start, Vecteur destination){
-    vector<Vecteur> TAB; //init avec les obsatcle recuperr a un moment
-    return astar_(TAB,start,destination).begin();
+    vector<Vecteur> tabl_obstacle; //init avec les obsatcle recuperr a un moment
+    return *(astar_(tabl_obstacle,start,destination).begin());
 }
+
+
+
+
+
+
+
