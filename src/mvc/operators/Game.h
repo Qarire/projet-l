@@ -33,12 +33,7 @@ private:
 
 public:
     //! Singleton
-    static Game* GetInstance() { 
-        if(Instance == nullptr)
-            Instance = new Game();
-        
-        return Instance;
-    } 
+    static Game* GetInstance();
     //! Singleton
 
     ~Game() {

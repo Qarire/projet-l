@@ -14,12 +14,7 @@ private:
 
 public:
     //! Singleton
-    static Updater* GetInstance() { 
-        if(Instance == nullptr)
-            Instance = new Updater();
-        
-        return Instance;
-    } 
+    static Updater* GetInstance();
     //! Singleton
 
     void Init() {

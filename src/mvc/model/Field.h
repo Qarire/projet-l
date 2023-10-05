@@ -34,12 +34,7 @@ private:
 
 public:
 //! Singleton
-    static Field* GetInstance() { 
-        if(Instance == nullptr)
-            Instance = new Field();
-        
-        return Instance;
-    } 
+    static Field* GetInstance();
 //! Singleton
 
     void Init(pair<int, int> size) {

@@ -14,12 +14,7 @@ private:
 
 public:
     //! Singleton
-    static Drawer* GetInstance() { 
-        if(Instance == nullptr)
-            Instance = new Drawer();
-        
-        return Instance;
-    } 
+    static Drawer* GetInstance();
     //! Singleton
 
     void Init() {
@@ -27,7 +22,7 @@ public:
     }
 
     void Draw(float dt) {
-        if(game == nullptr) throw std::invalid_argument("Updater hasn't been initialized");
+        if(game == nullptr) throw std::invalid_argument("Drawer hasn't been initialized");
 
         throw std::runtime_error("not implemented");        
     }
