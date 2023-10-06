@@ -1,8 +1,10 @@
 #pragma once
 
-#include "Vecteur.h"
-#include "E_Direction.h"
 
+
+
+#include "E_Direction.h"
+#include "Vecteur.h"
 
 class Movement {
 private:
