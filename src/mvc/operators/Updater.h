@@ -20,7 +20,7 @@ public:
     static Updater* GetInstance();
     //! Singleton
 
-    void Init(Behavior* behavior); {
+    void Init(Behavior* behavior) {
         game = Game::GetInstance();
         this->behavior = behavior;
     }

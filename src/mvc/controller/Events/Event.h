@@ -16,7 +16,6 @@ public:
         this->condition = condition;
         this->consequence = consequence;
     }
-    static Event* DefaultEvent(Consequence* consequence);
     ~Event() {
         delete condition;
         delete consequence;
@@ -36,7 +35,3 @@ public:
         return false;
     }
 };
-
-Event* Event::DefaultEvent(Consequence* consequence) {
-    return new Event(new ConditionTrue(), consequence)
-}

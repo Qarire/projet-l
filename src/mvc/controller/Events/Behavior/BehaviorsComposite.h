@@ -29,4 +29,4 @@ public:
             behaviorList[i]->runBehavior();
         }
     }
-}
+};
