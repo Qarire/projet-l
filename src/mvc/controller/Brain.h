@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include <vector>
-#include <Math.h>
+#include <math.h>
 #include "CharacterData.h"
 #include "Action.h"
 
