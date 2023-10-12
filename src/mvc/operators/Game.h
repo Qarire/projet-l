@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Vector>
+#include <vector>
 
 #include "Field.h"
 #include "Brain.h"
