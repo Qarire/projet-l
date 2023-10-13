@@ -34,6 +34,8 @@ int main() {
     int Width = field->getWidth();
     InitWindow(Height, Width, "Game Window");
 
+    Texture2D LoadTextureFromImage(Image image);
+
 
 //CharacterData(Team team, Stats stats, float healModifier, float damageModifier, Type type, Type favoriteEnemyType);
    
@@ -55,14 +57,18 @@ int main() {
 
     CharacterData* new_r_perso = new CharacterData(first_team,stat_perso,23,44,Tank,Tank);
     new_r_perso->setPosition(pos);
-    CharacterData* new_b_perso = new CharacterData(seconde_team,stat_perso,23,44,Melee,Melee);
+    CharacterData* new_b_perso = new CharacterData(seconde_team,stat_perso,23,44,Support,Melee);
     new_b_perso->setPosition(pos);
+    
+    CharacterData* new_Melee_perso = new CharacterData(first_team,stat_perso,23,44,Melee,Tank);
+    CharacterData* new_Tank_perso = new CharacterData(first_team,stat_perso,23,44,Tank,Tank);
+    CharacterData* new_archer_perso = new CharacterData(first_team,stat_perso,23,44,Archer,Tank);
 
    
    
     
     /// partie fond map
-    Color *pixels = (Color *)malloc(Width*Height*sizeof(Color));
+    /*Color *pixels = (Color *)malloc(Width*Height*sizeof(Color));
 
     for (int y = 0; y < Height; y++)
     {
@@ -86,22 +92,29 @@ int main() {
 
     Texture2D checked = LoadTextureFromImage(checkedIm);
     UnloadImage(checkedIm); 
-
-    /////
-
-    //RenderTexture2D fogOfWar = LoadRenderTexture(Height - 10, Width - 10);
-    //SetTextureFilter(fogOfWar.texture, TEXTURE_FILTER_BILINEAR);
+    */
+    
     SetTargetFPS(60); 
+
+    Vector2 My_Mouse;
 
     while (!WindowShouldClose()) { // Detect window close button or ESC key 
         
-        //BeginTextureMode(fogOfWar);
-        //EndTextureMode();
-
+   
 
         if(IsKeyPressed(KEY_R)) {
             field->addCharacterData(new_r_perso);
             tabcharact = field->getCharacterDataList();  
+        }
+        
+        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) ) {
+             My_Mouse = GetMousePosition();   
+             if (My_Mouse.x < Width/2 && My_Mouse.y < Height/2 ) {
+                field->addCharacterData(new_r_perso);
+                tabcharact = field->getCharacterDataList(); 
+             }
+
+
         }
 
         if(IsKeyPressed(KEY_B)) {
@@ -110,11 +123,11 @@ int main() {
         }
 
         BeginDrawing();
-        
+        /*
         ClearBackground(RAYWHITE);
 
         DrawTexture(checked, Width/2 - checked.width/2, Height/2 - checked.height/2, Fade(WHITE, 0.5f));
-
+        */
 
         for(int i=0;i<tabcharact.size();i++)
         {
@@ -143,7 +156,7 @@ int main() {
     }   
 
    
-    UnloadTexture(checked); 
+    //UnloadTexture(checked); 
     CloseWindow();         
     //--------------------------------------------------------------------------------------
 
