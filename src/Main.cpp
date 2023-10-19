@@ -34,18 +34,22 @@ int main() {
 
     vector<Event*> events = {new Event(new ConditionTrue(), new ConsequenceTestDelete())};
     
+    field->Init(make_pair(1680, 900));
+    game->Init(); drawer->Init();
+    updater->Init(new Behavior( events ));
+
+    int Height = field->getHeight();
+    int Width = field->getWidth();
+
     int screenWidth = 1680;
     int screenHeight = 900;
     InitWindow(screenWidth, screenHeight, "Game Window");
     Texture2D texture = LoadTexture("img/Sprite.png");                                      
     
-    field->Init(make_pair(1680, 900));
-    game->Init(); drawer->Init();
-    updater->Init(new Behavior( events ));
+   
 
 
-    int Height = field->getHeight();
-    int Width = field->getWidth();
+    
 
     ValueMaxed value;
     vector<CharacterData*> tabcharact;
@@ -74,8 +78,8 @@ int main() {
 
     Vector2 My_Mouse;
        
-    int width35 = Width * 0.35;
-    int width25 = Width * 0.25;
+    int width35 = screenWidth * 0.35;
+    int width25 = screenWidth * 0.25;
 
     /*int PosXPink = width35;
     int PosXGreen = width35 + width25;
@@ -102,38 +106,38 @@ int main() {
             
             int it = field->getCharacterDataList().size(); 
             
-            if ((My_Mouse.x > PosXPink && My_Mouse.x < PosXPink + Width * 0.15) && (My_Mouse.y > 800  && My_Mouse.y < 800 + Width * 0.15  )) {
+            if ((My_Mouse.x > PosXPink && My_Mouse.x < PosXPink + screenWidth* 0.15) && (My_Mouse.y > 800  && My_Mouse.y < 800 + screenWidth * 0.15  )) {
                 CharacterData* new_Support_perso = new CharacterData(seconde_team,stat_perso,23,44,Support,Support);
                 field->addCharacterData(new_Support_perso);
-                new_Support_perso->setPosition(Position(Width -200,100 + it * 100));
+                new_Support_perso->setPosition(Position(screenWidth -200,100 + it * 100));
                 //tabcharact = field->getCharacterDataList(); 
             }
 
-            if ((My_Mouse.x > PosXGreen && My_Mouse.x < PosXGreen + Width * 0.15) && (My_Mouse.y > 800  && My_Mouse.y < 800 + Width * 0.15  )) {
+            if ((My_Mouse.x > PosXGreen && My_Mouse.x < PosXGreen + screenWidth * 0.15) && (My_Mouse.y > 800  && My_Mouse.y < 800 + screenWidth * 0.15  )) {
                 CharacterData* new_archer_perso = new CharacterData(seconde_team,stat_perso,23,44,Archer,Tank);
                 field->addCharacterData(new_archer_perso);
-                new_archer_perso->setPosition(Position(Width -200,100 + it * 100));
+                new_archer_perso->setPosition(Position(screenWidth -200,100 + it * 100));
                 //tabcharact = field->getCharacterDataList(); 
             }
 
-            if ((My_Mouse.x > PosXRed && My_Mouse.x < PosXRed + Width * 0.15) && (My_Mouse.y > 800  && My_Mouse.y < 800 + Width * 0.15  )) {
+            if ((My_Mouse.x > PosXRed && My_Mouse.x < PosXRed + screenWidth * 0.15) && (My_Mouse.y > 800  && My_Mouse.y < 800 + screenWidth * 0.15  )) {
                 CharacterData* new_Tank_perso = new CharacterData(seconde_team,stat_perso,23,44,Tank,Tank);
                 field->addCharacterData(new_Tank_perso);
-                new_Tank_perso->setPosition(Position(Width -200,100 + it * 100));
+                new_Tank_perso->setPosition(Position(screenWidth -200,100 + it * 100));
                 //tabcharact = field->getCharacterDataList(); 
             }
 
-            if ((My_Mouse.x > PosXGray && My_Mouse.x < PosXGray + Width * 0.15) && (My_Mouse.y > 800  && My_Mouse.y < 800 + Width * 0.15  )) {
+            if ((My_Mouse.x > PosXGray && My_Mouse.x < PosXGray + screenWidth * 0.15) && (My_Mouse.y > 800  && My_Mouse.y < 800 + screenWidth * 0.15  )) {
                 CharacterData* new_Sorcerer_perso = new CharacterData(seconde_team,stat_perso,23,44,Sorcerer,Melee);
                 field->addCharacterData(new_Sorcerer_perso);
-                new_Sorcerer_perso->setPosition(Position(Width -200,100 + it * 100));
+                new_Sorcerer_perso->setPosition(Position(screenWidth -200,100 + it * 100));
                 //tabcharact = field->getCharacterDataList(); 
             }
 
-            if ((My_Mouse.x > PosXBlue && My_Mouse.x < PosXBlue + Width * 0.15) && (My_Mouse.y > 800  && My_Mouse.y < 800 + Width * 0.15  )) {
+            if ((My_Mouse.x > PosXBlue && My_Mouse.x < PosXBlue + screenWidth * 0.15) && (My_Mouse.y > 800  && My_Mouse.y < 800 + screenWidth * 0.15  )) {
                 CharacterData* new_Melee_perso = new CharacterData(seconde_team,stat_perso,23,44,Melee,Tank);
                 field->addCharacterData(new_Melee_perso);
-                new_Melee_perso->setPosition(Position(Width -200,100 + it * 100));
+                new_Melee_perso->setPosition(Position(screenWidth -200,100 + it * 100));
                 //tabcharact = field->getCharacterDataList(); 
             }
         }
@@ -158,8 +162,9 @@ int main() {
          
         }
 
-        if(IsMouseButtonDown(MOUSE_BUTTON_LEFT) && verif_moov.first == true) {
+        if(IsMouseButtonDown(MOUSE_BUTTON_LEFT) && verif_moov.first == true && My_Mouse.y < 750 && My_Mouse.y > 325) {
 
+            
             verif_moov.second->setPosition(Position(My_Mouse.y - PLAYER_SIZE /2,My_Mouse.x - PLAYER_SIZE /2));
         }
 
@@ -215,11 +220,11 @@ int main() {
       
         }
         //Le shop
-        DrawRectangle(PosXPink, 800, Width * 0.15 , Width * 0.15 , PINK);
-        DrawRectangle(PosXGreen, 800, Width * 0.15 , Width * 0.15 , GREEN);
-        DrawRectangle(PosXRed, 800, Width * 0.15 , Width * 0.15 , RED);
-        DrawRectangle(PosXGray, 800, Width * 0.15 , Width * 0.15 , GRAY);
-        DrawRectangle(PosXBlue, 800, Width * 0.15 , Width * 0.15 , BLUE);
+        DrawRectangle(PosXPink, 800, screenWidth * 0.15 , screenWidth * 0.15 , PINK);
+        DrawRectangle(PosXGreen, 800, screenWidth * 0.15 , screenWidth * 0.15 , GREEN);
+        DrawRectangle(PosXRed, 800, screenWidth * 0.15 , screenWidth * 0.15 , RED);
+        DrawRectangle(PosXGray, 800, screenWidth * 0.15 , screenWidth * 0.15 , GRAY);
+        DrawRectangle(PosXBlue, 800, screenWidth * 0.15 , screenWidth * 0.15 , BLUE);
         
         //void DrawLine(int startPosX, int startPosY, int endPosX, int endPosY, Color color);
         //Le Banc
