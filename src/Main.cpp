@@ -48,7 +48,7 @@ int main() {
     int Width = field->getWidth();
 
     ValueMaxed value;
-     vector<CharacterData*> tabcharact;
+    vector<CharacterData*> tabcharact;
     int playerTileX; 
     int playerTileY; 
 
@@ -66,11 +66,11 @@ int main() {
     CharacterData* new_r_perso = new CharacterData(first_team,stat_perso,23,44,Tank,Tank);
     //new_r_perso->setPosition(pos);
    
-    CharacterData* new_Support_perso = new CharacterData(seconde_team,stat_perso,23,44,Support,Support);
-    CharacterData* new_Melee_perso = new CharacterData(seconde_team,stat_perso,23,44,Melee,Tank);
-    CharacterData* new_Tank_perso = new CharacterData(seconde_team,stat_perso,23,44,Tank,Tank);
-    CharacterData* new_archer_perso = new CharacterData(seconde_team,stat_perso,23,44,Archer,Tank);
-    CharacterData* new_Sorcerer_perso = new CharacterData(seconde_team,stat_perso,23,44,Sorcerer,Melee);
+    
+    
+    
+    
+    
 
     Vector2 My_Mouse;
        
@@ -104,26 +104,31 @@ int main() {
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) ) {
             
             if ((My_Mouse.x > PosXPink && My_Mouse.x < PosXPink + Width * 0.15) && (My_Mouse.y > 800  && My_Mouse.y < 800 + Width * 0.15  )) {
+                CharacterData* new_Support_perso = new CharacterData(seconde_team,stat_perso,23,44,Support,Support);
                 field->addCharacterData(new_Support_perso);
                 tabcharact = field->getCharacterDataList(); 
             }
 
             if ((My_Mouse.x > PosXGreen && My_Mouse.x < PosXGreen + Width * 0.15) && (My_Mouse.y > 800  && My_Mouse.y < 800 + Width * 0.15  )) {
+                CharacterData* new_archer_perso = new CharacterData(seconde_team,stat_perso,23,44,Archer,Tank);
                 field->addCharacterData(new_archer_perso);
                 tabcharact = field->getCharacterDataList(); 
             }
 
             if ((My_Mouse.x > PosXRed && My_Mouse.x < PosXRed + Width * 0.15) && (My_Mouse.y > 800  && My_Mouse.y < 800 + Width * 0.15  )) {
+                CharacterData* new_Tank_perso = new CharacterData(seconde_team,stat_perso,23,44,Tank,Tank);
                 field->addCharacterData(new_Tank_perso);
                 tabcharact = field->getCharacterDataList(); 
             }
 
             if ((My_Mouse.x > PosXGray && My_Mouse.x < PosXGray + Width * 0.15) && (My_Mouse.y > 800  && My_Mouse.y < 800 + Width * 0.15  )) {
+                CharacterData* new_Sorcerer_perso = new CharacterData(seconde_team,stat_perso,23,44,Sorcerer,Melee);
                 field->addCharacterData(new_Sorcerer_perso);
                 tabcharact = field->getCharacterDataList(); 
             }
 
             if ((My_Mouse.x > PosXBlue && My_Mouse.x < PosXBlue + Width * 0.15) && (My_Mouse.y > 800  && My_Mouse.y < 800 + Width * 0.15  )) {
+                CharacterData* new_Melee_perso = new CharacterData(seconde_team,stat_perso,23,44,Melee,Tank);
                 field->addCharacterData(new_Melee_perso);
                 tabcharact = field->getCharacterDataList(); 
             }
@@ -135,8 +140,10 @@ int main() {
                 
                 Position pos_p = tabcharact[i]->getPosition();
                 if((My_Mouse.x > pos_p.x && My_Mouse.x < pos_p.x + PLAYER_SIZE ) && (My_Mouse.y > pos_p.y && My_Mouse.y < pos_p.y + PLAYER_SIZE)) {
+                    
                     tabcharact[i]->setPosition(Position(My_Mouse.x,My_Mouse.y));
-                   
+                   //void DrawText(const char *text, int posX, int posY, int fontSize, Color color);
+                  
                 }              
             }
          
