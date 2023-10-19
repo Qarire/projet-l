@@ -69,7 +69,7 @@ int main() {
     
     
     pair<bool, CharacterData*> verif_moov;
-    
+   
 
 
     Vector2 My_Mouse;
@@ -92,9 +92,10 @@ int main() {
     SetTargetFPS(60);
 
     while (!WindowShouldClose()) { // Detect window close button or ESC key 
+        cout << verif_moov.first << endl;
     
         My_Mouse = GetMousePosition();
-        cout << My_Mouse.x << " " << My_Mouse.y << endl;
+        // cout << My_Mouse.x << " " << My_Mouse.y << endl;
         
         
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) ) {
@@ -136,7 +137,7 @@ int main() {
                 //tabcharact = field->getCharacterDataList(); 
             }
         }
-
+        
         if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) ) {
 
             tabcharact = field->getCharacterDataList(); 
@@ -147,16 +148,27 @@ int main() {
                 
                 Position pos_p = tabcharact[i]->getPosition();
                 if((My_Mouse.x > pos_p.x && My_Mouse.x < pos_p.x + PLAYER_SIZE ) && (My_Mouse.y > pos_p.y && My_Mouse.y < pos_p.y + PLAYER_SIZE)) {
-                    
-                    tabcharact[i]->setPosition(Position(My_Mouse.y - PLAYER_SIZE /2,My_Mouse.x - PLAYER_SIZE /2));
+                    verif_moov.first = true;
+                    verif_moov.second = tabcharact[i];
+                    //tabcharact[i]->setPosition(Position(My_Mouse.y - PLAYER_SIZE /2,My_Mouse.x - PLAYER_SIZE /2));
                   
-                }              
+                }  
+
             }
          
         }
 
+        if(IsMouseButtonDown(MOUSE_BUTTON_LEFT) && verif_moov.first == true) {
+
+            verif_moov.second->setPosition(Position(My_Mouse.y - PLAYER_SIZE /2,My_Mouse.x - PLAYER_SIZE /2));
+        }
+
+        if(IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
+            verif_moov.first = false;
+        }
+
         if(field->getCharacterDataList().size() > 0) {
-            cout << field->getCharacterDataList()[0]->getPosition().x << " - " << field->getCharacterDataList()[0]->getPosition().y << endl;
+            // cout << field->getCharacterDataList()[0]->getPosition().x << " - " << field->getCharacterDataList()[0]->getPosition().y << endl;
         }
        
 
