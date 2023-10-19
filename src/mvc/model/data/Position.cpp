@@ -3,8 +3,8 @@ using namespace std;
 
 
 Position::Position() {
-    y = 0;
-    x = 0;
+    y = 200;
+    x = 100;
 }
 Position::Position(float y, float x) {
     this->y = y;

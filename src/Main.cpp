@@ -14,31 +14,39 @@
 #include "ConditionTrue.h"
 
 using namespace std;
+/*
+void MovePerso(CharacterData* perso, float x, float y)
+{
+    
+    perso->getPosition().x = x; 
+    perso->getPosition().y = y;
 
-
+    
+}
+*/
 int main() {
 // Initialization
+    
     Field* field = Field::GetInstance();
     Game* game = Game::GetInstance();
      Updater* updater = Updater::GetInstance();
      Drawer* drawer = Drawer::GetInstance();
 
     vector<Event*> events = {new Event(new ConditionTrue(), new ConsequenceTestDelete())};
-
-    field->Init(make_pair(1680, 1050));
+    
+    int screenWidth = 1680;
+    int screenHeight = 900;
+    InitWindow(screenWidth, screenHeight, "Game Window");
+    Texture2D texture = LoadTexture("img/Sprite.png");                                      
+    
+    field->Init(make_pair(1680, 900));
     game->Init(); drawer->Init();
     updater->Init(new Behavior( events ));
 
 
     int Height = field->getHeight();
     int Width = field->getWidth();
-    InitWindow(Height, Width, "Game Window");
 
-    Texture2D LoadTextureFromImage(Image image);
-
-
-//CharacterData(Team team, Stats stats, float healModifier, float damageModifier, Type type, Type favoriteEnemyType);
-   
     ValueMaxed value;
      vector<CharacterData*> tabcharact;
     int playerTileX; 
@@ -53,120 +61,156 @@ int main() {
     Team first_team = RED1;
     Team seconde_team = Blue;
 
-    Position pos = Position(200,100);
+    Position pos = Position();
 
     CharacterData* new_r_perso = new CharacterData(first_team,stat_perso,23,44,Tank,Tank);
-    new_r_perso->setPosition(pos);
-    CharacterData* new_b_perso = new CharacterData(seconde_team,stat_perso,23,44,Support,Melee);
-    new_b_perso->setPosition(pos);
-    
-    CharacterData* new_Melee_perso = new CharacterData(first_team,stat_perso,23,44,Melee,Tank);
-    CharacterData* new_Tank_perso = new CharacterData(first_team,stat_perso,23,44,Tank,Tank);
-    CharacterData* new_archer_perso = new CharacterData(first_team,stat_perso,23,44,Archer,Tank);
-
+    //new_r_perso->setPosition(pos);
    
-   
-    
-    /// partie fond map
-    /*Color *pixels = (Color *)malloc(Width*Height*sizeof(Color));
+    CharacterData* new_Support_perso = new CharacterData(seconde_team,stat_perso,23,44,Support,Support);
+    CharacterData* new_Melee_perso = new CharacterData(seconde_team,stat_perso,23,44,Melee,Tank);
+    CharacterData* new_Tank_perso = new CharacterData(seconde_team,stat_perso,23,44,Tank,Tank);
+    CharacterData* new_archer_perso = new CharacterData(seconde_team,stat_perso,23,44,Archer,Tank);
+    CharacterData* new_Sorcerer_perso = new CharacterData(seconde_team,stat_perso,23,44,Sorcerer,Melee);
 
-    for (int y = 0; y < Height; y++)
-    {
-        for (int x = 0; x < Width; x++)
-        {
-            if (((x/32+y/32)/1)%2 == 0) 
-                pixels[y*Width + x] = DARKGREEN;
-            else 
-                pixels[y*Width + x] = GREEN;
-        }
-    }
+    Vector2 My_Mouse;
+       
+    int width35 = Width * 0.35;
+    int width25 = Width * 0.25;
 
-        Image checkedIm = {
-        .data = pixels,             // We can assign pixels directly to data
-        .width = Width,
-        .height = Height,
-        .mipmaps = 1,
-        .format = PIXELFORMAT_UNCOMPRESSED_R8G8B8A8
-        
-    };
+    /*int PosXPink = width35;
+    int PosXGreen = width35 + width25;
+    int PosXRed = (width35 + width25) + width25;
+    int PosXGray = ((width35 + width25) + width25) + width25;
+    int PosXBlue = (((width35 + width25) + width25) + width25) + width25;*/
 
-    Texture2D checked = LoadTextureFromImage(checkedIm);
-    UnloadImage(checkedIm); 
-    */
+    int PosXPink = width35;
+    int PosXGreen = PosXPink + width25;
+    int PosXRed = PosXGreen + width25;
+    int PosXGray = PosXRed + width25;
+    int PosXBlue = PosXGray + width25;
     
     SetTargetFPS(60); 
 
-    Vector2 My_Mouse;
-
     while (!WindowShouldClose()) { // Detect window close button or ESC key 
+    
+        My_Mouse = GetMousePosition();
         
-   
-
-        if(IsKeyPressed(KEY_R)) {
+        if(IsKeyPressed(KEY_R)) { //inutile mtn c'était pour test
             field->addCharacterData(new_r_perso);
             tabcharact = field->getCharacterDataList();  
         }
         
+        
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) ) {
-             My_Mouse = GetMousePosition();   
-             if (My_Mouse.x < Width/2 && My_Mouse.y < Height/2 ) {
-                field->addCharacterData(new_r_perso);
+            
+            if ((My_Mouse.x > PosXPink && My_Mouse.x < PosXPink + Width * 0.15) && (My_Mouse.y > 800  && My_Mouse.y < 800 + Width * 0.15  )) {
+                field->addCharacterData(new_Support_perso);
                 tabcharact = field->getCharacterDataList(); 
-             }
+            }
 
+            if ((My_Mouse.x > PosXGreen && My_Mouse.x < PosXGreen + Width * 0.15) && (My_Mouse.y > 800  && My_Mouse.y < 800 + Width * 0.15  )) {
+                field->addCharacterData(new_archer_perso);
+                tabcharact = field->getCharacterDataList(); 
+            }
 
+            if ((My_Mouse.x > PosXRed && My_Mouse.x < PosXRed + Width * 0.15) && (My_Mouse.y > 800  && My_Mouse.y < 800 + Width * 0.15  )) {
+                field->addCharacterData(new_Tank_perso);
+                tabcharact = field->getCharacterDataList(); 
+            }
+
+            if ((My_Mouse.x > PosXGray && My_Mouse.x < PosXGray + Width * 0.15) && (My_Mouse.y > 800  && My_Mouse.y < 800 + Width * 0.15  )) {
+                field->addCharacterData(new_Sorcerer_perso);
+                tabcharact = field->getCharacterDataList(); 
+            }
+
+            if ((My_Mouse.x > PosXBlue && My_Mouse.x < PosXBlue + Width * 0.15) && (My_Mouse.y > 800  && My_Mouse.y < 800 + Width * 0.15  )) {
+                field->addCharacterData(new_Melee_perso);
+                tabcharact = field->getCharacterDataList(); 
+            }
         }
 
-        if(IsKeyPressed(KEY_B)) {
-            field->addCharacterData(new_b_perso);
-            tabcharact = field->getCharacterDataList();     
+        if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
+
+            for (int i=0;i<tabcharact.size(); i++) {
+                
+                Position pos_p = tabcharact[i]->getPosition();
+                if((My_Mouse.x > pos_p.x && My_Mouse.x < pos_p.x + PLAYER_SIZE ) && (My_Mouse.y > pos_p.y && My_Mouse.y < pos_p.y + PLAYER_SIZE)) {
+                    tabcharact[i]->setPosition(Position(My_Mouse.x,My_Mouse.y));
+                   
+                }              
+            }
+         
         }
+       
 
         BeginDrawing();
-        /*
+        
         ClearBackground(RAYWHITE);
+ 
+        
 
-        DrawTexture(checked, Width/2 - checked.width/2, Height/2 - checked.height/2, Fade(WHITE, 0.5f));
-        */
-
-        for(int i=0;i<tabcharact.size();i++)
-        {
+        for(int i=0;i<tabcharact.size();i++) {
             Position playerPosition = tabcharact[i]->getPosition();
             Team equipe = tabcharact[i]->getTeam();
-            if(equipe == RED1) {
-                
-                playerTileX = playerPosition.x + i*100;
-                playerTileY = playerPosition.y;
-
-                DrawRectangle(playerTileX, playerTileY, PLAYER_SIZE, PLAYER_SIZE, RED);
-            }else
-            {
+            Type le_type = tabcharact[i]->getType();
+            if(equipe == Blue) {
+            
                 playerTileX = playerPosition.x + i*100;
                 playerTileY = Width - playerPosition.y ;
-
-                DrawRectangle(playerTileX, playerTileY, PLAYER_SIZE, PLAYER_SIZE, BLUE);
+                
+                switch (le_type) {
+                    case Support:
+                        DrawRectangle(playerTileX, playerTileY, PLAYER_SIZE, PLAYER_SIZE, PINK);
+                        break;
+                    case Tank:
+                        DrawRectangle(playerTileX, playerTileY, PLAYER_SIZE, PLAYER_SIZE, RED);
+                        break;
+                    case Melee:
+                        DrawRectangle(playerTileX, playerTileY, PLAYER_SIZE, PLAYER_SIZE, BLUE);
+                        break;
+                    case Sorcerer:
+                        DrawRectangle(playerTileX, playerTileY, PLAYER_SIZE, PLAYER_SIZE, GRAY);
+                        break;
+                    case Archer:
+                        DrawRectangle(playerTileX, playerTileY, PLAYER_SIZE, PLAYER_SIZE, GREEN);
+                        break;
+                    default:
+                        DrawRectangle(playerTileX, playerTileY, PLAYER_SIZE, PLAYER_SIZE, BLACK);
+                }
+            }else { 
+                playerTileX = playerPosition.x + i*100;
+                playerTileY = playerPosition.y;
+                DrawRectangle(playerTileX, playerTileY, PLAYER_SIZE, PLAYER_SIZE, YELLOW);
             }
             
-           
-            
-           // DrawText(TextFormat("Current tile: [%i,%i]", playerTileX, playerTileY), 10, 10, 20, RAYWHITE);
+      
         }
+        //Le shop
+        DrawRectangle(PosXPink, 800, Width * 0.15 , Width * 0.15 , PINK);
+        DrawRectangle(PosXGreen, 800, Width * 0.15 , Width * 0.15 , GREEN);
+        DrawRectangle(PosXRed, 800, Width * 0.15 , Width * 0.15 , RED);
+        DrawRectangle(PosXGray, 800, Width * 0.15 , Width * 0.15 , GRAY);
+        DrawRectangle(PosXBlue, 800, Width * 0.15 , Width * 0.15 , BLUE);
         
+        //void DrawLine(int startPosX, int startPosY, int endPosX, int endPosY, Color color);
+        //Le Banc
+        DrawLine(0, 750, screenWidth, 750, BLACK );
+        DrawLine(0, 650, screenWidth, 650, BLACK );
+        
+        //delimitation des deux camps enemis
+        DrawLine(0,325, screenWidth, 325, RED);
         EndDrawing(); 
     }   
 
-   
-    //UnloadTexture(checked); 
+    UnloadTexture(texture); 
+    //UnloadImage(perso_image); 
     CloseWindow();         
     //--------------------------------------------------------------------------------------
 
+
+
+
     return 0;
-
-
-// // Game loop
-//     // while(true) {
-//     //     updater->Update(1);
-//     // }
 
 
 
