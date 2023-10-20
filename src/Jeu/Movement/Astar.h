@@ -23,16 +23,17 @@ public:
     Astar(int heightTerrain, int widthTerrain) : Movement(heightTerrain, widthTerrain) {}
     
     int Heuristic(Vecteur start, Vecteur objective);//ok
-    int fscore(Case case1);//ok
+    int fscore(Case* case1);//ok
 
     
     //bool case_valide(Vecteur case1);
     bool destination(Vecteur depart, Vecteur arrive);
-    vector<Case*> case_autour(vector<vector<Case*>> TAB,Case case1, Vecteur dest);
+    bool est_dedans(int i, int TAILLE_TERRAIN);
+    vector<Case*> case_autour(vector<vector<Case*>> TAB,Case* case1, Vecteur dest,vector<Case*> CLOSED);
     int min_f_score( vector<Case*> tab); //ok
-    bool appartient_list(Case* case1, vector<Case*> OPEN);
-    vector<Vecteur> defilement (Case* case1);
-    vector<Vecteur> algo_Astar(vector<Vecteur> TAB, Vecteur depart, Vecteur objectif);
+    int appartient_list(Case* case1, vector<Case*> OPEN);
+    Vecteur defilement (Case* case1);
+    Vecteur algo_Astar(vector<Vecteur> TAB, Vecteur depart, Vecteur objectif);
     Vecteur Move(Vecteur start, Vecteur objective) override;
 };
 

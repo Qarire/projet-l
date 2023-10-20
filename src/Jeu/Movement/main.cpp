@@ -5,14 +5,17 @@ using namespace std;
 int main(){
     
 
-    Vecteur inint = *(new Vecteur(0,0));
-    Vecteur fin = *(new Vecteur(10,10));
+    Vecteur inint = *(new Vecteur(1,0));
+    Vecteur fin = *(new Vecteur(0,4));
 
     Astar* a = new Astar(25,25);
-    cout<<"hallo";
-    a->Move(inint, fin);
+    Vecteur x = a->Move(inint, fin);
 
-    
+    cout<<"next deplacement :";
+    cout <<x.getX();;
+    cout<<",";
+    cout<<x.getY();;
+    cout<<"\n\n";
     
     return 0;
 }
