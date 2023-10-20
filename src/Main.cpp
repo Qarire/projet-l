@@ -146,36 +146,49 @@ int main() {
         BeginDrawing();
         
         ClearBackground(RAYWHITE);
- 
-        
-
+    
         for(int i=0;i<tabcharact.size();i++) {
             Position playerPosition = tabcharact[i]->getPosition();
             Team equipe = tabcharact[i]->getTeam();
             Type le_type = tabcharact[i]->getType();
+            Vector2 origin;
+            origin.x=0; origin.y=0;
+            Rectangle RS; RS.x = 0; RS.y = texture.height/13;
+            RS.height = texture.height/13; RS.width = texture.width/6;
             if(equipe == Blue) {
             
                 playerTileX = playerPosition.x;
                 playerTileY = playerPosition.y;
-                
+                Rectangle Rdest; Rdest.x = playerTileX; Rdest.y = playerTileY;
+                Rdest.height = PLAYER_SIZE; Rdest.width = PLAYER_SIZE;
                 switch (le_type) {
                     case Support:
-                        DrawRectangle(playerTileX, playerTileY, PLAYER_SIZE, PLAYER_SIZE, PINK);
-                        cout << "player x : " <<playerTileX  << endl;
-                        cout << "player y : " << playerTileY  << endl;
-
+                        //DrawRectangle(playerTileX, playerTileY, PLAYER_SIZE, PLAYER_SIZE, PINK);
+                        RS.y = RS.y*5;
+                        //DrawTextureRec(texture,RT,pos,WHITE);
+                        DrawTexturePro(texture,RS,Rdest,origin,0,WHITE);
                         break;
                     case Tank:
-                        DrawRectangle(playerTileX, playerTileY, PLAYER_SIZE, PLAYER_SIZE, RED);
+                        //DrawRectangle(playerTileX, playerTileY, PLAYER_SIZE, PLAYER_SIZE, RED);
+                        //Rectangle RT; RT.x = 0; RT.y = texture.height/13;
+                        //RT.height = texture.height/13; RT.width = texture.width/6;
+                        //DrawTextureRec(texture,RT,pos,WHITE);                       
+                        DrawTexturePro(texture,RS,Rdest,origin,0,WHITE);
                         break;
                     case Melee:
-                        DrawRectangle(playerTileX, playerTileY, PLAYER_SIZE, PLAYER_SIZE, BLUE);
+                        //DrawRectangle(playerTileX, playerTileY, PLAYER_SIZE, PLAYER_SIZE, BLUE);
+                        RS.y = RS.y*2;
+                        DrawTexturePro(texture,RS,Rdest,origin,0,WHITE);
                         break;
                     case Sorcerer:
-                        DrawRectangle(playerTileX, playerTileY, PLAYER_SIZE, PLAYER_SIZE, GRAY);
+                        //DrawRectangle(playerTileX, playerTileY, PLAYER_SIZE, PLAYER_SIZE, GRAY);
+                        RS.y=RS.y*4;
+                        DrawTexturePro(texture,RS,Rdest,origin,0,WHITE);
                         break;
                     case Archer:
-                        DrawRectangle(playerTileX, playerTileY, PLAYER_SIZE, PLAYER_SIZE, GREEN);
+                        //DrawRectangle(playerTileX, playerTileY, PLAYER_SIZE, PLAYER_SIZE, GREEN);
+                        RS.y=RS.y*3;
+                        DrawTexturePro(texture,RS,Rdest,origin,0,WHITE);
                         break;
                     default:
                         DrawRectangle(playerTileX, playerTileY, PLAYER_SIZE, PLAYER_SIZE, BLACK);
@@ -186,11 +199,11 @@ int main() {
         }
         //Le shop
      
-        DrawRectangle(PosXPink, 800, screenWidth * 0.07 , screenWidth * 0.07 , PINK);
-        DrawRectangle(PosXGreen, 800, screenWidth * 0.07 , screenWidth * 0.07 , GREEN);
-        DrawRectangle(PosXRed, 800, screenWidth * 0.07 , screenWidth * 0.07 , RED);
-        DrawRectangle(PosXGray, 800, screenWidth * 0.07 , screenWidth * 0.07 , GRAY);
-        DrawRectangle(PosXBlue, 800, screenWidth * 0.07 , screenWidth * 0.07 , BLUE);
+        //DrawRectangle(PosXPink, 800,  , screenWidth * 0.07 , PINK);
+        //DrawRectangle(PosXGreen, 800, screenWidth * 0.07 , screenWidth * 0.07 , GREEN);
+        //DrawRectangle(PosXRed, 800, screenWidth * 0.07 , screenWidth * 0.07 , RED);
+        //DrawRectangle(PosXGray, 800, screenWidth * 0.07 , screenWidth * 0.07 , GRAY);
+        //DrawRectangle(PosXBlue, 800, screenWidth * 0.07 , screenWidth * 0.07 , BLUE);
         
 
         //Le Banc
@@ -200,6 +213,59 @@ int main() {
         
         //delimitation des deux camps enemis
         DrawLine(0,screenHeight * 0.3611, screenWidth, 325, RED);
+
+        
+        Rectangle destination;
+        destination.x = PosXPink;
+        destination.y = 800;
+        destination.width = screenWidth * 0.07;
+        destination.height = screenWidth * 0.07;
+        Rectangle ImT; /* permet de récupérer l'image pour le Tank*/
+        ImT.x = 0; ImT.y = texture.height/13;
+        ImT.height = texture.height/13; ImT.width = texture.width/6;
+        Vector2 origine;
+        origine.x = 0; origine.y = 0;
+        /*dessine le healer*/
+        Rectangle ImH = ImT; 
+        ImH.y = 5*ImH.y; /* permet de récupérer l'image pour le healer*/
+        DrawTexturePro(texture,ImH,destination,origine,0,WHITE);
+        //DrawRectangle(PosXPink, 650, Width * 0.10 , Width * 0.10 , PINK);
+
+        /*dessine le tank*/
+        Rectangle destTank = destination;
+        destTank.x = PosXRed;
+        DrawTexturePro(texture,ImT,destTank,origine,0,WHITE);
+        /*dessine le melee*/
+        Rectangle ImM = ImT; 
+        ImM.y = ImM.y*2; /* permet de récupérer l'image pour le Melee*/
+        Rectangle destMelee = destination;
+        destMelee.x = PosXBlue;
+        DrawTexturePro(texture,ImM,destMelee,origine,0,WHITE);
+
+        /*dessine l'archer'*/
+        Rectangle ImA = ImT; 
+        ImA.y = ImA.y * 3; /* permet de récupérer l'image pour l'archer'*/
+        Rectangle destArcher = destination;
+        destArcher.x = PosXGreen;
+        DrawTexturePro(texture,ImA,destArcher,origine,0,WHITE);
+
+        /*dessine le Sorcerer*/
+        Rectangle ImS = ImT; 
+        ImS.y = ImS.y*4; /* permet de récupérer l'image pour le Melee*/
+        Rectangle destSorc = destination;
+        destSorc.x = PosXGray;
+        DrawTexturePro(texture,ImS,destSorc,origine,0,WHITE);
+        //DrawRectangle(PosXGreen, 650, Width * 0.10 , Width * 0.10 , GREEN);
+        //DrawRectangle(PosXRed, 650, Width * 0.10 , Width * 0.10 , RED);
+        //DrawRectangle(PosXGray, 650, Width * 0.10 , Width * 0.10 , GRAY);
+        //DrawRectangle(PosXBlue, 650, Width * 0.10 , Width * 0.10 , BLUE);            
+        //void DrawLine(int startPosX, int startPosY, int endPosX, int endPosY, Color color);
+        //Le Banc
+        //DrawLine(0, 650, screenWidth, 650, BLACK );
+        //DrawLine(0, 550, screenWidth, 550, BLACK );
+        
+        //delimitation des deux camps enemis
+        //DrawLine(0,225, screenWidth, 225, RED);
         EndDrawing(); 
     }   
 
