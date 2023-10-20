@@ -14,16 +14,7 @@
 #include "ConditionTrue.h"
 
 using namespace std;
-/*
-void MovePerso(CharacterData* perso, float x, float y)
-{
-    
-    perso->getPosition().x = x; 
-    perso->getPosition().y = y;
 
-    
-}
-*/
 int main() {
 // Initialization
     
@@ -43,9 +34,10 @@ int main() {
 
     float screenWidth = 1680;
     float screenHeight = 900;
+
+   
     InitWindow(screenWidth, screenHeight, "Game Window");
     Texture2D texture = LoadTexture("img/Sprite.png");                                      
-    
     ValueMaxed value;
     vector<CharacterData*> tabcharact;
     int playerTileX; 
@@ -65,7 +57,7 @@ int main() {
 
     Vector2 My_Mouse;
        
-    int width35 = screenWidth * 0.35;
+    int width35 = screenWidth * 0.28;
     int width25 = screenWidth * 0.1;
 
     int PosXPink = width35;
@@ -76,7 +68,7 @@ int main() {
     
     SetTargetFPS(60);
 
-    while (!WindowShouldClose()) { // Detect window close button or ESC key 
+    while (!WindowShouldClose()) { 
     
         My_Mouse = GetMousePosition();
         
@@ -84,31 +76,31 @@ int main() {
             
             int it = field->getCharacterDataList().size(); 
             
-            if ((My_Mouse.x > PosXPink && My_Mouse.x < PosXPink + screenWidth* 0.07) && (My_Mouse.y > 800  && My_Mouse.y < 800 + screenWidth * 0.07  )) {
+            if ((My_Mouse.x > PosXPink && My_Mouse.x < PosXPink + screenWidth* 0.05) && (My_Mouse.y > 800  && My_Mouse.y < 800 + screenWidth * 0.05  )) {
                 CharacterData* new_Support_perso = new CharacterData(seconde_team,stat_perso,23,44,Support,Support);
                 field->addCharacterData(new_Support_perso);
                 new_Support_perso->setPosition(Position(screenHeight * 0.775,100 + it * 100));
             }
 
-            if ((My_Mouse.x > PosXGreen && My_Mouse.x < PosXGreen + screenWidth * 0.07) && (My_Mouse.y > 800  && My_Mouse.y < 800 + screenWidth * 0.07  )) {
+            if ((My_Mouse.x > PosXGreen && My_Mouse.x < PosXGreen + screenWidth * 0.05) && (My_Mouse.y > 800  && My_Mouse.y < 800 + screenWidth * 0.05  )) {
                 CharacterData* new_archer_perso = new CharacterData(seconde_team,stat_perso,23,44,Archer,Tank);
                 field->addCharacterData(new_archer_perso);
                 new_archer_perso->setPosition(Position(screenHeight * 0.775,100 + it * 100));
             }
 
-            if ((My_Mouse.x > PosXRed && My_Mouse.x < PosXRed + screenWidth * 0.07) && (My_Mouse.y > 800  && My_Mouse.y < 800 + screenWidth * 0.07  )) {
+            if ((My_Mouse.x > PosXRed && My_Mouse.x < PosXRed + screenWidth * 0.05) && (My_Mouse.y > 800  && My_Mouse.y < 800 + screenWidth * 0.05  )) {
                 CharacterData* new_Tank_perso = new CharacterData(seconde_team,stat_perso,23,44,Tank,Tank);
                 field->addCharacterData(new_Tank_perso);
                 new_Tank_perso->setPosition(Position(screenHeight * 0.775 ,100 + it * 100));
             }
 
-            if ((My_Mouse.x > PosXGray && My_Mouse.x < PosXGray + screenWidth * 0.07) && (My_Mouse.y > 800  && My_Mouse.y < 800 + screenWidth * 0.07  )) {
+            if ((My_Mouse.x > PosXGray && My_Mouse.x < PosXGray + screenWidth * 0.05) && (My_Mouse.y > 800  && My_Mouse.y < 800 + screenWidth * 0.05  )) {
                 CharacterData* new_Sorcerer_perso = new CharacterData(seconde_team,stat_perso,23,44,Sorcerer,Melee);
                 field->addCharacterData(new_Sorcerer_perso);
                 new_Sorcerer_perso->setPosition(Position(screenHeight * 0.775,100 + it * 100));
             }
 
-            if ((My_Mouse.x > PosXBlue && My_Mouse.x < PosXBlue + screenWidth * 0.07) && (My_Mouse.y > 800  && My_Mouse.y < 800 + screenWidth * 0.07  )) {
+            if ((My_Mouse.x > PosXBlue && My_Mouse.x < PosXBlue + screenWidth * 0.05) && (My_Mouse.y > 800  && My_Mouse.y < 800 + screenWidth * 0.05  )) {
                 CharacterData* new_Melee_perso = new CharacterData(seconde_team,stat_perso,23,44,Melee,Tank);
                 field->addCharacterData(new_Melee_perso);
                 new_Melee_perso->setPosition(Position(screenHeight * 0.775,100 + it * 100));
@@ -118,7 +110,6 @@ int main() {
         if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) ) {
 
             tabcharact = field->getCharacterDataList(); 
-
             
             
             for (int i=0;i<tabcharact.size(); i++) {
@@ -127,22 +118,21 @@ int main() {
                 if((My_Mouse.x > pos_p.x && My_Mouse.x < pos_p.x + PLAYER_SIZE ) && (My_Mouse.y > pos_p.y && My_Mouse.y < pos_p.y + PLAYER_SIZE)) {
                     verif_moov.first = true;
                     verif_moov.second = tabcharact[i];
-                  
                 }  
 
             }
-         
+    
         }
-
         if(IsMouseButtonDown(MOUSE_BUTTON_LEFT) && verif_moov.first == true && My_Mouse.y < 750 && My_Mouse.y > 325) {
-
-            
+ 
             verif_moov.second->setPosition(Position(My_Mouse.y - PLAYER_SIZE /2,My_Mouse.x - PLAYER_SIZE /2));
         }
 
         if(IsMouseButtonReleased(MOUSE_BUTTON_LEFT)) {
             verif_moov.first = false;
         }
+        
+        
         BeginDrawing();
         
         ClearBackground(RAYWHITE);
@@ -163,49 +153,32 @@ int main() {
                 Rdest.height = PLAYER_SIZE; Rdest.width = PLAYER_SIZE;
                 switch (le_type) {
                     case Support:
-                        //DrawRectangle(playerTileX, playerTileY, PLAYER_SIZE, PLAYER_SIZE, PINK);
                         RS.y = RS.y*5;
-                        //DrawTextureRec(texture,RT,pos,WHITE);
                         DrawTexturePro(texture,RS,Rdest,origin,0,WHITE);
                         break;
-                    case Tank:
-                        //DrawRectangle(playerTileX, playerTileY, PLAYER_SIZE, PLAYER_SIZE, RED);
-                        //Rectangle RT; RT.x = 0; RT.y = texture.height/13;
-                        //RT.height = texture.height/13; RT.width = texture.width/6;
-                        //DrawTextureRec(texture,RT,pos,WHITE);                       
+                    case Tank:               
                         DrawTexturePro(texture,RS,Rdest,origin,0,WHITE);
                         break;
                     case Melee:
-                        //DrawRectangle(playerTileX, playerTileY, PLAYER_SIZE, PLAYER_SIZE, BLUE);
                         RS.y = RS.y*2;
                         DrawTexturePro(texture,RS,Rdest,origin,0,WHITE);
                         break;
                     case Sorcerer:
-                        //DrawRectangle(playerTileX, playerTileY, PLAYER_SIZE, PLAYER_SIZE, GRAY);
                         RS.y=RS.y*4;
                         DrawTexturePro(texture,RS,Rdest,origin,0,WHITE);
                         break;
                     case Archer:
-                        //DrawRectangle(playerTileX, playerTileY, PLAYER_SIZE, PLAYER_SIZE, GREEN);
                         RS.y=RS.y*3;
                         DrawTexturePro(texture,RS,Rdest,origin,0,WHITE);
                         break;
                     default:
-                        DrawRectangle(playerTileX, playerTileY, PLAYER_SIZE, PLAYER_SIZE, BLACK);
+                        cout << "error" << endl;
                 }
             }
             
       
         }
-        //Le shop
-     
-        //DrawRectangle(PosXPink, 800,  , screenWidth * 0.07 , PINK);
-        //DrawRectangle(PosXGreen, 800, screenWidth * 0.07 , screenWidth * 0.07 , GREEN);
-        //DrawRectangle(PosXRed, 800, screenWidth * 0.07 , screenWidth * 0.07 , RED);
-        //DrawRectangle(PosXGray, 800, screenWidth * 0.07 , screenWidth * 0.07 , GRAY);
-        //DrawRectangle(PosXBlue, 800, screenWidth * 0.07 , screenWidth * 0.07 , BLUE);
-        
-
+       
         //Le Banc
         
         DrawLine(0, screenHeight * 0.8333, screenWidth, 750, BLACK );
@@ -214,12 +187,12 @@ int main() {
         //delimitation des deux camps enemis
         DrawLine(0,screenHeight * 0.3611, screenWidth, 325, RED);
 
-        
+        //Shop
         Rectangle destination;
         destination.x = PosXPink;
         destination.y = 800;
-        destination.width = screenWidth * 0.07;
-        destination.height = screenWidth * 0.07;
+        destination.width = screenWidth * 0.05;
+        destination.height = screenWidth * 0.05;
         Rectangle ImT; /* permet de récupérer l'image pour le Tank*/
         ImT.x = 0; ImT.y = texture.height/13;
         ImT.height = texture.height/13; ImT.width = texture.width/6;
@@ -229,7 +202,7 @@ int main() {
         Rectangle ImH = ImT; 
         ImH.y = 5*ImH.y; /* permet de récupérer l'image pour le healer*/
         DrawTexturePro(texture,ImH,destination,origine,0,WHITE);
-        //DrawRectangle(PosXPink, 650, Width * 0.10 , Width * 0.10 , PINK);
+       
 
         /*dessine le tank*/
         Rectangle destTank = destination;
@@ -255,22 +228,13 @@ int main() {
         Rectangle destSorc = destination;
         destSorc.x = PosXGray;
         DrawTexturePro(texture,ImS,destSorc,origine,0,WHITE);
-        //DrawRectangle(PosXGreen, 650, Width * 0.10 , Width * 0.10 , GREEN);
-        //DrawRectangle(PosXRed, 650, Width * 0.10 , Width * 0.10 , RED);
-        //DrawRectangle(PosXGray, 650, Width * 0.10 , Width * 0.10 , GRAY);
-        //DrawRectangle(PosXBlue, 650, Width * 0.10 , Width * 0.10 , BLUE);            
-        //void DrawLine(int startPosX, int startPosY, int endPosX, int endPosY, Color color);
-        //Le Banc
-        //DrawLine(0, 650, screenWidth, 650, BLACK );
-        //DrawLine(0, 550, screenWidth, 550, BLACK );
-        
-        //delimitation des deux camps enemis
-        //DrawLine(0,225, screenWidth, 225, RED);
+      
+    
         EndDrawing(); 
     }   
 
     UnloadTexture(texture); 
-    //UnloadImage(perso_image); 
+
     CloseWindow();         
     //--------------------------------------------------------------------------------------
 
