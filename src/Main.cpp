@@ -12,6 +12,8 @@
 #define PLAYER_SIZE      16  
 #include "ConsequenceTestDelete.h"
 #include "ConditionTrue.h"
+#include "ButtonCondition.h"
+#include "ConsequenceInvoke.h"
 
 using namespace std;
 /*
@@ -26,17 +28,13 @@ void MovePerso(CharacterData* perso, float x, float y)
 */
 int main() {
 // Initialization
-    
+
     Field* field = Field::GetInstance();
     Game* game = Game::GetInstance();
      Updater* updater = Updater::GetInstance();
      Drawer* drawer = Drawer::GetInstance();
-
-    vector<Event*> events = {new Event(new ConditionTrue(), new ConsequenceTestDelete())};
     
-    field->Init(make_pair(1680, 900));
-    game->Init(); drawer->Init();
-    updater->Init(new Behavior( events ));
+    
 
     int Height = field->getHeight();
     int Width = field->getWidth();
@@ -44,48 +42,45 @@ int main() {
     int screenWidth = 1680;
     int screenHeight = 900;
     InitWindow(screenWidth, screenHeight, "Game Window");
-    Texture2D texture = LoadTexture("img/Sprite.png");                                      
-    
-   
+    Texture2D texture = LoadTexture("img/Sprite.png");
 
+// Init Events
+    /*
+    Rectangle healerButtonRect = Rectangle{float(GetScreenHeight() * 0.8), float(GetScreenWidth() * 0.28), float(GetScreenWidth()*0.05), float(GetScreenWidth()*0.05)};
+    Rectangle archerButtonRect = Rectangle{float(GetScreenHeight() * 0.8), float(healerButtonRect.x + GetScreenWidth()*0.05), float(GetScreenWidth()*0.05), float(GetScreenWidth()*0.05)};
+    Rectangle tankButtonRect = Rectangle{float(GetScreenHeight() * 0.8), float(archerButtonRect.x + GetScreenWidth()*0.05), float(GetScreenWidth()*0.05), float(GetScreenWidth()*0.05)};
+    Rectangle sorcererButtonRect = Rectangle{float(GetScreenHeight() * 0.8), float(tankButtonRect.x + GetScreenWidth()*0.05), float(GetScreenWidth()*0.05), float(GetScreenWidth()*0.05)};
+    Rectangle meleeButtonRect = Rectangle{float(GetScreenHeight() * 0.8), float(meleeButtonRect.x + GetScreenWidth()*0.05), float(GetScreenWidth()*0.05), float(GetScreenWidth()*0.05)};
 
-    
+    vector<Event*> events = {
 
-    ValueMaxed value;
+        new Event(new ConditionTrue(), new ConsequenceTestDelete()),
+        new Event(new ButtonCondition(healerButtonRect), new ConsequenceInvoque(Support)),
+        new Event(new ButtonCondition(archerButtonRect), new ConsequenceInvoque(Archer)),
+        new Event(new ButtonCondition(tankButtonRect), new ConsequenceInvoque(Tank)),
+        new Event(new ButtonCondition(sorcererButtonRect), new ConsequenceInvoque(Sorcerer)),
+        new Event(new ButtonCondition(meleeButtonRect), new ConsequenceInvoque(Melee))
+    };  
+       
+    */
+
+    vector<Event*> events = {new Event(new ConditionTrue(), new ConsequenceTestDelete())};
+
+    field->Init(make_pair(1680, 900));
+    game->Init(); drawer->Init();
+    updater->Init(new Behavior( events ));                                 
+
     vector<CharacterData*> tabcharact;
     int playerTileX; 
     int playerTileY; 
 
-    value.Max = 100;
-    value.Value = 30;
-    Stats stat_perso;
-    stat_perso.hp = value;
-    stat_perso.def = value;
-    stat_perso.atk = value;
-    Team first_team = RED1;
-    Team seconde_team = Blue;
-
-    Position pos = Position();
-
-    CharacterData* new_r_perso = new CharacterData(first_team,stat_perso,23,44,Tank,Tank);
-    //new_r_perso->setPosition(pos);
-   
-    
     
     pair<bool, CharacterData*> verif_moov;
-   
-
 
     Vector2 My_Mouse;
        
     int width35 = Width * 0.35;
     int width25 = Width * 0.25;
-
-    /*int PosXPink = width35;
-    int PosXGreen = width35 + width25;
-    int PosXRed = (width35 + width25) + width25;
-    int PosXGray = ((width35 + width25) + width25) + width25;
-    int PosXBlue = (((width35 + width25) + width25) + width25) + width25;*/
 
     int PosXPink = width35;
     int PosXGreen = PosXPink + width25;
@@ -101,47 +96,7 @@ int main() {
         My_Mouse = GetMousePosition();
         // cout << My_Mouse.x << " " << My_Mouse.y << endl;
         
-        
-        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) ) {
-            
-            int it = field->getCharacterDataList().size(); 
-            
-            if ((My_Mouse.x > PosXPink && My_Mouse.x < PosXPink + Width* 0.15) && (My_Mouse.y > 800  && My_Mouse.y < 800 + Width * 0.15  )) {
-                CharacterData* new_Support_perso = new CharacterData(seconde_team,stat_perso,23,44,Support,Support);
-                field->addCharacterData(new_Support_perso);
-                new_Support_perso->setPosition(Position(Width -200,100 + it * 100));
-                //tabcharact = field->getCharacterDataList(); 
-            }
-
-            if ((My_Mouse.x > PosXGreen && My_Mouse.x < PosXGreen + Width * 0.15) && (My_Mouse.y > 800  && My_Mouse.y < 800 + Width * 0.15  )) {
-                CharacterData* new_archer_perso = new CharacterData(seconde_team,stat_perso,23,44,Archer,Tank);
-                field->addCharacterData(new_archer_perso);
-                new_archer_perso->setPosition(Position(Width -200,100 + it * 100));
-                //tabcharact = field->getCharacterDataList(); 
-            }
-
-            if ((My_Mouse.x > PosXRed && My_Mouse.x < PosXRed + Width * 0.15) && (My_Mouse.y > 800  && My_Mouse.y < 800 + Width * 0.15  )) {
-                CharacterData* new_Tank_perso = new CharacterData(seconde_team,stat_perso,23,44,Tank,Tank);
-                field->addCharacterData(new_Tank_perso);
-                new_Tank_perso->setPosition(Position(Width -200,100 + it * 100));
-                //tabcharact = field->getCharacterDataList(); 
-            }
-
-            if ((My_Mouse.x > PosXGray && My_Mouse.x < PosXGray + Width * 0.15) && (My_Mouse.y > 800  && My_Mouse.y < 800 + Width * 0.15  )) {
-                CharacterData* new_Sorcerer_perso = new CharacterData(seconde_team,stat_perso,23,44,Sorcerer,Melee);
-                field->addCharacterData(new_Sorcerer_perso);
-                new_Sorcerer_perso->setPosition(Position(Width -200,100 + it * 100));
-                //tabcharact = field->getCharacterDataList(); 
-            }
-
-            if ((My_Mouse.x > PosXBlue && My_Mouse.x < PosXBlue + Width * 0.15) && (My_Mouse.y > 800  && My_Mouse.y < 800 + Width * 0.15  )) {
-                CharacterData* new_Melee_perso = new CharacterData(seconde_team,stat_perso,23,44,Melee,Tank);
-                field->addCharacterData(new_Melee_perso);
-                new_Melee_perso->setPosition(Position(Width -200,100 + it * 100));
-                //tabcharact = field->getCharacterDataList(); 
-            }
-        }
-        
+               
         if (IsMouseButtonDown(MOUSE_BUTTON_LEFT) ) {
 
             tabcharact = field->getCharacterDataList(); 
@@ -220,6 +175,8 @@ int main() {
       
         }
         //Le shop
+
+        cout << "HEY" << endl;
         DrawRectangle(PosXPink, 800, Width * 0.15 , Width * 0.15 , PINK);
         DrawRectangle(PosXGreen, 800, Width * 0.15 , Width * 0.15 , GREEN);
         DrawRectangle(PosXRed, 800, Width * 0.15 , Width * 0.15 , RED);
@@ -240,7 +197,6 @@ int main() {
     //UnloadImage(perso_image); 
     CloseWindow();         
     //--------------------------------------------------------------------------------------
-
 
 
 

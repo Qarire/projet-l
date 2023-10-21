@@ -26,7 +26,7 @@ public:
     Consequence* getConsequence() const { return this->consequence; }
 
 // Public Methods
-    bool runEvent() const {
+    virtual bool runEvent() const {
         if(condition->isConditionMet()) {
             consequence->run();
             return true;

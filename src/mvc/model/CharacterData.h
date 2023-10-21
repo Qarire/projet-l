@@ -6,6 +6,7 @@
 #include "Type.h"
 
 using namespace std;
+
 class CharacterData {
     private :
         Position position;
@@ -17,7 +18,7 @@ class CharacterData {
         Type type;
         Type favoriteEnemyType;
     public :
-    CharacterData(Team team, Stats stats, float healModifier, float damageModifier, Type type, Type favoriteEnemyType);
+    CharacterData(Team team, Stats stats, Position position, float healModifier, float damageModifier, Type type, Type favoriteEnemyType);
 
     Position getPosition() const {return this->position; };
     void setPosition(Position position) {this->position = position; };
@@ -32,4 +33,30 @@ class CharacterData {
 
     void changeHP(int value, bool isDamaged);
     void kill() { isDead = true; };
+};
+
+class CharacterDataTank : public CharacterData {
+public:
+    CharacterDataTank(Team team, Position position)
+    : CharacterData(team, Stats(500, 5, 20), position, 1, 1, Tank, Tank) {};
+};
+class CharacterDataMelee : public CharacterData {
+public:
+    CharacterDataMelee(Team team, Position position)
+    : CharacterData(team, Stats(300, 20, 10), position, 1, 1, Melee, Tank) {};
+};
+class CharacterDataArcher : public CharacterData {
+public:
+    CharacterDataArcher(Team team, Position position)
+    : CharacterData(team, Stats(300, 20, 5), position, 1, 1, Archer, Tank) {};
+};
+class CharacterDataSorcerer : public CharacterData {
+public:
+    CharacterDataSorcerer(Team team, Position position)
+    : CharacterData(team, Stats(300, 20, 5), position, 1, 1, Sorcerer, Tank) {};
+};
+class CharacterDataSupport : public CharacterData {
+public:
+    CharacterDataSupport(Team team, Position position)
+    : CharacterData(team, Stats(100, 10, 10), position, 1, 1, Sorcerer, Tank) {};
 };

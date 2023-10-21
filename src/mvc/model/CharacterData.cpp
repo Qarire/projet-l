@@ -2,9 +2,10 @@
 
 using namespace std;
 
-CharacterData::CharacterData(Team team, Stats stats, float healModifier, float damageModifier, Type type, Type favoriteEnemyType) {
+CharacterData::CharacterData(Team team, Stats stats, Position position, float healModifier, float damageModifier, Type type, Type favoriteEnemyType) {
     this->team = team;
     this->stats = stats;
+    this->position = position;
     this->healModifier = healModifier;
     this->damageModifier = damageModifier;
     this->type = type;
