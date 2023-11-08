@@ -48,12 +48,9 @@ public:
 
 
         for(int i = 0; i < field->getCharacterDataList().size(); i++) {
-            field->getCharacterDataList()[i]->setPosition(Position(
-                field->getCharacterDataList()[i]->getPosition().y,
-
-                float(GetScreenWidth()/(field->getCharacterDataList().size()+1) 
-                    + (GetScreenWidth()/(field->getCharacterDataList().size()+1)) * i)
-            ));
+            field->getCharacterDataList()[i]->setPosition(
+                Position(0, 0)
+            );
         }        
     }
 };

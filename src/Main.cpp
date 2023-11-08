@@ -18,47 +18,63 @@
 using namespace std;
 
 int main() {
+    // Setting up the code
 
     Field* field = Field::GetInstance();
     Game* game = Game::GetInstance();
     Updater* updater = Updater::GetInstance();
     Drawer* drawer = Drawer::GetInstance();
 
+    // Setting up the window
     int display = GetCurrentMonitor();
 
     int screenWidth = GetMonitorWidth(display);
     int screenHeight = GetMonitorHeight(display);
+
     InitWindow(screenWidth, screenHeight, "Game Window");
-    Texture2D texture = LoadTexture("img/Sprite.png");
+
+    Texture2D spriteTexture = LoadTexture("img/Sprite.png");
+    Texture2D groundSpriteTexture = LoadTexture("img/Ground_Sprite.png");
 
     //ToggleFullscreen();
 
+
+    // creating the events
     pair<bool, CharacterData*> verif_moov;
     Vector2 My_Mouse;
-       
-    int width35 = screenWidth * 0.35;
-    int width25 = screenWidth * 0.25;
 
-    Rectangle tankButtonRect = Rectangle{float(GetScreenWidth()/6 * 1), float(GetScreenHeight() * 0.87), float(GetScreenWidth()*0.05), float(GetScreenWidth()*0.05)};
-    Rectangle meleeButtonRect = Rectangle{float(GetScreenWidth()/6 * 2), float(GetScreenHeight() * 0.87), float(GetScreenWidth()*0.05), float(GetScreenWidth()*0.05)};
-    Rectangle archerButtonRect = Rectangle{float(GetScreenWidth()/6 * 3), float(GetScreenHeight() * 0.87), float(GetScreenWidth()*0.05), float(GetScreenWidth()*0.05)};
-    Rectangle sorcererButtonRect = Rectangle{float(GetScreenWidth()/6 * 4), float(GetScreenHeight() * 0.87), float(GetScreenWidth()*0.05), float(GetScreenWidth()*0.05)};
-    Rectangle healerButtonRect = Rectangle{float(GetScreenWidth()/6 * 5), float(GetScreenHeight() * 0.87), float(GetScreenWidth()*0.05), float(GetScreenWidth()*0.05)};
+    float diff = (GetScreenWidth() - (float(GetScreenWidth()/6) + float(GetScreenWidth()/8) * 6)) / 4;
+
+    Rectangle deleteRectangle =     Rectangle{diff + float(GetScreenWidth()/6 * 0), float(GetScreenHeight() * 0.75), float(GetScreenWidth()/8), float(GetScreenWidth()/8)};
+    Rectangle tankButtonRect =      Rectangle{diff + float(GetScreenWidth()/6 * 1), float(GetScreenHeight() * 0.75), float(GetScreenWidth()/8), float(GetScreenWidth()/8)};
+    Rectangle meleeButtonRect =     Rectangle{diff + float(GetScreenWidth()/6 * 2), float(GetScreenHeight() * 0.75), float(GetScreenWidth()/8), float(GetScreenWidth()/8)};
+    Rectangle archerButtonRect =    Rectangle{diff + float(GetScreenWidth()/6 * 3), float(GetScreenHeight() * 0.75), float(GetScreenWidth()/8), float(GetScreenWidth()/8)};
+    Rectangle sorcererButtonRect =  Rectangle{diff + float(GetScreenWidth()/6 * 4), float(GetScreenHeight() * 0.75), float(GetScreenWidth()/8), float(GetScreenWidth()/8)};
+    Rectangle healerButtonRect =    Rectangle{diff + float(GetScreenWidth()/6 * 5), float(GetScreenHeight() * 0.75), float(GetScreenWidth()/8), float(GetScreenWidth()/8)};
 
     vector<Event*> events = {
-        new Event(new ButtonCondition(tankButtonRect), new ConsequenceInvoque(Tank)),
-        new Event(new ButtonCondition(meleeButtonRect), new ConsequenceInvoque(Melee)),
-        new Event(new ButtonCondition(archerButtonRect), new ConsequenceInvoque(Archer)),
-        new Event(new ButtonCondition(sorcererButtonRect), new ConsequenceInvoque(Sorcerer)),
-        new Event(new ButtonCondition(healerButtonRect), new ConsequenceInvoque(Healer)),
+        new Event(new ButtonCondition(tankButtonRect),      new ConsequenceInvoque(Tank)),
+        new Event(new ButtonCondition(meleeButtonRect),     new ConsequenceInvoque(Melee)),
+        new Event(new ButtonCondition(archerButtonRect),    new ConsequenceInvoque(Archer)),
+        new Event(new ButtonCondition(sorcererButtonRect),  new ConsequenceInvoque(Sorcerer)),
+        new Event(new ButtonCondition(healerButtonRect),    new ConsequenceInvoque(Healer)),
     };  
 
-    field->Init(make_pair(25, 25));
+    // starting up the game
+    field->Init(make_pair(8, 7));
     game->Init(); drawer->Init();
     updater->Init(new Behavior( events ));  
 
+    // setting some constants
+    float fieldHeight = float(GetScreenHeight() * 0.75);
+    float fieldTile = fieldHeight/(field->getHeight()+1);
+    float fieldWidth = fieldTile*field->getWidth();
+    float negativeFieldWidth = GetScreenWidth() - fieldTile*field->getWidth();
+
+
     SetTargetFPS(60);
 
+    // game loop
     while (!WindowShouldClose()) {
         float dt = GetFrameTime(); // delta time since last frame
         My_Mouse = GetMousePosition();
@@ -69,48 +85,86 @@ int main() {
         
             ClearBackground(RAYWHITE);
 
+            // Background
+            for(int i = 0; i < GetScreenHeight()/fieldTile; i++) {
+                for(int j = 0; j < GetScreenWidth()/fieldTile; j++) {
+                    DrawTexturePro(
+                        groundSpriteTexture,
+                        Rectangle{0, 0, float(groundSpriteTexture.width), float(groundSpriteTexture.height/5)},
+                        Rectangle{j * fieldTile, i * fieldTile, fieldTile, fieldTile},
+                        Vector2{0, 0},
+                        0,
+                        WHITE
+                    );
+                }
+            }
+            
+
+            for(int i = 0; i < field->getHeight(); i++) {
+                for(int j = 0; j < field->getWidth(); j++) {
+                    DrawTexturePro(
+                        spriteTexture,
+                        Rectangle{0, 0, float(spriteTexture.height/14.0), float(spriteTexture.width/11.0)},
+                        Rectangle{ negativeFieldWidth / 2 + j * fieldTile, i * fieldTile, fieldTile, fieldTile},
+                        Vector2{0, 0},
+                        0,
+                        WHITE
+                    );
+                }
+            }
+
+            
+
             //Le Banc
-            DrawLine(0, float(GetScreenHeight() * 0.8333), float(GetScreenWidth()), float(GetScreenHeight() * 0.8333), BLACK );
-            DrawLine(0, float(GetScreenHeight() * 0.7222), float(GetScreenWidth()), float(GetScreenHeight() * 0.7222), BLACK );
+            // DrawLine(0, float(GetScreenHeight() * 0.8333), float(GetScreenWidth()), float(GetScreenHeight() * 0.8333), BLACK );
+            // DrawLine(0, float(GetScreenHeight() * 0.7222), float(GetScreenWidth()), float(GetScreenHeight() * 0.7222), BLACK );
 
             //delimitation des deux camps enemis
-            DrawLine(0, float(GetScreenHeight() * 0.3611), float(GetScreenWidth()), float(GetScreenHeight() * 0.3611), RED);
+            // DrawLine(0, float(GetScreenHeight() * 0.3611), float(GetScreenWidth()), float(GetScreenHeight() * 0.3611), RED);
 
             DrawTexturePro(
-                texture,
-                Rectangle{0, float(1.0 * texture.height/14.0), float(texture.height/14.0), float(texture.width/6.0)},
+                spriteTexture,
+                Rectangle{float(6.0 * spriteTexture.width/11.0), float(10.0 * spriteTexture.height/14.0), float(spriteTexture.height/14.0 *2), float(spriteTexture.width/11.0 *2)},
+                deleteRectangle,
+                Vector2{0, 0},
+                0,
+                WHITE
+            );
+            DrawTexturePro(
+                spriteTexture,
+                Rectangle{float(6.0 * spriteTexture.width/11.0), float(0.0 * spriteTexture.height/14.0), float(spriteTexture.height/14.0 *2), float(spriteTexture.width/11.0 *2)},
                 tankButtonRect,
                 Vector2{0, 0},
                 0,
                 WHITE
             );
             DrawTexturePro(
-                texture,
-                Rectangle{0, float(2.0 * texture.height/14), float(texture.height/14), float(texture.width/6)},
+                spriteTexture,
+                Rectangle{float(6.0 * spriteTexture.width/11.0), float(2.0 * spriteTexture.height/14), float(spriteTexture.height/14 *2), float(spriteTexture.width/11.0 *2)},
                 meleeButtonRect,
                 Vector2{0, 0},
                 0,
                 WHITE
             );
             DrawTexturePro(
-                texture,
-                Rectangle{0, float(3.0 * texture.height/14), float(texture.height/14), float(texture.width/6)},
+                spriteTexture,
+                Rectangle{float(6.0 * spriteTexture.width/11.0), float(4.0 * spriteTexture.height/14), float(spriteTexture.height/14 *2), float(spriteTexture.width/11.0 *2)},
                 archerButtonRect,
                 Vector2{0, 0},
                 0,
                 WHITE
             );
             DrawTexturePro(
-                texture,
-                Rectangle{0, float(4.0 * texture.height/14), float(texture.height/14), float(texture.width/6)},
+                spriteTexture,
+                Rectangle{float(6.0 * spriteTexture.width/11.0), float(6.0 * spriteTexture.height/14), float(spriteTexture.height/14 *2), float(spriteTexture.width/11.0 *2)},
                 sorcererButtonRect,
                 Vector2{0, 0},
                 0,
                 WHITE
             );
             DrawTexturePro(
-                texture,
-                Rectangle{0, float(5.0 * texture.height/14), float(texture.height/14), float(texture.width/6)},
+                spriteTexture,
+                Rectangle{float(6.0 * spriteTexture.width/11.0), float(8.0 * spriteTexture.height/14), float(spriteTexture.height/14 *2), float(spriteTexture.width/11.0 *2)},
                 healerButtonRect,
                 Vector2{0, 0},
                 0,
@@ -122,55 +176,40 @@ int main() {
                 Type type = field->getCharacterDataList()[i]->getType();
                 cout << "[" << field->getCharacterDataList()[i]->getPosition().y << "; " << field->getCharacterDataList()[i]->getPosition().x << "]" << endl;
 
+                Rectangle source;
                 switch(type) {
                     case Tank:
-                        DrawTextureRec(
-                            texture,
-                            Rectangle{0, float(1.0 * texture.height/14), float(texture.height/14), float(texture.width/6)},
-                            field->getCharacterDataList()[i]->getPosition().toVector2(),
-                            WHITE
-                        );
+                        source = Rectangle{0, float(1.0 * spriteTexture.height/14), float(spriteTexture.height/14), float(spriteTexture.width/11.0)};
                         break;
                     case Melee:
-                        DrawTextureRec(
-                            texture,
-                            Rectangle{0, float(2.0 * texture.height/14), float(texture.height/14), float(texture.width/6)},
-                            field->getCharacterDataList()[i]->getPosition().toVector2(),
-                            WHITE
-                        );
+                        source = Rectangle{0, float(2.0 * spriteTexture.height/14), float(spriteTexture.height/14), float(spriteTexture.width/11.0)};
                         break;
                     case Archer:
-                        DrawTextureRec(
-                            texture,
-                            Rectangle{0, float(3.0 * texture.height/14), float(texture.height/14), float(texture.width/6)},
-                            field->getCharacterDataList()[i]->getPosition().toVector2(),
-                            WHITE
-                        );
+                        source = Rectangle{0, float(3.0 * spriteTexture.height/14), float(spriteTexture.height/14), float(spriteTexture.width/11.0)};
                         break;
                     case Sorcerer:
-                        DrawTextureRec(
-                            texture,
-                            Rectangle{0, float(4.0 * texture.height/14), float(texture.height/14), float(texture.width/6)},
-                            field->getCharacterDataList()[i]->getPosition().toVector2(),
-                            WHITE
-                        );
+                        source = Rectangle{0, float(4.0 * spriteTexture.height/14), float(spriteTexture.height/14), float(spriteTexture.width/11.0)};
                         break;
                     case Healer:
-                        DrawTextureRec(
-                            texture,
-                            Rectangle{0, float(5.0 * texture.height/14), float(texture.height/14), float(texture.width/6)},
-                            field->getCharacterDataList()[i]->getPosition().toVector2(),
-                            WHITE
-                        );
+                        source = Rectangle{0, float(5.0 * spriteTexture.height/14), float(spriteTexture.height/14), float(spriteTexture.width/11.0)};
                         break;
                 }
+                DrawTexturePro(
+                    spriteTexture,
+                    source,
+                    Rectangle{field->getCharacterDataList()[i]->getPosition().y, field->getCharacterDataList()[i]->getPosition().x, fieldTile, fieldTile},
+                    Vector2{0,0},
+                    0,
+                    WHITE
+                );
             }
 
 
         EndDrawing(); 
     }
 
-    UnloadTexture(texture);
+    UnloadTexture(spriteTexture);
+    UnloadTexture(groundSpriteTexture);
 
     CloseWindow(); 
 
