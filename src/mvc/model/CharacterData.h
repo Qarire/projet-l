@@ -55,8 +55,8 @@ public:
     CharacterDataSorcerer(Team team, Position position)
     : CharacterData(team, Stats(300, 20, 5), position, 1, 1, Sorcerer, Tank) {};
 };
-class CharacterDataSupport : public CharacterData {
+class CharacterDataHealer : public CharacterData {
 public:
-    CharacterDataSupport(Team team, Position position)
-    : CharacterData(team, Stats(100, 10, 10), position, 1, 1, Sorcerer, Tank) {};
+    CharacterDataHealer(Team team, Position position)
+    : CharacterData(team, Stats(100, 10, 10), position, 1, 1, Healer, Tank) {};
 };

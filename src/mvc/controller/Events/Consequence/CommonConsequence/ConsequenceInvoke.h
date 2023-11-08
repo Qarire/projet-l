@@ -18,32 +18,42 @@ public:
     void run() override {
         Field* field = Field::GetInstance();
 
-        Position pos = Position(
-            GetScreenHeight() * 0.8, 
-            GetScreenHeight() / field->getCharacterDataList().size() 
-                + (GetScreenHeight() / field->getCharacterDataList().size()) 
-                    * field->getCharacterDataList().size()
-        );
+        Position position = Position(GetScreenHeight()*0.75, 0);
+
 
         CharacterData* characd;
         switch (this->type) {
-            Tank:
-                characd = new CharacterDataTank(Blue, pos);
+            case Tank:
+                characd = new CharacterDataTank(Blue, position);
                 break;
-            Melee:
-                characd = new CharacterDataMelee(Blue, pos);
+            case Melee:
+                characd = new CharacterDataMelee(Blue, position);
                 break;
-            Archer:
-                characd = new CharacterDataArcher(Blue, pos);
+            case Archer:
+                characd = new CharacterDataArcher(Blue, position);
                 break;
-            Sorcerer:
-                characd = new CharacterDataSorcerer(Blue, pos);
+            case Sorcerer:
+                characd = new CharacterDataSorcerer(Blue, position);
                 break;
-            Support:
-                characd = new CharacterDataSupport(Blue, pos);
+            case Healer:
+                characd = new CharacterDataHealer(Blue, position);
+                break;
+            default:
+                throw std::invalid_argument("The type isn't supported");
                 break;
         }
 
         field->addCharacterData(characd);
+
+
+
+        for(int i = 0; i < field->getCharacterDataList().size(); i++) {
+            field->getCharacterDataList()[i]->setPosition(Position(
+                field->getCharacterDataList()[i]->getPosition().y,
+
+                float(GetScreenWidth()/(field->getCharacterDataList().size()+1) 
+                    + (GetScreenWidth()/(field->getCharacterDataList().size()+1)) * i)
+            ));
+        }        
     }
 };

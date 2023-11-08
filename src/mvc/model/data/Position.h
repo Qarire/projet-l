@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <cmath>
+#include "raylib.h"
 
 using namespace std;
 
@@ -16,6 +17,9 @@ public :
 
 // Static Methods
     static float distance(Position pos1, Position pos2);
+
+// Convertor
+    Vector2 toVector2();
 
 // Operators
     bool operator==(Position p);

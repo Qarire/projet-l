@@ -20,6 +20,11 @@ float Position::distance(Position posA, Position posB) {
 }
 
 
+Vector2 Position::toVector2() {
+    return Vector2{x, y};
+}
+
+
 bool Position::operator==(Position p) {
     return (x==p.x && y==p.y);
 }

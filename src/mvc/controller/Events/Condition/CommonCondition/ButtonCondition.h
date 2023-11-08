@@ -22,7 +22,8 @@ public:
 
     bool isConditionMet() const override {
         Vector2 myMouse = GetMousePosition();
-
-        return ((myMouse.x > hitbox.x && myMouse.x < hitbox.x + hitbox.width) && (myMouse.y > hitbox.y  && myMouse.y < hitbox.y + hitbox.height));
+        if(IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
+            return ((myMouse.x > hitbox.x && myMouse.x < hitbox.x + hitbox.width) && (myMouse.y > hitbox.y  && myMouse.y < hitbox.y + hitbox.height));
+        return false;
     };
 };
