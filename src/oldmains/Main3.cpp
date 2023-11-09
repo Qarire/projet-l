@@ -18,7 +18,7 @@
 
 using namespace std;
 
-int main3() {
+int main() {
 // Initialization
 
     Field* field = Field::GetInstance();

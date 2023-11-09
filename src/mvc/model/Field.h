@@ -49,6 +49,19 @@ public:
     int getWidth() const { 
         return size.second;
     }
+    float getFieldHeight() const {
+        return float(GetScreenHeight() * 0.75);
+    }
+    float getFieldTile() const {
+        return getFieldHeight()/(getHeight()+1);
+    }
+    float getFieldWidth() const {
+        return getFieldTile()*getWidth();
+    }
+    float getNegativeFieldWidth() const {
+        return GetScreenWidth() - getFieldTile()*getWidth();
+    }
+
 
     vector<CharacterData*> getCharacterDataList() const {
         return CharacterDataList;

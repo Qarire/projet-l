@@ -12,12 +12,6 @@ public:
     ButtonCondition(Rectangle hitbox) {
         this->hitbox = hitbox;
     }
-    ButtonCondition(int x, int y, int width, int height) {
-        hitbox.x = x;
-        hitbox.y = y;
-        hitbox.width = width;
-        hitbox.height = height;
-    }
 
 
     bool isConditionMet() const override {

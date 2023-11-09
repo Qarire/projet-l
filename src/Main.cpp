@@ -65,12 +65,6 @@ int main() {
     game->Init(); drawer->Init();
     updater->Init(new Behavior( events ));  
 
-    // setting some constants
-    float fieldHeight = float(GetScreenHeight() * 0.75);
-    float fieldTile = fieldHeight/(field->getHeight()+1);
-    float fieldWidth = fieldTile*field->getWidth();
-    float negativeFieldWidth = GetScreenWidth() - fieldTile*field->getWidth();
-
 
     SetTargetFPS(60);
 
@@ -86,12 +80,12 @@ int main() {
             ClearBackground(RAYWHITE);
 
             // Background
-            for(int i = 0; i < GetScreenHeight()/fieldTile; i++) {
-                for(int j = 0; j < GetScreenWidth()/fieldTile; j++) {
+            for(int i = 0; i < GetScreenHeight()/field->getFieldTile(); i++) {
+                for(int j = 0; j < GetScreenWidth()/field->getFieldTile(); j++) {
                     DrawTexturePro(
                         groundSpriteTexture,
                         Rectangle{0, 0, float(groundSpriteTexture.width), float(groundSpriteTexture.height/5)},
-                        Rectangle{j * fieldTile, i * fieldTile, fieldTile, fieldTile},
+                        Rectangle{j * field->getFieldTile(), i * field->getFieldTile(), field->getFieldTile(), field->getFieldTile()},
                         Vector2{0, 0},
                         0,
                         WHITE
@@ -105,7 +99,7 @@ int main() {
                     DrawTexturePro(
                         spriteTexture,
                         Rectangle{0, 0, float(spriteTexture.height/14.0), float(spriteTexture.width/11.0)},
-                        Rectangle{ negativeFieldWidth / 2 + j * fieldTile, i * fieldTile, fieldTile, fieldTile},
+                        Rectangle{ field->getNegativeFieldWidth() / 2 + j * field->getFieldTile(), i * field->getFieldTile(), field->getFieldTile(), field->getFieldTile()},
                         Vector2{0, 0},
                         0,
                         WHITE
@@ -197,7 +191,7 @@ int main() {
                 DrawTexturePro(
                     spriteTexture,
                     source,
-                    Rectangle{field->getCharacterDataList()[i]->getPosition().y, field->getCharacterDataList()[i]->getPosition().x, fieldTile, fieldTile},
+                    Rectangle{field->getCharacterDataList()[i]->getPosition().y, field->getCharacterDataList()[i]->getPosition().x, field->getFieldTile(), field->getFieldTile()},
                     Vector2{0,0},
                     0,
                     WHITE
