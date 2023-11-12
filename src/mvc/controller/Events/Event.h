@@ -5,7 +5,7 @@
 #include "Consequence.h"
 
 class Event {
-private:
+protected:
 //Fields
     Condition* condition;
     Consequence* consequence;

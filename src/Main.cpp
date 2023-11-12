@@ -14,6 +14,7 @@
 #include "ConditionTrue.h"
 #include "ButtonCondition.h"
 #include "ConsequenceInvoke.h"
+#include "SlideCharacterEvent.h"
 
 using namespace std;
 
@@ -58,6 +59,8 @@ int main() {
         new Event(new ButtonCondition(archerButtonRect),    new ConsequenceInvoque(Archer)),
         new Event(new ButtonCondition(sorcererButtonRect),  new ConsequenceInvoque(Sorcerer)),
         new Event(new ButtonCondition(healerButtonRect),    new ConsequenceInvoque(Healer)),
+
+        new SlideCharacterEvent()
     };  
 
     // starting up the game

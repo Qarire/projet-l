@@ -116,11 +116,11 @@ public:
 
         return resultList;
     }
-    vector<CharacterData*> findAllCharacterData(Position position, int range) const {
+    vector<CharacterData*> findAllCharacterData(Position position, int range = 0) const {
         vector<CharacterData*> resultList;
 
         for(int i = 0; i < CharacterDataList.size(); i++) {
-            if(range >= Position::distance(position, CharacterDataList[i]->getPosition()))
+            if(range >= int(Position::distance(position, CharacterDataList[i]->getPosition())))
                 resultList.push_back(CharacterDataList[i]);
         }
 

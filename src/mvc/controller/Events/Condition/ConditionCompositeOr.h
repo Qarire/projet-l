@@ -2,7 +2,7 @@
 
 #include "ConditionComposite.h"
 
-class ConditionCompositeOr : ConditionComposite {
+class ConditionCompositeOr : public ConditionComposite {
 public:
 // Constructor
     ConditionCompositeOr(Condition* firstCondition, Condition* secondCondition) 

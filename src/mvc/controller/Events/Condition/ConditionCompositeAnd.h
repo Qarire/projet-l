@@ -2,7 +2,7 @@
 
 #include "ConditionComposite.h"
 
-class ConditionCompositeAnd : ConditionComposite {
+class ConditionCompositeAnd : public ConditionComposite {
 public:
 // Constructor
     ConditionCompositeAnd(Condition* firstCondition, Condition* secondCondition) 

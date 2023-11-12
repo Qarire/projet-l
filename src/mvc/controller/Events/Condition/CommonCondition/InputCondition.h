@@ -12,4 +12,4 @@ public:
     }
 
     virtual bool isConditionMet() const override = 0;
-}
+};
