@@ -25,7 +25,7 @@ public:
             Field* field = Field::GetInstance();
             Vector2 myMouse = GetMousePosition();
 
-            characterData->setPosition(Position(myMouse.y - field->getFieldTile()/2, myMouse.x - field->getFieldTile()/2));
+            characterData->setPosition(Position(myMouse.x - Background::getFieldTile()/2, myMouse.y - Background::getFieldTile()/2));
         }
     }
 };

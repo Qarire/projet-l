@@ -175,7 +175,6 @@ int main2() {
         }
         //Le shop
 
-        cout << PosXPink << endl;
         DrawRectangle(PosXPink, 800, Width * 0.15 , Width * 0.15 , PINK);
         DrawRectangle(PosXGreen, 800, Width * 0.15 , Width * 0.15 , GREEN);
         DrawRectangle(PosXRed, 800, Width * 0.15 , Width * 0.15 , RED);

@@ -170,7 +170,7 @@ int main() {
                         DrawTexturePro(texture,RS,Rdest,origin,0,WHITE);
                         break;
                     default:
-                        cout << "error" << endl;
+                        cerr << "error" << endl;
                 }
             }
 

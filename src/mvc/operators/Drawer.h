@@ -1,6 +1,9 @@
 #pragma once
 
-#include "Game.h"
+#include <vector>
+#include "Drawable.h"
+
+using namespace std;
 
 class Drawer {
 private:
@@ -10,21 +13,21 @@ private:
 
 //! Singleton
 
-    Game* game;
+    vector<Drawable*> drawables;
 
 public:
     //! Singleton
     static Drawer* GetInstance();
     //! Singleton
 
-    void Init() {
-        game = Game::GetInstance();
+    void Init(vector<Drawable*> drawables) {
+        this->drawables = drawables;
     }
 
-    void Draw(float dt) {
-        if(game == nullptr) throw std::invalid_argument("Drawer hasn't been initialized");
-
-        throw std::runtime_error("not implemented");        
+    void Draw() {
+        for(int i = 0; i < drawables.size(); i++) {
+            drawables[i]->Draw();
+        }
     }
 
 };

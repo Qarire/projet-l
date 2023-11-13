@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Game.h"
 #include "Behavior.h"
+
 
 class Updater {
 private:
@@ -11,8 +11,6 @@ private:
 
 //! Singleton
 
-    Game* game = nullptr;
-
     Behavior* behavior = nullptr;
 
 public:
@@ -21,22 +19,13 @@ public:
     //! Singleton
 
     void Init(Behavior* behavior) {
-        game = Game::GetInstance();
         this->behavior = behavior;
     }
 
     void Update(float dt) {
-        if(game == nullptr || behavior == nullptr) throw std::invalid_argument("Updater hasn't been initialized");
-
-        vector<Brain*> brainList = game->getBrainList();
-
+        // REVIEW if(behavior == nullptr) throw std::invalid_argument("Updater hasn't been initialized");
 
         behavior->runBehavior();
-        for(int i = 0; i < brainList.size(); i++) {
-            brainList[i]->Update(dt);
-        }
-
-        game->cleanTheDeads();
     }
 
 };

@@ -2,15 +2,14 @@
 #include <utility>
 #include <stdlib.h>
 
-#include "Game.h"
 #include "Field.h"
 #include "Updater.h"
 #include "Drawer.h"
 
 #include "raylib.h"
 
-#define PLAYER_SIZE      26
-#include "ConsequenceTestDelete.h"
+#include "Background.h"
+#include "Drawable.h"
 #include "ConditionTrue.h"
 #include "ButtonCondition.h"
 #include "ConsequenceInvoke.h"
@@ -22,7 +21,6 @@ int main() {
     // Setting up the code
 
     Field* field = Field::GetInstance();
-    Game* game = Game::GetInstance();
     Updater* updater = Updater::GetInstance();
     Drawer* drawer = Drawer::GetInstance();
 
@@ -34,11 +32,10 @@ int main() {
 
     InitWindow(screenWidth, screenHeight, "Game Window");
 
-    Texture2D spriteTexture = LoadTexture("img/Sprite.png");
-    Texture2D groundSpriteTexture = LoadTexture("img/Ground_Sprite.png");
-
     //ToggleFullscreen();
 
+    Texture2D spriteTexture = LoadTexture("img/Sprite.png");
+    Texture2D groundSpriteTexture = LoadTexture("img/Ground_Sprite.png");
 
     // creating the events
     pair<bool, CharacterData*> verif_moov;
@@ -63,9 +60,13 @@ int main() {
         new SlideCharacterEvent()
     };  
 
+    // creating the drawables
+    vector<Drawable*> drawables;
+    drawables.push_back(new Background(spriteTexture, groundSpriteTexture));
+
     // starting up the game
     field->Init(make_pair(8, 7));
-    game->Init(); drawer->Init();
+    drawer->Init(drawables);
     updater->Init(new Behavior( events ));  
 
 
@@ -82,35 +83,7 @@ int main() {
         
             ClearBackground(RAYWHITE);
 
-            // Background
-            for(int i = 0; i < GetScreenHeight()/field->getFieldTile(); i++) {
-                for(int j = 0; j < GetScreenWidth()/field->getFieldTile(); j++) {
-                    DrawTexturePro(
-                        groundSpriteTexture,
-                        Rectangle{0, 0, float(groundSpriteTexture.width), float(groundSpriteTexture.height/5)},
-                        Rectangle{j * field->getFieldTile(), i * field->getFieldTile(), field->getFieldTile(), field->getFieldTile()},
-                        Vector2{0, 0},
-                        0,
-                        WHITE
-                    );
-                }
-            }
-            
-
-            for(int i = 0; i < field->getHeight(); i++) {
-                for(int j = 0; j < field->getWidth(); j++) {
-                    DrawTexturePro(
-                        spriteTexture,
-                        Rectangle{0, 0, float(spriteTexture.height/14.0), float(spriteTexture.width/11.0)},
-                        Rectangle{ field->getNegativeFieldWidth() / 2 + j * field->getFieldTile(), i * field->getFieldTile(), field->getFieldTile(), field->getFieldTile()},
-                        Vector2{0, 0},
-                        0,
-                        WHITE
-                    );
-                }
-            }
-
-            
+            drawer->Draw();
 
             //Le Banc
             // DrawLine(0, float(GetScreenHeight() * 0.8333), float(GetScreenWidth()), float(GetScreenHeight() * 0.8333), BLACK );
@@ -171,7 +144,6 @@ int main() {
 
             for(int i = 0; i < field->getCharacterDataList().size(); i++) {
                 Type type = field->getCharacterDataList()[i]->getType();
-                cout << "[" << field->getCharacterDataList()[i]->getPosition().y << "; " << field->getCharacterDataList()[i]->getPosition().x << "]" << endl;
 
                 Rectangle source;
                 switch(type) {
@@ -194,7 +166,7 @@ int main() {
                 DrawTexturePro(
                     spriteTexture,
                     source,
-                    Rectangle{field->getCharacterDataList()[i]->getPosition().y, field->getCharacterDataList()[i]->getPosition().x, field->getFieldTile(), field->getFieldTile()},
+                    Rectangle{field->getCharacterDataList()[i]->getPosition().y, field->getCharacterDataList()[i]->getPosition().x, Background::getFieldTile(), Background::getFieldTile()},
                     Vector2{0,0},
                     0,
                     WHITE

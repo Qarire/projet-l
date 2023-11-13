@@ -25,30 +25,37 @@ public:
     virtual bool runEvent() const override {
         Field* field = Field::GetInstance();
         Vector2 myMouse = GetMousePosition();
+        ConsequenceCharacterFollowMouse* consequenceCasted =  dynamic_cast<ConsequenceCharacterFollowMouse*> (this->consequence);
 
         if(condition->isConditionMet()) {
             if(IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
+
                 if(!switchCondition->isConditionMet()) {
+
                     vector<CharacterData*> characterDatas;
                 
-                    characterDatas = field->findAllCharacterData(Position(myMouse.y, myMouse.x));
+                    characterDatas = field->getCharacterDataList(); 
+                    // TODO get the right character
+                    // TODO modify the consequence to set up the character to a round up value and in the field
+                    // TODO separate view from model
 
                     if(characterDatas.size() > 0) {
+                        
                         switchCondition->setSwitch(true);
 
-                        (ConsequenceCharacterFollowMouse)consequence->setCharacterData(characterDatas[0]);
+                        consequenceCasted->setCharacterData(characterDatas[0]);
                     }
                     else {
                         return false;
                     }
                 }
                
-                consequence->run();
+                consequenceCasted->run();
 
                 return true;
             }
             else {
-                (ConsequenceCharacterFollowMouse)consequence->setCharacterData(nullptr);
+                consequenceCasted->setCharacterData(nullptr);
                 switchCondition->setSwitch(false);
                 return false;
             }            

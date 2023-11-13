@@ -3,14 +3,15 @@
 #include <vector>
 #include "Event.h"
 
+
 class Behavior {
 private:
 // Fields
-    vector<Event*> eventList;
+    std::vector<Event*> eventList;
 
 public:
 // Constructors
-    Behavior(vector<Event*> eventList) {
+    Behavior(std::vector<Event*> eventList) {
         this->eventList = eventList;
     }
     ~Behavior() {
