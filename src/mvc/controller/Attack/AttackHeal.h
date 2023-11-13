@@ -3,13 +3,12 @@
 #include <cmath>
 #include "Attack.h"
 
-class Range: public Attack {
+class AttackHeal: public Attack {
 public:
-    Range() : Attack() {}
-    ~Range() {}
+    AttackHeal() : Attack() {}
+    ~AttackHeal() {}
 
     bool canTouch() override;
     int damage() override;
     void Act() override;
-  
 };

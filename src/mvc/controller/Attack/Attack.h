@@ -2,21 +2,23 @@
 
 #include <vector>
 #include "AttackData.h"
-#include "Position.h"
-#include "Action.h"
+
+#include "CharacterData.h"
 
 using namespace std;
 
 class Attack {
-private: 
+protected: 
     AttackData spell;
-
+    CharacterData* target;
+    CharacterData* attacker;
 public:
-    Attack() {}
+    Attack () {}
+    Attack(CharacterData* attacker,CharacterData* target) {}
     ~Attack() {}
 
-
-    virtual bool canTouch(Position myPosition, Position targetPosition) = 0;
-    virtual vector<Position> findAllPositionWhereIcanHit(Position targetPosition, int heightTerrain, int widthTerrain);
-    virtual int damage(Position myPosition, Position targetPosition) = 0;
+    virtual void Act();
+    virtual bool canTouch() = 0;
+    virtual vector<Position> findAllPositionWhereIcanHit(int heightTerrain, int widthTerrain) = 0;
+    virtual int damage() = 0;
 };

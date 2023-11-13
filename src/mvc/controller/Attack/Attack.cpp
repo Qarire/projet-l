@@ -1,6 +1,6 @@
 #include "Attack.h"
 
-
+/*
 vector<Position> Attack::findAllPositionWhereIcanHit(Position targetPosition, int heightTerrain, int widthTerrain) {
     vector<Position> positionList;
 
@@ -14,3 +14,4 @@ vector<Position> Attack::findAllPositionWhereIcanHit(Position targetPosition, in
 
     return positionList;
 }
+*/

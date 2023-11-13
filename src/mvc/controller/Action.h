@@ -1,18 +1,22 @@
 #pragma once
 
+#include <iostream>
+#include <stdlib.h>   
+
+
+using namespace std;
 class Action {
-
     private:
-        float lastFor;
-        float chrono;
-        bool isRunning;
 
-    public:
-        Action(float lastfor, float chrono, bool run);
-        ~Action() {};
-        float getLastFor() const;
-        float getChrono() const;
+    float time;
+    float chrono;
+    bool cooldown;
+    
+    virtual void Act() = 0;
 
-        void Update(float dt);
+    float getTime() const { return time; };
+    float getChrono() const { return chrono; };
+
+    void Update ();
 
 };

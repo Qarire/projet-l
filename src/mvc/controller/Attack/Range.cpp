@@ -1,8 +1,8 @@
 #include "Range.h"
 
-bool Range::canTouch(Position myPosition, Position targetPosition) {
-    int diffX = abs(myPosition.x - targetPosition.x);
-    int diffY = abs(myPosition.y - targetPosition.y);
+bool Range::canTouch() {
+    int diffX = abs(attacker->getPosition().x - target->getPosition().x);
+    int diffY = abs(attacker->getPosition().y - target->getPosition().y);
 
     if(diffX >= 3 || diffY >=3)
         return true;
@@ -10,9 +10,9 @@ bool Range::canTouch(Position myPosition, Position targetPosition) {
 }
 
 
-int Range::damage(Position myPosition, Position targetPosition) {
-    int diffX = abs(myPosition.x - targetPosition.x);
-    int diffY = abs(myPosition.y - targetPosition.y);
+int Range::damage() {
+    int diffX = abs(attacker->getPosition().x - target->getPosition().x);
+    int diffY = abs(attacker->getPosition().y - target->getPosition().y);
 
     int real_dist = diffX + diffY;
 
@@ -22,4 +22,12 @@ int Range::damage(Position myPosition, Position targetPosition) {
         return 10;  
     }else 
         return 20;  
+}
+
+void Range::Act() {
+    int _damage = damage();
+    bool verif_touch = canTouch();
+    if(verif_touch) {
+        target->changeHP(_damage, true);
+    }
 }
