@@ -12,6 +12,7 @@ protected:
     float cooldownTime;
     float chrono;
     bool isInCooldown;
+    bool isDone;
 
     virtual void Act() = 0;
 
@@ -24,6 +25,16 @@ public:
         this->cooldownTime = cooldownTime;
         this->chrono = 0;
         this->isInCooldown = false;
+        this->isDone = false;
+    }
+
+    bool readFlagIsDone() {
+        if(isDone == true) {
+            isDone = false;
+            return true;
+        }
+
+        return false;
     }
 
     void Update (float dt) {
@@ -37,19 +48,20 @@ public:
                 tmp -= time;
 
                 Act();
-                isInCooldown = true;
+                if(cooldownTimer != 0)
+                    isInCooldown = true;
+                if(cooldownTimer == 0)
+                    isDone = true;
             }
         }
         else{
             if(chrono >= cooldownTime) {
                 chrono = 0
                 isInCooldown = false;
+                
+                isDone = true;
             }
         }
-
-
-
-
     }
     
 };

@@ -9,13 +9,11 @@
 using namespace std;
 
 class Decision {
-
-    private:
-    
+private:
     CharacterData* character;
     vector<Action*> actionlist;
     
-    public:
+public:
 
     Decision() {}
     Decision(CharacterData* _character, vector<Action*> _actionlist);
@@ -25,8 +23,4 @@ class Decision {
     virtual void decideWhereToMove(CharaterData* character)= 0 ;
     virtual void decideAction() = 0;
     virtual void prioritySystem() = 0;
-
-    
-
-    
 }
