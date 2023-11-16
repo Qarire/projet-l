@@ -38,25 +38,25 @@ class CharacterData {
 class CharacterDataTank : public CharacterData {
 public:
     CharacterDataTank(Team team, Position position)
-    : CharacterData(team, Stats(500, 5, 20), position, 1, 1, Tank, Tank) {};
+    : CharacterData(team, Stats(500, 5, 20,1), position, 1, 1, Tank, Tank) {};
 };
 class CharacterDataMelee : public CharacterData {
 public:
     CharacterDataMelee(Team team, Position position)
-    : CharacterData(team, Stats(300, 20, 10), position, 1, 1, Melee, Tank) {};
+    : CharacterData(team, Stats(300, 20, 10,1), position, 1, 1, Melee, Tank) {};
 };
 class CharacterDataArcher : public CharacterData {
 public:
     CharacterDataArcher(Team team, Position position)
-    : CharacterData(team, Stats(300, 20, 5), position, 1, 1, Archer, Tank) {};
+    : CharacterData(team, Stats(300, 20, 5,ValueMaxed(3,10)), position, 1, 1, Archer, Tank) {};
 };
 class CharacterDataSorcerer : public CharacterData {
 public:
     CharacterDataSorcerer(Team team, Position position)
-    : CharacterData(team, Stats(300, 20, 5), position, 1, 1, Sorcerer, Tank) {};
+    : CharacterData(team, Stats(300, 20, 5, 3), position, 1, 1, Sorcerer, Tank) {};
 };
 class CharacterDataHealer : public CharacterData {
 public:
     CharacterDataHealer(Team team, Position position)
-    : CharacterData(team, Stats(100, 10, 10), position, 1, 1, Healer, Tank) {};
+    : CharacterData(team, Stats(100, 10, 10,4), position, 1, 1, Healer, Tank) {};
 };
