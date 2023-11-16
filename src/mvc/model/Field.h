@@ -63,6 +63,25 @@ public:
         CharacterDataList.erase(CharacterDataList.begin() + index);
     }
 
+// Find Method
+    CharacterData* findClosestCharacter(CharacterData* character) {
+        vector<CharacterData*> allEnemies = findAllCharacterData(character->getTeam());
+
+        CharacterData* closest = allEnemies[0];
+
+        for(int i = 0; i < allEnemies.size(); i++) {
+            if(
+                Position::distance(character->getPosition(), allEnemies[i]) 
+              < Position::distance(character->getPosition(), closest) 
+            ) {
+                closest = allEnemies[i];
+            }
+        }
+
+        return closest;
+    }
+
+
 // Find All... Methods
     vector<CharacterData*> intersectionOfLists(vector<vector<CharacterData*>> listOfLists) {
         vector<CharacterData*> resultList = listOfLists[0];
