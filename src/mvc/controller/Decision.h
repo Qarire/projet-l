@@ -2,7 +2,9 @@
 
 #include <iostream>
 #include <utility>
-#include <stdlib.h>   
+#include <stdlib.h>
+#include <Field.h> 
+#include <Action.h>
 
 using namespace std;
 
@@ -15,6 +17,8 @@ class Decision {
     
     public:
 
+    Decision() {}
+    Decision(CharacterData* _character, vector<Action*> _actionlist);
     CharacterData* getCharacterData() const;
     vector<Action*> getActionlist() const;
 

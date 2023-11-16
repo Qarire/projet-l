@@ -11,5 +11,5 @@ public:
     bool canTouch() override;
     int damage() override;
     void Act() override;
-    //vector<Position> findAllPositionWhereIcanHit(int heightTerrain, int widthTerrain) override;
+    
 };

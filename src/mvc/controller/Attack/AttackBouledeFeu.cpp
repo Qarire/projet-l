@@ -16,9 +16,17 @@ int AttackBouledeFeu::damage() {
 }
 
 void AttackBouledeFeu::Act() {
+    
+    Position pos = target->getPosition();
+    vector<CharacterData*> listPerso;
     int _damage = damage();
     bool verif_touch = canTouch();
+    
     if(verif_touch) {
         target->changeHP(_damage, true);
-    }
+        listPerso = field->findAllCharacterData(pos,1);
+        for(int i=0; i<listPerso.size(); i++){
+            listPerso->changeHP(_damage, true);
+        }
+    }      
 }
