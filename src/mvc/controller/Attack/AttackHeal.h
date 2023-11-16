@@ -5,7 +5,7 @@
 
 class AttackHeal: public Attack {
 public:
-    AttackHeal() : Attack() {}
+    AttackHeal(CharacterData* attacker, CharacterData* target) : Attack(attacker, target,1,0) {}
     ~AttackHeal() {}
 
     bool canTouch() override;

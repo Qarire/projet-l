@@ -23,10 +23,11 @@ void AttackBouledeFeu::Act() {
     bool verif_touch = canTouch();
     
     if(verif_touch) {
+        Field* field = Field::GetInstance();
         target->changeHP(_damage, true);
         listPerso = field->findAllCharacterData(pos,1);
         for(int i=0; i<listPerso.size(); i++){
-            listPerso->changeHP(_damage, true);
+            listPerso[i]->changeHP(_damage, true);
         }
     }      
 }

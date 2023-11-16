@@ -71,8 +71,8 @@ public:
 
         for(int i = 0; i < allEnemies.size(); i++) {
             if(
-                Position::distance(character->getPosition(), allEnemies[i]) 
-              < Position::distance(character->getPosition(), closest) 
+                Position::distance(character->getPosition(), allEnemies[i]->getPosition()) 
+              < Position::distance(character->getPosition(), closest->getPosition()) 
             ) {
                 closest = allEnemies[i];
             }

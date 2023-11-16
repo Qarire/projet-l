@@ -15,3 +15,4 @@ vector<Position> Attack::findAllPositionWhereIcanHit(Position targetPosition, in
     return positionList;
 }
 */
+

@@ -5,7 +5,7 @@
 
 class Range: public Attack {
 public:
-    Range() : Attack() {}
+    Range(CharacterData* attacker, CharacterData* target) : Attack(attacker, target,1,0) {}
     ~Range() {}
 
     bool canTouch() override;

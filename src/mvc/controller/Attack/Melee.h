@@ -5,7 +5,7 @@
 
 class Melee: public Attack {
 public:
-    Melee() : Attack() {}
+    Melee(CharacterData* attacker, CharacterData* target) : Attack(attacker, target,1,0)  {}
     ~Melee() {}
 
     bool canTouch() override;

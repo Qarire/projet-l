@@ -11,11 +11,11 @@ protected:
     CharacterData* target;
     CharacterData* attacker;
 public:
-    Attack () {}
-    Attack(CharacterData* attacker,CharacterData* target) {}
+   
+    Attack(CharacterData* attacker,CharacterData* target, float time, float cooldown = 0) : Action(time,cooldown) {}
     ~Attack() {}
 
-    virtual bool void CooldownAction() = 0;
+   
     virtual void Act() = 0;
     virtual bool canTouch() = 0;
     virtual vector<Position> findAllPositionWhereIcanHit(int heightTerrain, int widthTerrain) = 0;

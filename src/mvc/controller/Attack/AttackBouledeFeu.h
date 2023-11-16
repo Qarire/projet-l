@@ -5,7 +5,7 @@
 
 class AttackBouledeFeu: public Attack {
 public:
-    AttackBouledeFeu() : Attack() {}
+    AttackBouledeFeu(CharacterData* attacker, CharacterData* target) : Attack(attacker, target,1,0) {}
     ~AttackBouledeFeu() {}
 
     bool canTouch() override;

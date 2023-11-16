@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include <stdlib.h>   
-#include <Field.h>
+#include "Field.h"
 
 using namespace std;
 class Action {
@@ -48,15 +48,15 @@ public:
                 tmp -= time;
 
                 Act();
-                if(cooldownTimer != 0)
+                if(cooldownTime != 0)
                     isInCooldown = true;
-                if(cooldownTimer == 0)
+                if(cooldownTime == 0)
                     isDone = true;
             }
         }
         else{
             if(chrono >= cooldownTime) {
-                chrono = 0
+                chrono = 0;
                 isInCooldown = false;
                 
                 isDone = true;
