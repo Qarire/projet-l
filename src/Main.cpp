@@ -41,7 +41,7 @@ int main() {
     Texture2D spriteTexture = LoadTexture("img/Sprite.png");
     Texture2D groundSpriteTexture = LoadTexture("img/Ground_Sprite.png");
 
-    // creating the events
+    // creating the EventConditions
     pair<bool, CharacterData*> verif_moov;
     Vector2 My_Mouse;
 
@@ -54,12 +54,12 @@ int main() {
     Rectangle sorcererButtonRect =  Rectangle{diff + float(GetScreenWidth()/6 * 4), float(GetScreenHeight() * 0.75), float(GetScreenWidth()/8), float(GetScreenWidth()/8)};
     Rectangle healerButtonRect =    Rectangle{diff + float(GetScreenWidth()/6 * 5), float(GetScreenHeight() * 0.75), float(GetScreenWidth()/8), float(GetScreenWidth()/8)};
 
-    vector<Event*> events = {
-        new Event(new ButtonCondition(tankButtonRect),      new ConsequenceInvoque(Tank)),
-        new Event(new ButtonCondition(meleeButtonRect),     new ConsequenceInvoque(Melee)),
-        new Event(new ButtonCondition(archerButtonRect),    new ConsequenceInvoque(Archer)),
-        new Event(new ButtonCondition(sorcererButtonRect),  new ConsequenceInvoque(Sorcerer)),
-        new Event(new ButtonCondition(healerButtonRect),    new ConsequenceInvoque(Healer)),
+    vector<EventCondition*> EventConditions = {
+        new EventCondition(new ButtonCondition(tankButtonRect),      new ConsequenceInvoque(Tank)),
+        new EventCondition(new ButtonCondition(meleeButtonRect),     new ConsequenceInvoque(Melee)),
+        new EventCondition(new ButtonCondition(archerButtonRect),    new ConsequenceInvoque(Archer)),
+        new EventCondition(new ButtonCondition(sorcererButtonRect),  new ConsequenceInvoque(Sorcerer)),
+        new EventCondition(new ButtonCondition(healerButtonRect),    new ConsequenceInvoque(Healer)),
 
         new SlideCharacterEvent()
     };  
@@ -68,22 +68,10 @@ int main() {
     vector<Drawable*> drawables;
     drawables.push_back(new Background(spriteTexture, groundSpriteTexture));
 
-    AssetData* assetData = new AssetData(
-        "main asset",
-        spriteTexture,
-        make_pair(10, 13),
-        vector<SpriteData*>{
-            new SpriteData{"Tank_icon", Rectangle{0, 1, 5, 1}, 1, make_pair(0, 0), true},
-        }
-    );
-
-    Sprite* sprite = new Sprite(assetData, "Tank_icon", Position(20, 20));
-    drawables.push_back(sprite);
-
     // starting up the game
     field->Init(make_pair(8, 7));
     drawer->Init(drawables);
-    updater->Init(new Behavior( events ));  
+    updater->Init(new Behavior( EventConditions ));  
 
 
     //SetTargetFPS(60);
@@ -98,7 +86,6 @@ int main() {
         BeginDrawing();
         
             ClearBackground(RAYWHITE);
-
             drawer->Draw(dt);
 
             //Le Banc
@@ -158,36 +145,36 @@ int main() {
             );
 
 
-            for(int i = 0; i < field->getCharacterDataList().size(); i++) {
-                Type type = field->getCharacterDataList()[i]->getType();
+            // for(int i = 0; i < field->getCharacterDataList().size(); i++) {
+            //     Type type = field->getCharacterDataList()[i]->getType();
 
-                Rectangle source;
-                switch(type) {
-                    case Tank:
-                        source = Rectangle{0, float(1.0 * spriteTexture.height/14), float(spriteTexture.height/14), float(spriteTexture.width/11.0)};
-                        break;
-                    case Melee:
-                        source = Rectangle{0, float(2.0 * spriteTexture.height/14), float(spriteTexture.height/14), float(spriteTexture.width/11.0)};
-                        break;
-                    case Archer:
-                        source = Rectangle{0, float(3.0 * spriteTexture.height/14), float(spriteTexture.height/14), float(spriteTexture.width/11.0)};
-                        break;
-                    case Sorcerer:
-                        source = Rectangle{0, float(4.0 * spriteTexture.height/14), float(spriteTexture.height/14), float(spriteTexture.width/11.0)};
-                        break;
-                    case Healer:
-                        source = Rectangle{0, float(5.0 * spriteTexture.height/14), float(spriteTexture.height/14), float(spriteTexture.width/11.0)};
-                        break;
-                }
-                DrawTexturePro(
-                    spriteTexture,
-                    source,
-                    Rectangle{field->getCharacterDataList()[i]->getPosition().y, field->getCharacterDataList()[i]->getPosition().x, Background::getFieldTile(), Background::getFieldTile()},
-                    Vector2{0,0},
-                    0,
-                    WHITE
-                );
-            }
+            //     Rectangle source;
+            //     switch(type) {
+            //         case Tank:
+            //             source = Rectangle{0, float(1.0 * spriteTexture.height/14), float(spriteTexture.height/14), float(spriteTexture.width/11.0)};
+            //             break;
+            //         case Melee:
+            //             source = Rectangle{0, float(2.0 * spriteTexture.height/14), float(spriteTexture.height/14), float(spriteTexture.width/11.0)};
+            //             break;
+            //         case Archer:
+            //             source = Rectangle{0, float(3.0 * spriteTexture.height/14), float(spriteTexture.height/14), float(spriteTexture.width/11.0)};
+            //             break;
+            //         case Sorcerer:
+            //             source = Rectangle{0, float(4.0 * spriteTexture.height/14), float(spriteTexture.height/14), float(spriteTexture.width/11.0)};
+            //             break;
+            //         case Healer:
+            //             source = Rectangle{0, float(5.0 * spriteTexture.height/14), float(spriteTexture.height/14), float(spriteTexture.width/11.0)};
+            //             break;
+            //     }
+            //     DrawTexturePro(
+            //         spriteTexture,
+            //         source,
+            //         Rectangle{field->getCharacterDataList()[i]->getPosition().y, field->getCharacterDataList()[i]->getPosition().x, Background::getFieldTile(), Background::getFieldTile()},
+            //         Vector2{0,0},
+            //         0,
+            //         WHITE
+            //     );
+            // }
 
 
         EndDrawing(); 

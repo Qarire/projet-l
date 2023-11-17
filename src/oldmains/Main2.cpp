@@ -44,7 +44,7 @@ int main2() {
     InitWindow(screenWidth, screenHeight, "Game Window");
     Texture2D texture = LoadTexture("img/Sprite.png");
 
-// Init Events
+// Init EventConditions
     /*
     Rectangle healerButtonRect = Rectangle{float(GetScreenHeight() * 0.8), float(GetScreenWidth() * 0.28), float(GetScreenWidth()*0.05), float(GetScreenWidth()*0.05)};
     Rectangle archerButtonRect = Rectangle{float(GetScreenHeight() * 0.8), float(healerButtonRect.x + GetScreenWidth()*0.05), float(GetScreenWidth()*0.05), float(GetScreenWidth()*0.05)};
@@ -52,23 +52,23 @@ int main2() {
     Rectangle sorcererButtonRect = Rectangle{float(GetScreenHeight() * 0.8), float(tankButtonRect.x + GetScreenWidth()*0.05), float(GetScreenWidth()*0.05), float(GetScreenWidth()*0.05)};
     Rectangle meleeButtonRect = Rectangle{float(GetScreenHeight() * 0.8), float(meleeButtonRect.x + GetScreenWidth()*0.05), float(GetScreenWidth()*0.05), float(GetScreenWidth()*0.05)};
 
-    vector<Event*> events = {
+    vector<EventCondition*> EventConditions = {
 
-        new Event(new ConditionTrue(), new ConsequenceTestDelete()),
-        new Event(new ButtonCondition(healerButtonRect), new ConsequenceInvoque(Support)),
-        new Event(new ButtonCondition(archerButtonRect), new ConsequenceInvoque(Archer)),
-        new Event(new ButtonCondition(tankButtonRect), new ConsequenceInvoque(Tank)),
-        new Event(new ButtonCondition(sorcererButtonRect), new ConsequenceInvoque(Sorcerer)),
-        new Event(new ButtonCondition(meleeButtonRect), new ConsequenceInvoque(Melee))
+        new EventCondition(new ConditionTrue(), new ConsequenceTestDelete()),
+        new EventCondition(new ButtonCondition(healerButtonRect), new ConsequenceInvoque(Support)),
+        new EventCondition(new ButtonCondition(archerButtonRect), new ConsequenceInvoque(Archer)),
+        new EventCondition(new ButtonCondition(tankButtonRect), new ConsequenceInvoque(Tank)),
+        new EventCondition(new ButtonCondition(sorcererButtonRect), new ConsequenceInvoque(Sorcerer)),
+        new EventCondition(new ButtonCondition(meleeButtonRect), new ConsequenceInvoque(Melee))
     };  
        
     */
 
-    vector<Event*> events = {new Event(new ConditionTrue(), new ConsequenceTestDelete())};
+    vector<EventCondition*> EventConditions = {new EventCondition(new ConditionTrue(), new ConsequenceTestDelete())};
 
     field->Init(make_pair(1680, 900));
     game->Init(); drawer->Init();
-    updater->Init(new Behavior( events ));                                 
+    updater->Init(new Behavior( EventConditions ));                                 
 
     vector<CharacterData*> tabcharact;
     int playerTileX; 

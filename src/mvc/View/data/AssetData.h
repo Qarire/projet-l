@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <string>
 #include "raylib.h"
 #include "SpriteData.h"
 
@@ -32,7 +33,7 @@ public:
     Texture2D getTexture() const { return this->texture; }
     std::pair<int, int> getTextureSize() const { return this->textureSize; }
 
-    SpriteData* getSpriteData(string name) const {
+    SpriteData* getSpriteData(std::string name) const {
         for (int i = 0; i < sprites.size(); i++) {
             if (sprites[i]->name == name) {
                 return sprites[i];

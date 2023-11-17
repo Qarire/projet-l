@@ -1,5 +1,5 @@
 #pragma once
-
+// DELETE
 #include "Condition.h"
 
 class SwitchCondition : public Condition {

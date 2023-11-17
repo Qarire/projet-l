@@ -25,7 +25,7 @@ public:
 
 // Public Methods
     void runBehavior() const override {
-        for(int i = 0; i < eventList.size(); i++) {
+        for(int i = 0; i < EventConditionList.size(); i++) {
             behaviorList[i]->runBehavior();
         }
     }

@@ -1,5 +1,5 @@
 #pragma once
-
+// DELETE
 #include "Field.h"
 #include "Consequence.h"
 #include "CharacterData.h"

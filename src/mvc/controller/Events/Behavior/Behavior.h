@@ -1,32 +1,32 @@
 #pragma once
 
 #include <vector>
-#include "Event.h"
+#include "EventCondition.h"
 
 
 class Behavior {
 private:
 // Fields
-    std::vector<Event*> eventList;
+    std::vector<EventCondition*> EventConditionList;
 
 public:
 // Constructors
-    Behavior(std::vector<Event*> eventList) {
-        this->eventList = eventList;
+    Behavior(std::vector<EventCondition*> EventConditionList) {
+        this->EventConditionList = EventConditionList;
     }
     ~Behavior() {
-        for(int i = 0; i < eventList.size(); i++) {
-            delete eventList[i];
+        for(int i = 0; i < EventConditionList.size(); i++) {
+            delete EventConditionList[i];
         }
 
-        eventList.clear();
+        EventConditionList.clear();
     }
 
 
 // Public Methods
     virtual void runBehavior() const {
-        for(int i = 0; i < eventList.size(); i++) {
-            eventList[i]->runEvent();
+        for(int i = 0; i < EventConditionList.size(); i++) {
+            EventConditionList[i]->runEvent();
         }
     }
 };

@@ -26,11 +26,11 @@ int main() {
      Updater* updater = Updater::GetInstance();
      Drawer* drawer = Drawer::GetInstance();
 
-    vector<Event*> events = {new Event(new ConditionTrue(), new ConsequenceTestDelete())};
+    vector<EventCondition*> EventConditions = {new EventCondition(new ConditionTrue(), new ConsequenceTestDelete())};
 
     field->Init(make_pair(50, 50));
     game->Init(); drawer->Init();
-    updater->Init(new Behavior( events ));
+    updater->Init(new Behavior( EventConditions ));
 
     int Height = field->getHeight();
     int Width = field->getWidth();

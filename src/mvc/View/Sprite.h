@@ -10,10 +10,12 @@
 class Sprite : public Drawable {
 private:
 // Fields
-    AssetData* assetData;
     SpriteData* currentSpriteData;
+    AssetData* assetData;
 
-    Position visualPosition;
+    CharacterData* characterData;
+
+    Position visualOffset;
     std::vector<std::vector<Rectangle>> frames; // width, height
     std::pair<int, int> currentFrameIndex; // width, height
 
@@ -28,6 +30,7 @@ private:
 
 // Private Methods
     void buildFrames() {
+        cout << "heeeey" << endl;
         frames.clear();
         
         std::pair<float, float> tileSize = std::make_pair( // width , height
@@ -40,9 +43,9 @@ private:
         );
 
 
-        for(int k = 0; k < currentSpriteData->spriteRectangle.height - currentSpriteData->spriteRectangle.y; k++) {
+        for(int k = 0; k < currentSpriteData->spriteRectangle.height; k++) {
             std::vector<Rectangle> row;
-            for(int i = 0; i < currentSpriteData->spriteRectangle.width - currentSpriteData->spriteRectangle.x; i++) {
+            for(int i = 0; i < currentSpriteData->spriteRectangle.width; i++) {
                 row.push_back(Rectangle{
                     startPoint.first + i * tileSize.first,
                     startPoint.second + k * tileSize.second,
@@ -96,10 +99,16 @@ private:
     
 public:
 // Constructors
-    Sprite(AssetData* AssetData, std::string spriteName, Position visualPosition) {
-        this->assetData = AssetData;
-        this->currentSpriteData = assetData->getSpriteData(spriteName);
-        this->visualPosition = visualPosition;
+    Sprite(std::string spriteName, CharacterData* characterData, Position visualOffset) {
+        Drawer* drawer = Drawer::GetInstance();
+
+        this->assetData = drawer->getAssetData();
+
+        this->currentSpriteData = drawer->getSpriteData(spriteName);
+
+        this->characterData = characterData;
+
+        this->visualOffset = visualOffset;
         buildFrames();
 
         currentFrameIndex = currentSpriteData->firstFrame;
@@ -110,15 +119,16 @@ public:
 
 // Public Methods
     void Draw(float dt) override {
-        Rectangle currentFrame = frames[currentFrameIndex.first][currentFrameIndex.second];
+        Rectangle currentFrame = frames[currentFrameIndex.second][currentFrameIndex.first];
 
         Vector2 frameCenter = Vector2{currentFrame.width/2, currentFrame.height/2};
+
 
         DrawTexturePro(
             assetData->getTexture(),
             currentFrame,
-            Rectangle{visualPosition.x - frameCenter.x, visualPosition.y - frameCenter.y, Background::getFieldTile(), Background::getFieldTile()},
-            frameCenter,
+            Rectangle{visualOffset.x + characterData->getPosition().x, visualOffset.y + characterData->getPosition().y, Background::getFieldTile(), Background::getFieldTile()},
+            Vector2{0,0},
             0,
             WHITE
         );
