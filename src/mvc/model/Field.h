@@ -163,4 +163,20 @@ public:
         }
         return resultcharacter;
     }
+
+    CharacterData* findWeakCharacterData(vector<CharacterData*> listcharacters) const {
+          CharacterData* resultcharacter = listcharacters[0];
+            
+            int ratio, ratio2 ;
+            int ratio0 =(listcharacters[0]->getStats().hp.Value * 1,4) / (listcharacters[0]->getStats().def.Value * 1,2);
+        
+            for(int i = 1; i < listcharacters.size(); i++) {
+                ratio = (listcharacters[i]->getStats().hp.Value * 1,4) / (listcharacters[i]->getStats().def.Value * 1,2);
+                
+                if(ratio < ratio0) {
+                    resultcharacter = listcharacters[i];
+                }
+        }
+        return resultcharacter;
+    }
 };

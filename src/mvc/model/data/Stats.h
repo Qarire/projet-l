@@ -6,9 +6,9 @@
 struct Stats {
 
     ValueMaxed hp = 100;
-    ValueMaxed def = 0;
-    ValueMaxed atk = 0;
-    ValueMaxed range = 0;
+    ValueMaxed def = 40;
+    ValueMaxed atk = 50;
+    ValueMaxed range = 3;
 
     Stats() = default;
     Stats(ValueMaxed hp, ValueMaxed def, ValueMaxed atk, ValueMaxed range) {

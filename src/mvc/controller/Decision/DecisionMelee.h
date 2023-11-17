@@ -10,16 +10,21 @@ class DecisionMelee : public Decision {
 
     Action* prioritySystem() override {
         
-        vector<CharacterData*> listcharacters;
-        CharacterData closecharacter;
-        listcharacters=field->findAllCharacterData(this.character,1);
-
-        if(listcharacters.size()==0) {
-            closecharacter = field->findCloserCharacter(this.character);
-            //return new Mouvement(this.character->getPosition());
-        }else
+        vector<CharacterData*> listcharactersRange = field->findAllCharacterData(this.character,1);
+        vector<CharacterData*> listcharacters = field->findAllCharacterData(this.character->getTeam())
+        CharacterData weakcharacter;
+        CharacterData closestcharacter;
         
-        return new Melee(this.character,listcharacters[0]);
+        if(listcharactersRange.size()>= 2) {                  /// si pas d'enemie proche à taper
+            weakcharacter = field->findWeakCharacterData(listcharactersRange);
+            
+            //return new Mouvement(weakcharacter->getPosition());
+
+        }else if (listcharatersRange.size()==0) {
+            closestcharacter = field->findClosestCharacter(this.character);
+            //return new Mouvement(closestcharacter->getPosition());
+        }
+        return new AttackHeal(this.character,listcharactersRange[0]);
          
     }
 }

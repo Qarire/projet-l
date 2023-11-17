@@ -15,7 +15,7 @@ CharacterData::CharacterData(Team team, Stats stats, Position position, float he
 void CharacterData::changeHP(int value, bool isDamaged) {
     
     if (isDamaged==true){
-        stats.hp.Value-= value;
+        stats.hp.Value-= value - 0,2 * stats.def.Value;
     }
     else if (isDamaged == false && stats.hp.Value < stats.hp.Max) {
         stats.hp.Value+=value;
