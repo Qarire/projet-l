@@ -112,6 +112,7 @@ public:
 
         return resultList;
     }
+
     vector<CharacterData*> findAllCharacterData(Type type) const {
         vector<CharacterData*> resultList;
 
@@ -133,4 +134,33 @@ public:
         return resultList;
     }
 
+    /// Mes ajouts de fonction
+
+    vector<CharacterData*> findAllCharacterDataBehindMe(CharacterData* character) const {
+        vector<CharacterData*> resultList;
+        Team team = character->getTeam();
+        switch (team) {
+            case Blue : for(int i = 0; i < CharacterDataList.size(); i++) {
+                            if(CharacterDataList[i]->getPosition().y > character->getPosition().y)
+                            resultList.push_back(CharacterDataList[i]);
+                         }
+            break;
+            case Red : for(int i = 0; i < CharacterDataList.size(); i++) {
+                            if(CharacterDataList[i]->getPosition().y < character->getPosition().y)
+                            resultList.push_back(CharacterDataList[i]);
+                         }
+            break;
+        }
+        return resultList;
+    }
+
+    CharacterData* findLowCharacterData(vector<CharacterData*> listcharacters) const {
+        CharacterData* resultcharacter = listcharacters[0];
+        for(int i = 1; i < listcharacters.size(); i++) {
+            if(listcharacters[i]->getStats().hp.Value < listcharacters[i-1]->getStats().hp.Value) {
+                resultcharacter = listcharacters[i];
+            }
+        }
+        return resultcharacter;
+    }
 };

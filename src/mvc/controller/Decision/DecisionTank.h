@@ -4,7 +4,7 @@
 class DecisionTank : public Decision {
 
     public:
-    DecisionTank(characterData* character, vector<Action*> actionlist) : Decision(character,actionlist) {}
+    DecisionTank(characterData* character, Action* actionlist) : Decision(character,actionlist) {}
     ~DecisionTank() {} 
 
 
@@ -12,12 +12,21 @@ class DecisionTank : public Decision {
         
         vector<CharacterData*> listcharacters;
         CharacterData closecharacter;
+        CharacterData behindcharacter;
         listcharacters=field->findAllCharacterData(this.character,1);
 
-        if(listcharacters.size()==0) {
-            closecharacter = field->findCloserCharacter(this.character);
-            //return new Mouvement();
-        }else
+        
+        if(listcharacters.size()==0) {                  /// si pas d'enemie proche à taper
+            behindcharacter = field->findAllbehindCharacterData(this.character);
+            
+            if(behindcharacter.size()==0) {                 /// si pas d'enemie derriere 
+                closecharacter = field->findCloserCharacter(this.character);
+                //return new Mouvement(closecharacter->getPosition());
+            } 
+
+            //return new Mouvement(behindcharacter->getPosition());
+
+        }
         
         return new Melee(this.character,listcharacters[0]);
          
