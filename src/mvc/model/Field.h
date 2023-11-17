@@ -179,4 +179,21 @@ public:
         }
         return resultcharacter;
     }
+
+    CharacterData* findFarCharacterData(CharacterData* character) const {
+        vector<CharacterData*> allEnemies = findAllCharacterData(character->getTeam());
+
+        CharacterData* far = allEnemies[0];
+
+        for(int i = 0; i < allEnemies.size(); i++) {
+            if(
+                Position::distance(character->getPosition(), allEnemies[i]->getPosition()) 
+              > Position::distance(character->getPosition(), far->getPosition()) 
+            ) {
+                far = allEnemies[i];
+            }
+        }
+
+        return far;
+    }
 };

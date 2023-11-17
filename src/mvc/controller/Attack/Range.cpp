@@ -16,12 +16,12 @@ int Range::damage() {
 
     int real_dist = diffX + diffY;
 
-    if (real_dist <= 5) {
+    if (real_dist <= 4) {
         return 5;
-    } else if (real_dist > 8) {
-        return 10;  
-    }else 
+    } else if (real_dist = 6) {
         return 20;  
+    }else 
+        return 10;  
 }
 
 void Range::Act() {

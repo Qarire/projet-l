@@ -22,7 +22,7 @@ class DecisionMelee : public Decision {
 
         }else if (listcharatersRange.size()==0) {
             closestcharacter = field->findClosestCharacter(this.character);
-            //return new Mouvement(closestcharacter->getPosition());
+            return new Mouvement(this.character->getPostion(),closestcharacter->getPosition());
         }
         return new AttackHeal(this.character,listcharactersRange[0]);
          
