@@ -18,7 +18,7 @@ class DecisionMelee : public Decision {
         if(listcharactersRange.size()>= 2) {                  /// si pas d'enemie proche à taper
             weakcharacter = field->findWeakCharacterData(listcharactersRange);
             
-            //return new Mouvement(weakcharacter->getPosition());
+            return new Mouvement(this.character->getPosition(),weakcharacter->getPosition());
 
         }else if (listcharatersRange.size()==0) {
             closestcharacter = field->findClosestCharacter(this.character);

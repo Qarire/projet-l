@@ -5,8 +5,8 @@
 
 class MovementSimple : public Movement {
 public:
-    MovementSimple(int heightTerrain, int widthTerrain) : Movement(heightTerrain, widthTerrain) {}
+    MovementSimple(Position origin, Position destination) : Movement(origin, destination,1,0) {}
     ~MovementSimple() {}
-    Position Move(Position start, Position objective) override;
+    Position Move() override;
 
 };

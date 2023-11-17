@@ -21,10 +21,10 @@ class DecisionTank : public Decision {
             
             if(behindcharacter.size()==0) {                 /// si pas d'enemie derriere 
                 closecharacter = field->findClosestCharacter(this.character);
-                //return new Mouvement(closecharacter->getPosition());
+                return new MouvementSimple(this.character->getPosition(),closecharacter->getPosition());
             } 
 
-            //return new Mouvement(behindcharacter->getPosition());
+            return new MouvementSimple(this.character->getPostion(),behindcharacter->getPosition());
 
         }
         

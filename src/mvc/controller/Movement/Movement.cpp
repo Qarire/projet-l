@@ -20,7 +20,3 @@ Position Movement::moveTowards(DIRECTION direction, Position position) {
     return position;
 }
 
-
-Position Movement::Move(Position start, Position objective) {
-    return start;
-}

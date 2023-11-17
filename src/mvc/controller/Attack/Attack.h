@@ -18,6 +18,5 @@ public:
    
     virtual void Act() = 0;
     virtual bool canTouch() = 0;
-    virtual vector<Position> findAllPositionWhereIcanHit(int heightTerrain, int widthTerrain) = 0;
     virtual int damage() = 0;
 };

@@ -17,7 +17,7 @@ class DecisionHealer : public Decision {
         if(listcharactersRange.size()==0) {                  /// si pas d'enemie proche à taper
             lowcharacter = field->findLowCharacterData(listcharacters);
             
-            //return new Mouvement(lowcharacter->getPosition());
+            return new MouvementSimple(this.character->getPosition(),lowcharacter->getPosition());
 
         }
         return new AttackHeal(this.character,listcharactersRange[0]);

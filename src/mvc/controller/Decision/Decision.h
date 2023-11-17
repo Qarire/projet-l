@@ -20,13 +20,13 @@ class Decision {
     Decision() {}
     Decision(CharacterData* _character, Action _actionlist);
     CharacterData* getCharacterData() const;
-    vector<Action*> getActionlist() const;
+   
 
     
     virtual Action* prioritySystem() = 0;
 
     void uptdate (float dt) {
-        if(currentAction==nullptr) {
+        if(currentAction!=nullptr) {
             currentAction.Act(dt);
             if(currentAction.readFlagsDone()==true) {
                 currentAction=nullptr;

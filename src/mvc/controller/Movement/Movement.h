@@ -5,22 +5,17 @@
 #include "Action.h"
 
 class Movement : public Action {
-private:
-    int heightTerrain;
-    int widthTerrain;
 
+    
 protected:
+    Position destination; 
+    Position origin;
+    
     Position moveTowards(DIRECTION direction, Position position);
     
 public:
-    Movement(int heightTerrain, int widthTerrain) : Action(1,0)
-     {
-        this->heightTerrain = heightTerrain; this->widthTerrain = widthTerrain; 
-    };
+    Movement(Position destination, Position origin, float time, float cooldown = 0) : Action(time,cooldown) {};
     ~Movement() {};
 
-    int getHeight() const { return heightTerrain; };
-    int getWidth() const { return widthTerrain; };
-
-    virtual Position Move(Position start, Position objective);
+    virtual Position Move() = 0;
 };

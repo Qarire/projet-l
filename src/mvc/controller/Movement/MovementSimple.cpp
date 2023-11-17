@@ -2,16 +2,16 @@
 
 #include <cstdlib>
 
-Position MovementSimple::Move(Position start, Position objective) {
-    int diffX = objective.x - start.x;
-    int diffY = objective.y - start.y;
+Position MovementSimple::Move() {
+    int diffX = destination.x - origin.x;
+    int diffY = destination.y - origin.y;
 
     if(abs(diffX) > abs(diffY)) 
-        return moveTowards((diffX > 0)? RIGHT : LEFT, start);
+        return moveTowards((diffX > 0)? RIGHT : LEFT, origin);
     else if (abs(diffX) < abs(diffY)) 
-        return moveTowards((diffY > 0)? DOWN : UP, start);
+        return moveTowards((diffY > 0)? DOWN : UP, origin);
     else if (abs(diffX) == abs(diffY) && abs(diffX) !=0)
-        return moveTowards((diffX > 0)? RIGHT : LEFT, start);
+        return moveTowards((diffX > 0)? RIGHT : LEFT, origin);
 
-    return start;
+    return origin;
 }
