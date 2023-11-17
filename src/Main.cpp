@@ -15,11 +15,15 @@
 #include "ConsequenceInvoke.h"
 #include "SlideCharacterEvent.h"
 
+#include "AssetData.h"
+#include "SpriteData.h"
+#include "Sprite.h"
+
 using namespace std;
 
 int main() {
     // Setting up the code
-
+ 
     Field* field = Field::GetInstance();
     Updater* updater = Updater::GetInstance();
     Drawer* drawer = Drawer::GetInstance();
@@ -64,13 +68,25 @@ int main() {
     vector<Drawable*> drawables;
     drawables.push_back(new Background(spriteTexture, groundSpriteTexture));
 
+    AssetData* assetData = new AssetData(
+        "main asset",
+        spriteTexture,
+        make_pair(10, 13),
+        vector<SpriteData*>{
+            new SpriteData{"Tank_icon", Rectangle{0, 1, 5, 1}, 1, make_pair(0, 0), true},
+        }
+    );
+
+    Sprite* sprite = new Sprite(assetData, "Tank_icon", Position(20, 20));
+    drawables.push_back(sprite);
+
     // starting up the game
     field->Init(make_pair(8, 7));
     drawer->Init(drawables);
     updater->Init(new Behavior( events ));  
 
 
-    SetTargetFPS(60);
+    //SetTargetFPS(60);
 
     // game loop
     while (!WindowShouldClose()) {
@@ -83,7 +99,7 @@ int main() {
         
             ClearBackground(RAYWHITE);
 
-            drawer->Draw();
+            drawer->Draw(dt);
 
             //Le Banc
             // DrawLine(0, float(GetScreenHeight() * 0.8333), float(GetScreenWidth()), float(GetScreenHeight() * 0.8333), BLACK );

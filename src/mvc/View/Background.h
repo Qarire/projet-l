@@ -33,13 +33,13 @@ public:
         Field* field = Field::GetInstance();
         return GetScreenWidth() - getFieldTile()*field->getWidth();
     }
-    static pair<float, float> getVisual0() {
+    static pair<float, float> getVisual0() { // height, width
         return make_pair(0, getNegativeFieldWidth() / 2);
     }
 
 
 // Inherited Methods
-    void Draw() override {
+    void Draw(float dt) override {
         Field* field = Field::GetInstance();
 
         for(int i = 0; i < GetScreenHeight()/getFieldTile(); i++) {

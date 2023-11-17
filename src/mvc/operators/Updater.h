@@ -23,7 +23,9 @@ public:
     }
 
     void Update(float dt) {
-        // REVIEW if(behavior == nullptr) throw std::invalid_argument("Updater hasn't been initialized");
+        // if(behavior == nullptr) {
+        //     throw new std::invalid_argument("Updater hasn't been initialized");
+        // }
 
         behavior->runBehavior();
     }

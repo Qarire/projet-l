@@ -24,9 +24,9 @@ public:
         this->drawables = drawables;
     }
 
-    void Draw() {
+    void Draw(float dt) {
         for(int i = 0; i < drawables.size(); i++) {
-            drawables[i]->Draw();
+            drawables[i]->Draw(dt);
         }
     }
 

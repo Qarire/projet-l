@@ -2,6 +2,6 @@
 
 class Drawable {
 public:
-    virtual void Draw() = 0;
+    virtual void Draw(float dt) = 0;
 
 };
