@@ -10,6 +10,7 @@
 
 #include "Background.h"
 #include "Drawable.h"
+#include "EventCondition.h"
 #include "ConditionTrue.h"
 #include "ButtonCondition.h"
 #include "ConsequenceInvoke.h"
@@ -54,7 +55,7 @@ int main() {
     Rectangle sorcererButtonRect =  Rectangle{diff + float(GetScreenWidth()/6 * 4), float(GetScreenHeight() * 0.75), float(GetScreenWidth()/8), float(GetScreenWidth()/8)};
     Rectangle healerButtonRect =    Rectangle{diff + float(GetScreenWidth()/6 * 5), float(GetScreenHeight() * 0.75), float(GetScreenWidth()/8), float(GetScreenWidth()/8)};
 
-    vector<EventCondition*> EventConditions = {
+    vector<Event*> events = {
         new EventCondition(new ButtonCondition(tankButtonRect),      new ConsequenceInvoque(Tank)),
         new EventCondition(new ButtonCondition(meleeButtonRect),     new ConsequenceInvoque(Melee)),
         new EventCondition(new ButtonCondition(archerButtonRect),    new ConsequenceInvoque(Archer)),
@@ -71,7 +72,7 @@ int main() {
     // starting up the game
     field->Init(make_pair(8, 7));
     drawer->Init(drawables);
-    updater->Init(new Behavior( EventConditions ));  
+    updater->Init(new Behavior( events ));  
 
 
     //SetTargetFPS(60);

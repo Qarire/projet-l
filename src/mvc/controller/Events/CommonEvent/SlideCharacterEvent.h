@@ -8,31 +8,43 @@ private:
     bool isSliding = false;
     CharacterData* characterData = nullptr;
 
+
+// Private Methods
+    void updatePositionToMouse() {
+        Vector2 myMouse = GetMousePosition();
+
+        characterData->setPosition(Position(myMouse.y - Background::getFieldTile()/2, myMouse.x - Background::getFieldTile()/2 - Background::getNegativeFieldWidth()/2));
+    }
+
 public:
     SlideCharacterEvent() {}
 
 
-    bool runEvent() const override {
+    bool runEvent() override {
         Field* field = Field::GetInstance();
         Vector2 myMouse = GetMousePosition();
 
+
         if(IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
             if(!isSliding) {
-                vector<CharacterData*> characterDatas = characterDatas = field->getCharacterDataList();
+
+                vector<CharacterData*> characterDatas = field->getCharacterDataList();
 
                 if(characterDatas.size() > 0) {
                         
                     isSliding = true;
                     characterData = characterDatas[0];
-
+                    updatePositionToMouse();
                 }
                 else {
                     return false;
                 }
             }
+            else {
             
-            // TODO move the character to the mouse
-            return true;
+                updatePositionToMouse();
+                return true;
+            }
         }
         else {
             characterData = nullptr;
@@ -40,6 +52,7 @@ public:
             return false;
         }
 
+        return false;
     }
 
 

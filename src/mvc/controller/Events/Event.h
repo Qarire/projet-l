@@ -3,6 +3,6 @@
 class Event {
 public:
 
-    virtual bool runEvent() const = 0;
+    virtual bool runEvent() = 0;
 
 };

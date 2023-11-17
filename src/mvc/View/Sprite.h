@@ -30,7 +30,6 @@ private:
 
 // Private Methods
     void buildFrames() {
-        cout << "heeeey" << endl;
         frames.clear();
         
         std::pair<float, float> tileSize = std::make_pair( // width , height
