@@ -66,7 +66,21 @@ public:
 // Find Method
     CharacterData* findClosestCharacter(CharacterData* character) {
         vector<CharacterData*> allEnemies = findAllCharacterData(character->getTeam());
+        CharacterData* closest = allEnemies[0];
 
+        for(int i = 0; i < allEnemies.size(); i++) {
+            if(
+                Position::distance(character->getPosition(), allEnemies[i]->getPosition()) 
+              < Position::distance(character->getPosition(), closest->getPosition()) 
+            ) {
+                closest = allEnemies[i];
+            }
+        }
+
+        return closest;
+    }
+
+    CharacterData* findClosestCharacter(CharacterData* character,vector<CharacterData*> allEnemies) {
         CharacterData* closest = allEnemies[0];
 
         for(int i = 0; i < allEnemies.size(); i++) {
@@ -156,7 +170,7 @@ public:
 
     CharacterData* findLowCharacterData(vector<CharacterData*> listcharacters) const {
         CharacterData* resultcharacter = listcharacters[0];
-        for(int i = 1; i < listcharacters.size(); i++) {
+        for(int i = 0; i < listcharacters.size(); i++) {
             if(listcharacters[i]->getStats().hp.Value < listcharacters[i-1]->getStats().hp.Value) {
                 resultcharacter = listcharacters[i];
             }
@@ -180,8 +194,8 @@ public:
         return resultcharacter;
     }
 
-    CharacterData* findFarCharacterData(CharacterData* character) const {
-        vector<CharacterData*> allEnemies = findAllCharacterData(character->getTeam());
+    CharacterData* findFarCharacterData(CharacterData* character,vector<CharacterData*> allEnemies) const {
+        //vector<CharacterData*> allEnemies = findAllCharacterData(character->getTeam());
 
         CharacterData* far = allEnemies[0];
 

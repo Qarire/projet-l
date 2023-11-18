@@ -1,5 +1,5 @@
 #include "Decision"
-/*
+
 class DecisionArcher : public Decision {
 
     public:
@@ -11,18 +11,20 @@ class DecisionArcher : public Decision {
         
         vector<CharacterData*> listcharactersRange = field->findAllCharacterData(this.character,6);
         vector<CharacterData*> listcharacters2 = field->findAllCharacterData(this.character,3);
-        CharacterData farcharacter = field->findFarCharacterData(listcharactersRange);
-        CharacterData closestcharacter = field->findClosestCharacter(listcharacter);
+        CharacterData farcharacter;
+        CharacterData closestcharacter;
         
         if(listcharactersRange.size()!=0) {                  /// si pas d'enemie proche à taper
+            
             if(listcharacters2.size()== 0) {
+                farcharacter = field->findFarCharacterData(listcharactersRange,listcharactersRange);
                 return new Range(this.character,farcharacter);
             }else
-                //return MouvementArcher(this.character->getPosition(),closestcharacter->getPosition);
+                closestcharacter = field->findClosestCharacter(listcharacter);
+                //return MouvementArcher(this.character->getPosition(),closestcharacter->getPosition); // Ce serait un mouvement pour la fuite
             
         }
         return new MouvementSimple(this.character->getPosition(),farcharacter->getPosition());
          
     }
 }
-*/

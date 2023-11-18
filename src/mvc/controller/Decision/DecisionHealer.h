@@ -20,7 +20,8 @@ class DecisionHealer : public Decision {
             return new MouvementSimple(this.character->getPosition(),lowcharacter->getPosition());
 
         }
-        return new AttackHeal(this.character,listcharactersRange[0]);
+        lowcharacter = field->findLowCharacterData(listcharactersRange);
+        return new AttackHeal(this.character,lowcharacter);
          
     }
 }
